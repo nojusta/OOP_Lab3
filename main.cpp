@@ -15,9 +15,12 @@ void input(Student& data);
 
 double calculateAverage(const vector<int>& homeworkResults);
 
+double calculateFinalGrade(const Student& data);
+
+void output(const vector<Student>& students, int & m);
+
 int main() {
     Student data;
-    input(data);
     cout << "Iveskite studentu skaiciu: " ; 
     int m;
     cin >> m;
@@ -25,6 +28,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         input(students[i]);
     }
+    output(students, m);
     return 0;
 }
 
@@ -53,4 +57,18 @@ double calculateAverage(const vector<int>& homeworkResults) {
         sum += homeworkResults[i];
     }
     return sum / homeworkResults.size();
+}
+
+double calculateFinalGrade(const Student& data) {
+    double homeworkAverage = calculateAverage(data.homeworkResults);
+    return 0.4 * homeworkAverage + 0.6 * data.examResults;
+}
+
+void output(const vector<Student>& students, int & m) {
+    cout << "Pavarde" << setw(15) << "Vardas" << setw(20) << "Galutinis (Vid.)" << endl;
+    cout << "-------------------------------------------------------" << endl;
+    for (int i = 0; i < m; i++) {
+        double finalGrade = calculateFinalGrade(students[i]);
+        cout << students[i].lastName << setw(15) << students[i].firstName << setw(15) << fixed << setprecision(2) << finalGrade << endl;
+    }
 }

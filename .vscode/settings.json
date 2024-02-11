@@ -3,6 +3,8 @@
         "vector": "cpp",
         "array": "cpp",
         "string": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "iostream": "cpp",
+        "iomanip": "cpp"
     }
 }
