@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
+#include <string> 
 
 using namespace std;
 
@@ -9,14 +11,24 @@ struct Student {
     int examResults;
 };
 
-void input();
+void input(Student& data);
+
+double calculateAverage(const vector<int>& homeworkResults);
 
 int main() {
+    Student data;
+    input(data);
+    cout << "Iveskite studentu skaiciu: " ; 
+    int m;
+    cin >> m;
+    vector<Student> students(m);
+    for (int i = 0; i < m; i++) {
+        input(students[i]);
+    }
     return 0;
 }
 
-void input(){
-    Student data;
+void input(Student& data){
     cout << "Iveskite studento varda: ";
     cin >> data.firstName;
     cout << "Iveskite studento pavarde: ";
@@ -25,7 +37,7 @@ void input(){
     int n;
     cin >> n;
     for (int i = 0; i < n; i++) {
-        cout << "Iveskite " << i + 1 << "-aji namu darba: ";
+        cout << "Iveskite " << i + 1 << "-ajo namu darbo rezultata: ";
         int grade;
         cin >> grade;
         data.homeworkResults.push_back(grade);
@@ -33,4 +45,12 @@ void input(){
     cout << "Iveskite studento egzamino rezultata: ";
     cin >> data.examResults;
     
+}
+
+double calculateAverage(const vector<int>& homeworkResults) {
+    double sum = 0;
+    for (int i = 0; i < homeworkResults.size(); i++) {
+        sum += homeworkResults[i];
+    }
+    return sum / homeworkResults.size();
 }
