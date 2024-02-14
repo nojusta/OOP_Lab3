@@ -17,6 +17,8 @@ string isString(const string& prompt);
 
 int isNumber(const string& prompt);
 
+int isGrade(const string& prompt);
+
 void input(Student& data, bool& Median);
 
 double calculateAverage(const vector<int>& homeworkResults);
@@ -29,9 +31,7 @@ void output(const vector<Student>& students, int & m, bool Median);
 
 int main() {
     Student data;
-    cout << "Iveskite studentu skaiciu: " ;     
-    int m;
-    cin >> m;
+    int m = isNumber("Iveskite studentu skaiciu: ");
     bool Median;
     cout << "Ar norite galutinio balo skaiciavimui naudoti mediana? (1 - taip, 0 - ne): ";
     cin >> Median;
@@ -73,16 +73,32 @@ int isNumber(const string& prompt) {
     return result;
 }
 
+int isGrade(const string& prompt) {
+    int result;
+    do {
+        cout << prompt;
+        cin >> result;
+        if (cin.fail() || result < 1 || result > 10) { // patikrina ar ivestis yra skaicius ir ar jis yra nuo 1 iki 10
+            cin.clear(); 
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Netinkama ivestis, iveskite pazymi nuo 1 iki 10." << endl; 
+        } else {
+            break;
+        }
+    } while (true);
+    return result;
+}
+
 void input(Student& data, bool& Median){
     data.firstName = isString("Iveskite studento varda: ");
     data.lastName = isString("Iveskite studento pavarde: ");
     int n = isNumber("Iveskite studento namu darbu kieki (n): ");
     data.homeworkResults.clear(); // patikrina ar vektorius yra tuscias ir isvalo ji
     for (int i = 0; i < n; i++) {
-        int result = isNumber("Iveskite " + to_string(i + 1) + " namu darbo rezultata: ");
+        int result = isGrade("Iveskite " + to_string(i + 1) + " namu darbo rezultata: ");
         data.homeworkResults.push_back(result);
     }
-    data.examResults = isNumber("Iveskite studento egzamino rezultata: ");
+    data.examResults = isGrade("Iveskite studento egzamino rezultata: ");
 }
 
 double calculateAverage(const vector<int>& homeworkResults) {
