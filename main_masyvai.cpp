@@ -3,6 +3,8 @@
 #include <string> 
 #include <algorithm> 
 #include <limits>
+#include <random> 
+#include <ctime>
 
 using namespace std;
 
@@ -12,6 +14,14 @@ struct Student {
     int homeworkCount;
     int examResults;
 };
+
+int Menu();
+
+int generateGrade();
+
+string generateName();
+
+string generateLastName();
 
 string isString(const string& prompt);
 
@@ -28,30 +38,120 @@ double calculateMedian(int* homeworkResults, int homeworkCount);
 void output(Student* students, const int & m, bool Median);
 
 int main() {
+    srand(time(0));
     Student* students = new Student[1]; 
     bool Median;
     cout << "Ar norite galutinio balo skaiciavimui naudoti mediana? (1 - taip, 0 - ne): ";
     cin >> Median;
     int studentCount = 0;
     int moreStudents;
+    int number;
     do {
-        input(students[studentCount], Median);
-        studentCount++;
-        Student* temp = new Student[studentCount + 1]; // sukuria nauja masyva, kuris yra vienu elementu didesnis uz sena masyva 
-        for (int i = 0; i < studentCount; i++) {
-            temp[i] = students[i]; 
+        number = Menu();
+        switch (number) {
+            case 1: {
+                do {
+                    input(students[studentCount], Median);
+                    studentCount++;
+                    Student* temp = new Student[studentCount + 1]; 
+                    for (int i = 0; i < studentCount; i++) {
+                        temp[i] = students[i]; 
+                    }
+                    delete[] students;
+                    students = temp;
+                    cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
+                    cin >> moreStudents;
+                } while (moreStudents == 1);
+                break;
+            }
+            case 2: {
+                do {
+                    cout << "Iveskite studento varda: ";
+                    cin >> students[studentCount].firstName;
+                    cout << "Iveskite studento pavarde: ";
+                    cin >> students[studentCount].lastName;
+                    students[studentCount].homeworkResults = new int[5];
+                    for (int j = 0; j < 5; j++) {
+                        students[studentCount].homeworkResults[j] = generateGrade();
+                    }
+                    students[studentCount].homeworkCount = 5;
+                    students[studentCount].examResults = generateGrade();
+                    studentCount++;
+                    Student* temp = new Student[studentCount + 1]; 
+                    for (int i = 0; i < studentCount; i++) {
+                        temp[i] = students[i]; 
+                    }
+                    delete[] students;
+                    students = temp;
+                    cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
+                    cin >> moreStudents;
+                } while (moreStudents == 1);
+                break;
+            }
+            case 3: {
+                do {
+                    students[studentCount].firstName = generateName();
+                    students[studentCount].lastName = generateLastName();
+                    students[studentCount].homeworkResults = new int[5];
+                    for (int i = 0; i < 5; i++) {
+                        students[studentCount].homeworkResults[i] = generateGrade();
+                    }
+                    students[studentCount].homeworkCount = 5;
+                    students[studentCount].examResults = generateGrade();
+                    studentCount++;
+                    Student* temp = new Student[studentCount + 1]; 
+                    for (int i = 0; i < studentCount; i++) {
+                        temp[i] = students[i]; 
+                    }
+                    delete[] students;
+                    students = temp;
+                    cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
+                    cin >> moreStudents;
+                } while (moreStudents == 1);
+                break;
+            }
+            case 4: {
+                break;
+            }
+            default: {
+                cout << "Netinkama ivestis, iveskite skaiciu tarp 1 ir 4.\n";
+                break;
+            }
         }
-        delete[] students;
-        students = temp;
-        cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
-        cin >> moreStudents;
-    } while (moreStudents == 1);
-    output(students, studentCount, Median);
+    } while (number != 4);
+    if (studentCount > 0) {
+        output(students, studentCount, Median);
+    }
     for (int i = 0; i < studentCount; i++) {
         delete[] students[i].homeworkResults; 
     }
     delete[] students;
     return 0;
+}
+
+int Menu() {
+    int number;
+    cout << "1 - Suvesti duomenis ranka\n";
+    cout << "2 - Generuoti pazymius\n";
+    cout << "3 - Generuoti ir pazymius ir studentu vardus, pavardes\n";
+    cout << "4 - baigti darba\n";
+    cout << "Iveskite skaiciu: ";
+    cin >> number;
+    return number;
+}
+
+int generateGrade() {
+    return rand() % 10 + 1; // grazina skaiciu nuo 1 iki 10 (pazymi)
+}
+
+string generateName() {
+    string names[] = {"Jonas", "Tomas", "Rokas", "Lukas", "Mantas", "Arvydas"};
+    return names[rand() % 6];
+}
+
+string generateLastName() {
+    string lastNames[] = {"Kazlauskas", "Sabonis", "Stankevicius", "Petrauskas", "Navickas", "Urbonas"};
+    return lastNames[rand() % 6]; 
 }
 
 string isString(const string& prompt) {
