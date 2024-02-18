@@ -6,6 +6,7 @@
 #include <limits>
 #include <random> 
 #include <ctime>
+#include <fstream>
 
 using namespace std;
 
@@ -89,14 +90,24 @@ int main() {
                 break;
             }
             case 4: {
+                ifstream fin("kursiokai.txt"); 
+                if (!fin) {
+                    cout << "Nepavyko atidaryti failo 'kursiokai.txt'.";
+                    break;
+                }
+                
+                fin.close(); 
+                break;
+            }
+            case 5: {
                 break;
             }
             default: {
-                cout << "Netinkama ivestis, iveskite skaiciu tarp 1 ir 4.\n";
+                cout << "Netinkama ivestis, iveskite skaiciu tarp 1 ir 5.\n";
                 break;
             }
         }
-    } while (number != 4);
+    } while (number != 5);
     if (!students.empty()) {
         output(students, students.size(), Median);
     }
@@ -108,7 +119,8 @@ int Menu() {
     cout << "1 - Suvesti duomenis ranka\n";
     cout << "2 - Generuoti pazymius\n";
     cout << "3 - Generuoti ir pazymius ir studentu vardus, pavardes\n";
-    cout << "4 - baigti darba\n";
+    cout << "4 - Skaityti duomenis is failo\n";
+    cout << "5 - baigti darba\n";
     cout << "Iveskite skaiciu: ";
     cin >> number;
     return number;
