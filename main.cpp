@@ -7,6 +7,7 @@
 #include <random> 
 #include <ctime>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -92,10 +93,28 @@ int main() {
             case 4: {
                 ifstream fin("kursiokai.txt"); 
                 if (!fin) {
-                    cout << "Nepavyko atidaryti failo 'kursiokai.txt'.";
+                    cout << "Nepavyko atidaryti failo 'kursiokai.txt'.\n";
                     break;
                 }
-                
+                string buffer;
+                while (getline(fin, buffer)) { // nuskaito faila eilute po eilutes
+                    stringstream ss(buffer); 
+                    vector<int> grades; 
+                    Student s; 
+                    ss >> s.firstName >> s.lastName; 
+
+                    int grade;
+                    while (ss >> grade) {
+                        grades.push_back(grade);
+                    }
+
+                    if (!grades.empty()) { // jei vektorius ne tuscias, paskutinis elementas yra egzamino rezultatas
+                        s.examResults = grades.back(); 
+                        grades.pop_back(); 
+                    }
+                    s.homeworkResults = grades;
+                    students.push_back(s);
+                }
                 fin.close(); 
                 break;
             }
