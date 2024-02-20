@@ -145,7 +145,7 @@ int Menu() {
     cout << "2 - Generuoti pazymius\n";
     cout << "3 - Generuoti ir pazymius ir studentu vardus, pavardes\n";
     cout << "4 - Skaityti duomenis is failo\n";
-    cout << "5 - baigti darba / isvesti i ekrana\n";
+    cout << "5 - Baigti darba / Isvedimas \n";
     cout << "Iveskite skaiciu: ";
     cin >> number;
     return number;
@@ -242,10 +242,28 @@ double calculateMedian(vector<int> homeworkResults) {
 }
 
 void output(const vector<Student>& students, const int & m, bool Median){
-    cout << "\n" << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
-    cout << "-------------------------------------------------------" << endl;
-    for (int i = 0; i < m; i++) {
-        double finalGrade = calculateFinalGrade(students[i], Median);
-        cout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
-    }
+    int choice;
+    do {
+        cout << "Iveskite 1 jei norite, kad duomenys butu isvesti i ekrana, arba 2 jei norite, kad butu isvesti i faila: ";
+        cin >> choice;
+        if (choice == 1){
+            cout << "\n" << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
+            cout << "-------------------------------------------------------" << endl;
+            for (int i = 0; i < m; i++) {
+                double finalGrade = calculateFinalGrade(students[i], Median);
+                cout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
+            }
+        } else if (choice == 2){
+            ofstream fout("rezultatai.txt");
+            fout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
+            fout << "-------------------------------------------------------" << endl;
+            for (int i = 0; i < m; i++) {
+                double finalGrade = calculateFinalGrade(students[i], Median);
+                fout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
+            }
+            fout.close();
+        } else {
+            cout << "Netinkama ivestis, iveskite skaiciu 1 arba 2." << endl;
+        } 
+    } while (choice != 1 && choice != 2);
 }

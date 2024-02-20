@@ -1,0 +1,12 @@
+Pavarde        Vardas         Galutinis (Vid.)    
+-------------------------------------------------------
+Pavarde1       Vardas1        3.88
+Pavarde2       Vardas2        6.15
+Pavarde3       Vardas3        5.59
+Pavarde4       Vardas4        3.19
+Pavarde5       Vardas5        7.29
+Pavarde6       Vardas6        3.65
+Pavarde7       Vardas7        7.83
+Pavarde8       Vardas8        2.89
+Pavarde9       Vardas9        6.89
+Pavarde10      Vardas10       7.63
