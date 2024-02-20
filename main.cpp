@@ -37,6 +37,14 @@ double calculateFinalGrade(const Student& data, bool Median);
 
 double calculateMedian(vector<int> homeworkResults);
 
+bool compareByFirstName(const Student& a, const Student& b);
+
+bool compareByLastName(const Student& a, const Student& b);
+
+bool compareByGrade(const Student& a, const Student& b);
+
+void sortStudents(vector<Student>& students, int criteria);
+
 void output(const vector<Student>& students, const int & m, bool Median);
 
 int main() {
@@ -134,6 +142,10 @@ int main() {
         }
     } while (number != 5);
     if (!students.empty()) {
+        cout << "Iveskite kaip norite isrusiuoti studentus: 1 - pagal varda, 2 - pagal pavarde, 3 - pagal galutini bala: ";
+        int criteria;
+        cin >> criteria;
+        sortStudents(students, criteria);
         output(students, students.size(), Median);
     }
     return 0;
@@ -238,6 +250,28 @@ double calculateMedian(vector<int> homeworkResults) {
         return (homeworkResults[size / 2 - 1] + homeworkResults[size / 2]) / 2.0; 
     } else {
         return homeworkResults[size / 2];
+    }
+}
+
+bool compareByFirstName(const Student& a, const Student& b) {
+    return a.firstName < b.firstName;
+}
+
+bool compareByLastName(const Student& a, const Student& b) {
+    return a.lastName < b.lastName;
+}
+
+bool compareByGrade(const Student& a, const Student& b) {
+    return calculateFinalGrade(a, false) < calculateFinalGrade(b, false);
+}
+
+void sortStudents(vector<Student>& students, int criteria) {
+    if (criteria == 1) {
+        sort(students.begin(), students.end(), compareByFirstName);
+    } else if (criteria == 2) {
+        sort(students.begin(), students.end(), compareByLastName);
+    } else if (criteria == 3) {
+        sort(students.begin(), students.end(), compareByGrade);
     }
 }
 
