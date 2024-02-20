@@ -93,27 +93,33 @@ int main() {
             case 4: {
                 ifstream fin("kursiokai.txt"); 
                 if (!fin) {
-                    cout << "Nepavyko atidaryti failo 'kursiokai.txt'.\n";
-                    break;
+                    cout << "Nepavyko atidaryti failo 'kursiokai.txt'.";
+                    break; 
                 }
-                string buffer;
-                while (getline(fin, buffer)) { // nuskaito faila eilute po eilutes
+                string buffer; 
+                getline(fin, buffer); // nuskaitome pirma eilute, nes joje yra tik pavadinimai
+                while (getline(fin, buffer)) { // skaitome faila eilute po eilutes
                     stringstream ss(buffer); 
-                    vector<int> grades; 
+                    vector<int> grades;
                     Student s; 
+
                     ss >> s.firstName >> s.lastName; 
 
                     int grade;
-                    while (ss >> grade) {
-                        grades.push_back(grade);
+                    while (ss >> grade) { // skaitome pazymius is eilutes
+                        if (ss.good()) { // jei nuskaitymas pavyko, pridedame pazymi i vektoriu
+                            grades.push_back(grade);
+                        } else { 
+                            break; 
+                        }
                     }
 
-                    if (!grades.empty()) { // jei vektorius ne tuscias, paskutinis elementas yra egzamino rezultatas
-                        s.examResults = grades.back(); 
-                        grades.pop_back(); 
+                    if (!grades.empty()) {
+                        s.examResults = grades.back(); // paskutinis nuskaitytas skaicius yra egzamino pazymys
+                        grades.pop_back(); // istriname egzamino pazymi is vektoriaus
                     }
-                    s.homeworkResults = grades;
-                    students.push_back(s);
+                    s.homeworkResults = grades; // priskiriame namu darbu pazymiams
+                    students.push_back(s); // pridedame studenta i studentu vektoriu
                 }
                 fin.close(); 
                 break;
@@ -139,7 +145,7 @@ int Menu() {
     cout << "2 - Generuoti pazymius\n";
     cout << "3 - Generuoti ir pazymius ir studentu vardus, pavardes\n";
     cout << "4 - Skaityti duomenis is failo\n";
-    cout << "5 - baigti darba\n";
+    cout << "5 - baigti darba / isvesti i ekrana\n";
     cout << "Iveskite skaiciu: ";
     cin >> number;
     return number;
