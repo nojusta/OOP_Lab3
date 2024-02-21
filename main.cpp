@@ -19,6 +19,8 @@ struct Student {
 
 int Menu();
 
+void openFiles(const vector<string>& filenames);
+
 int generateGrade();
 
 string generateName();
@@ -51,8 +53,21 @@ int main() {
     srand(time(0));
     Student data;
     bool Median;
-    cout << "Ar norite galutinio balo skaiciavimui naudoti mediana? (1 - taip, 0 - ne): ";
-    cin >> Median;
+    string a;
+    while (true) {
+        cout << "Ar norite galutinio balo skaiciavimui naudoti mediana? (1 - taip, 0 - ne): ";
+        cin >> a;
+
+        if (a == "0") {
+            Median = false;
+            break;
+        } else if (a == "1") {
+            Median = true;
+            break;
+        } else {
+            cout << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
+        }
+    }
     vector<Student> students;
     int number;
     int moreStudents;
@@ -133,14 +148,22 @@ int main() {
                 break;
             }
             case 5: {
+                vector<string> filenames;
+                filenames.push_back("studentai10000.txt");
+                filenames.push_back("studentai100000.txt");
+                filenames.push_back("studentai1000000.txt");
+                openFiles(filenames);
+                break;
+            }
+            case 6: {
                 break;
             }
             default: {
-                cout << "Netinkama ivestis, iveskite skaiciu tarp 1 ir 5.\n";
+                cout << "Netinkama ivestis, iveskite skaiciu tarp 1 ir 6.\n";
                 break;
             }
         }
-    } while (number != 5);
+    } while (number != 6);
     if (!students.empty()) {
         cout << "Iveskite kaip norite isrusiuoti studentus: 1 - pagal varda, 2 - pagal pavarde, 3 - pagal galutini bala: ";
         int criteria;
@@ -153,14 +176,36 @@ int main() {
 
 int Menu() {
     int number;
-    cout << "1 - Suvesti duomenis ranka\n";
+    cout << "\n1 - Suvesti duomenis ranka\n";
     cout << "2 - Generuoti pazymius\n";
     cout << "3 - Generuoti ir pazymius ir studentu vardus, pavardes\n";
     cout << "4 - Skaityti duomenis is failo\n";
-    cout << "5 - Baigti darba / Isvedimas \n";
-    cout << "Iveskite skaiciu: ";
+    cout << "5 - Atidaryti testavimo failus\n";
+    cout << "6 - Baigti darba / Isvedimas\n";
+    cout << "\nIveskite skaiciu: ";
     cin >> number;
     return number;
+}
+
+void openFiles(const vector<string>& filenames) {
+    for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { // praeina pro kiekviena string'a vektoriuje
+        ifstream fin(*it); 
+        if (!fin) {
+            cout << "Nepavyko atidaryti failo: " << '"' << *it << '"' << endl;
+            continue;
+        } else {
+            cout << "\nFailas " << '"' << *it << '"' << " atidarytas sekmingai." << endl;
+        }
+        clock_t start = clock(); // pradedame skaiciuoti laika
+        string line;
+        while (getline(fin, line)) {
+            // Nuskaitome faila eilute po eilutes
+        }
+        clock_t end = clock(); // baigiame skaiciuoti laika
+        double sec = double(end - start) / CLOCKS_PER_SEC; // laikas sekundemis
+        cout << "Laikas, praleistas nuskaitant duomenis is " << '"' << *it << '"' <<": " << sec << " sekundes" << endl;
+        fin.close();
+    }
 }
 
 int generateGrade() {
