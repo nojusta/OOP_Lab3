@@ -19,6 +19,10 @@ struct Student {
 
 int Menu();
 
+string getFilenameFromUser();
+
+void readData(ifstream& fin, vector<Student>& students);
+
 void openFiles(const vector<string>& filenames);
 
 int generateGrade();
@@ -114,48 +118,31 @@ int main() {
                 break;
             }
             case 4: {
-                ifstream fin("kursiokai.txt"); 
+                string filename = getFilenameFromUser();
+                ifstream fin(filename); 
                 if (!fin) {
-                    cout << "Nepavyko atidaryti failo 'kursiokai.txt'.";
-                    break; 
+                    cout << "Nepavyko nuskaityti failo: " << '"' << filename << '"' << endl;
+                } else {
+                    cout << "\nFailas " << '"' << filename << '"' << " nuskaitytas sekmingai." << endl;
+                    readData(fin, students);
                 }
-                string buffer; 
-                getline(fin, buffer); // nuskaitome pirma eilute, nes joje yra tik pavadinimai
-                while (getline(fin, buffer)) { // skaitome faila eilute po eilutes
-                    stringstream ss(buffer); 
-                    vector<int> grades;
-                    Student s; 
-
-                    ss >> s.firstName >> s.lastName; 
-
-                    int grade;
-                    while (ss >> grade) { // skaitome pazymius is eilutes
-                        if (ss.good()) { // jei nuskaitymas pavyko, pridedame pazymi i vektoriu
-                            grades.push_back(grade);
-                        } else { 
-                            break; 
-                        }
-                    }
-
-                    if (!grades.empty()) {
-                        s.examResults = grades.back(); // paskutinis nuskaitytas skaicius yra egzamino pazymys
-                        grades.pop_back(); // istriname egzamino pazymi is vektoriaus
-                    }
-                    s.homeworkResults = grades; // priskiriame namu darbu pazymiams
-                    students.push_back(s); // pridedame studenta i studentu vektoriu
-                }
-                fin.close(); 
                 break;
             }
             case 5: {
+                string filename = getFilenameFromUser();
                 vector<string> filenames;
-                filenames.push_back("studentai10000.txt");
-                filenames.push_back("studentai100000.txt");
-                filenames.push_back("studentai1000000.txt");
+                filenames.push_back(filename);
                 openFiles(filenames);
                 break;
             }
             case 6: {
+                if (!students.empty()) {
+                    cout << "Iveskite kaip norite isrusiuoti studentus: 1 - pagal varda, 2 - pagal pavarde, 3 - pagal galutini bala: ";
+                    int criteria;
+                    cin >> criteria;
+                    sortStudents(students, criteria);
+                    output(students, students.size(), Median);
+                } 
                 break;
             }
             default: {
@@ -164,13 +151,7 @@ int main() {
             }
         }
     } while (number != 6);
-    if (!students.empty()) {
-        cout << "Iveskite kaip norite isrusiuoti studentus: 1 - pagal varda, 2 - pagal pavarde, 3 - pagal galutini bala: ";
-        int criteria;
-        cin >> criteria;
-        sortStudents(students, criteria);
-        output(students, students.size(), Median);
-    }
+    
     return 0;
 }
 
@@ -187,7 +168,41 @@ int Menu() {
     return number;
 }
 
+string getFilenameFromUser() {
+    cout << "Iveskite norimo failo pavadinima (kursiokai.txt, studentai10000.txt, studentai100000.txt, studentai1000000.txt): \n";
+    string filename;
+    cin >> filename;
+    return filename;
+}
+
+void readData(ifstream& fin, vector<Student>& students) {
+    string buffer; 
+    getline(fin, buffer); // nuskaitome pirma eilute, nes joje yra tik antrastes
+    while (getline(fin, buffer)) { // skaitome faila eilute po eilutes
+        stringstream ss(buffer); 
+        vector<int> grades;
+        Student s; 
+        ss >> s.firstName >> s.lastName; 
+        int grade;
+        while (ss >> grade) { // skaitome pazymius is eilutes
+            if (ss.good()) { // jei nuskaitymas pavyko, pridedame pazymi i vektoriu
+                grades.push_back(grade);
+            } else { 
+                break; 
+            }
+        }
+        if (!grades.empty()) {
+            s.examResults = grades.back(); // paskutinis nuskaitytas skaicius yra egzamino pazymys
+            grades.pop_back(); // istriname egzamino pazymi is vektoriaus
+        }   
+        s.homeworkResults = grades; // priskiriame namu darbu pazymiams
+        students.push_back(s); // pridedame studenta i vektoriu
+    }
+}
+
 void openFiles(const vector<string>& filenames) {
+    int numTests = 3; 
+    double sum = 0.0;
     for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { // praeina pro kiekviena string'a vektoriuje
         ifstream fin(*it); 
         if (!fin) {
@@ -196,16 +211,21 @@ void openFiles(const vector<string>& filenames) {
         } else {
             cout << "\nFailas " << '"' << *it << '"' << " atidarytas sekmingai." << endl;
         }
-        clock_t start = clock(); // pradedame skaiciuoti laika
-        string line;
-        while (getline(fin, line)) {
-            // Nuskaitome faila eilute po eilutes
+        for (int test = 0; test < numTests; ++test) {
+            clock_t start = clock(); // pradedame skaiciuoti laika
+            vector<Student> students;
+            readData(fin, students);
+            clock_t end = clock(); // baigiame skaiciuoti laika
+            double sec = double(end - start) / CLOCKS_PER_SEC; // laikas sekundemis
+            sum += sec; 
+            //cout << "Laikas, praleistas apdorojant duomenis is " << '"' << *it << '"' << " per " << test+1 << " testa: " << sec << " sekundes" << endl;
+            fin.clear(); // isvalome failo busena
+            fin.seekg(0); // nustatome failo skaitymo pozicija i pradzia
         }
-        clock_t end = clock(); // baigiame skaiciuoti laika
-        double sec = double(end - start) / CLOCKS_PER_SEC; // laikas sekundemis
-        cout << "Laikas, praleistas nuskaitant duomenis is " << '"' << *it << '"' <<": " << sec << " sekundes" << endl;
         fin.close();
     }
+    double average = sum / (filenames.size() * numTests); // apskaiciuojame vidurki
+    cout << "\nKeliu testu laiku vidurkis: " << average << " sekundes" << endl;
 }
 
 int generateGrade() {
