@@ -11,14 +11,9 @@
 #include <stdexcept>
 #include <exception>
 #include <locale.h>
+#include "student.h"
 
 using namespace std;
-
-struct Student {
-    string firstName, lastName;
-    vector<int> homeworkResults;
-    int examResults;
-};
 
 int Menu();
 
