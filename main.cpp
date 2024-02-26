@@ -15,6 +15,8 @@
 
 using namespace std;
 
+void processStudents(vector<Student>& students, bool Median);
+
 int Menu();
 
 string getFilenameFromUser();
@@ -47,28 +49,31 @@ bool compareByLastName(const Student& a, const Student& b);
 
 bool compareByGrade(const Student& a, const Student& b);
 
-int countLithuanianLetters(const string& s);
-
 void sortStudents(vector<Student>& students, int criteria);
 
 void output(const vector<Student>& students, const int & m, bool Median);
 
+bool getMedianPreference();
+
 int main() {
     setlocale(LC_ALL, "lt_LT.UTF-8");
     srand(time(0));
-    Student data;
-    bool Median;
+    bool Median = getMedianPreference();
+    vector<Student> students;
+    processStudents(students, Median);
+    return 0;
+}
+
+bool getMedianPreference() {
     string a;
     while (true) {
         try {
             cout << "Ar norite galutinio balo skaičiavimui naudoti medianą? (1 - taip, 0 - ne): ";
             cin >> a;
             if (a == "0") {
-                Median = false;
-                break;
+                return false;
             } else if (a == "1") {
-                Median = true;
-                break;
+                return true;
             } else {
                 throw invalid_argument("Neteisinga įvestis. Prašome įvesti 0 arba 1.");
             }
@@ -76,7 +81,10 @@ int main() {
             cout << e.what() << endl;
         }
     }
-    vector<Student> students;
+}
+
+void processStudents(vector<Student>& students, bool Median) {
+    Student data;
     int number;
     int moreStudents;
     do {
@@ -226,8 +234,6 @@ int main() {
             }
         }
     } while (number != 6);
-    
-    return 0;
 }
 
 int Menu() {
@@ -403,18 +409,6 @@ bool compareByLastName(const Student& a, const Student& b) {
 
 bool compareByGrade(const Student& a, const Student& b) {
     return calculateFinalGrade(a, false) < calculateFinalGrade(b, false);
-}
-
-int countLithuanianLetters(const string& s) {
-    string lithuanianLetters = "ąčęėįšųūžĄČĘĖĮŠŲŪŽ";
-    int count = 0;
-    for (size_t i = 0; i < s.length(); i++) {
-        char c = s[i];
-        if (lithuanianLetters.find(c) != string::npos) {
-            count++;
-        }
-    }
-    return count;
 }
 
 void sortStudents(vector<Student>& students, int criteria) {
