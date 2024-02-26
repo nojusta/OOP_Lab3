@@ -1,4 +1,4 @@
-Vardas                   Pavarde                    ND1       ND2       ND3       ND4       ND5       ND6       ND7       ND8       ND9      ND10      ND11      ND12      ND13      ND14      ND15      Egz.
+Vardas                   Pavardė                    ND1       ND2       ND3       ND4       ND5       ND6       ND7       ND8       ND9      ND10      ND11      ND12      ND13      ND14      ND15      Egz.
 Arvydas                 Jankauskas                      8         5         8         3         3         7         3        10         2         3         7         5         6         3         5         3
 Matas                   Kazlauskas                      6         6         5         5         1         8         4         3         3         8         5         4         5         5         5         7
 Nojus                   Stankevicius                      8         3         2         7         7         9         5        10         9         9        10         4         3         3         8         5
