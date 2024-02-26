@@ -97,9 +97,13 @@ int main() {
                         cerr << e.what() << '\n';
                     }
                     while (true) { 
-                        cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
+                        cout << "Ar norite sugeneruoti dar vieno studento pazymius? (1 - taip, 0 - ne): ";
                         cin >> moreStudents;
-                        if (moreStudents == 0 || moreStudents == 1) {
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cerr << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
+                        } else if (moreStudents == 0 || moreStudents == 1) {
                             break; 
                         } else {
                             cerr << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
@@ -111,10 +115,8 @@ int main() {
             case 2: {
                 do {
                     try {
-                        cout << "Iveskite studento varda: ";
-                        cin >> data.firstName;
-                        cout << "Iveskite studento pavarde: ";
-                        cin >> data.lastName;
+                        data.firstName = isString("Iveskite studento varda: ");
+                        data.lastName = isString("Iveskite studento pavarde: ");
                         for (int j = 0; j < 5; j++) {
                             data.homeworkResults.push_back(generateGrade());
                         }
@@ -123,7 +125,11 @@ int main() {
                         while (true) { 
                             cout << "Ar norite sugeneruoti dar vieno studento pazymius? (1 - taip, 0 - ne): ";
                             cin >> moreStudents;
-                            if (moreStudents == 0 || moreStudents == 1) {
+                            if (cin.fail()) {
+                                cin.clear();
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                cerr << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
+                            } else if (moreStudents == 0 || moreStudents == 1) {
                                 break; 
                             } else {
                                 cerr << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
@@ -136,25 +142,30 @@ int main() {
                 break;
             }
             case 3: {
-                do {
+                int numStudents;
+                while (true) {
                     try {
-                        data.firstName = generateName();
-                        data.lastName = generateLastName();
-                        for (int i = 0; i < 5; i++) {
-                            data.homeworkResults.push_back(generateGrade());
+                        cout << "Iveskite kiek studentu duomenu norite sugeneruoti: ";
+                        cin >> numStudents;
+                        if (cin.fail() || numStudents < 1) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            throw invalid_argument("Neteisinga ivestis. Prasome ivesti teigiama skaiciu.");
                         }
-                        data.examResults = generateGrade();
-                        students.push_back(data);
-                        cout << "Ar norite sugeneruoti dar vieno studento duomenis? (1 - taip, 0 - ne): ";
-                        cin >> moreStudents;
-                        if (moreStudents != 0 && moreStudents != 1) {
-                            throw invalid_argument("Neteisinga ivestis. Prasome ivesti 0 arba 1.");
-                        }
+                        break;
                     } catch (const exception& e) {
                         cerr << "Ivyko klaida: " << e.what() << '\n';
-                        continue;
                     }
-                } while (moreStudents == 1);
+                }
+                for (int i = 0; i < numStudents; i++) {
+                    data.firstName = generateName();
+                    data.lastName = generateLastName();
+                    for (int j = 0; j < 5; j++) {
+                        data.homeworkResults.push_back(generateGrade());
+                    }
+                    data.examResults = generateGrade();
+                    students.push_back(data);
+                }
                 break;
             }
             case 4: {
@@ -296,42 +307,43 @@ string generateLastName() {
 }
 
 string isString(const string& prompt) {
-    string result;
-    do {
-        cout << prompt;
-        cin >> result;
-        if (!all_of(result.begin(), result.end(), ::isalpha)) { // patikrina ar ivestis yra tik is raidziu
-            cout << "Netinkama ivestis, nenaudokite skaiciu." << endl;
-        } else {
-            break; // jei ivestis yra is raidziu, nutraukia cikla
+    while (true) {
+        try {
+            string result;
+            cout << prompt;
+            cin >> result;
+            if (!all_of(result.begin(), result.end(), ::isalpha)) { // patikrina ar ivestis yra tik is raidziu
+                throw runtime_error("Netinkama ivestis, nenaudokite skaiciu.");
+            }
+            return result;
+        } catch (const runtime_error& e) {
+            cerr << e.what() << '\n';
         }
-    } while (true);
-    return result;
+    }
 }
 
 int isGrade(const string& prompt) {
-    int result;
     while (true) {
-        cout << prompt;
-        cin >> result;
-        if (cin.fail()) { // patikrina ar ivestis yra skaicius ir ar jis yra nuo 1 iki 10
-            cin.clear(); 
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Netinkama ivestis, iveskite skaiciu nuo 1 iki 10 arba -1 jei baigete." << endl; 
-        } else if(result == -1) {
+        try {
+            int result;
+            cout << prompt;
+            cin >> result;
+            if (cin.fail() || cin.peek() != '\n' || (result < 1 && result != -1) || result > 10) { // check if input is a number and if it's between 1 and 10 or -1
+                cin.clear(); 
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("Netinkama ivestis, iveskite sveika skaiciu nuo 1 iki 10 arba -1 jei baigete."); 
+            }
             return result;
-        } else if(result < 1 || result > 10){
-            cout << "Netinkama ivestis, iveskite skaiciu nuo 1 iki 10 arba -1 jei baigete." << endl;
-        } else {
-            return result;
+        } catch (const runtime_error& e) {
+            cerr << e.what() << '\n';
         }
-    } 
+    }
 }
 
 void input(Student& data, bool& Median){
     data.firstName = isString("Iveskite studento varda: ");
     data.lastName = isString("Iveskite studento pavarde: ");
-    data.homeworkResults.clear(); // patikrina ar vektorius yra tuscias ir isvalo ji
+    data.homeworkResults.clear(); // isvalome vektoriu
     while (true) {
         int result = isGrade("Iveskite namu darbo pazymi arba -1, jei baigete: ");
         if (result == -1) {
@@ -407,6 +419,9 @@ void output(const vector<Student>& students, const int & m, bool Median){
             }
         } else if (choice == 2){
             ofstream fout("rezultatai.txt");
+            if (!fout) {
+                throw runtime_error("Nepavyko irasyti i 'rezultatai.txt'");
+            }
             fout << left << setw(15) << "Pavarde" << setw(15) << "Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
             fout << "-------------------------------------------------------" << endl;
             for (int i = 0; i < m; i++) {
@@ -415,7 +430,7 @@ void output(const vector<Student>& students, const int & m, bool Median){
             }
             fout.close();
         } else {
-            cout << "Netinkama ivestis, iveskite skaiciu 1 arba 2." << endl;
+            throw runtime_error("Netinkama ivestis, iveskite skaiciu 1 arba 2.");
         } 
     } while (choice != 1 && choice != 2);
 }
