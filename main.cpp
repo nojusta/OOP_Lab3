@@ -8,6 +8,8 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
+#include <exception>
 
 using namespace std;
 
@@ -59,80 +61,128 @@ int main() {
     bool Median;
     string a;
     while (true) {
-        cout << "Ar norite galutinio balo skaiciavimui naudoti mediana? (1 - taip, 0 - ne): ";
-        cin >> a;
-
-        if (a == "0") {
-            Median = false;
-            break;
-        } else if (a == "1") {
-            Median = true;
-            break;
-        } else {
-            cout << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
+        try {
+            cout << "Ar norite galutinio balo skaiciavimui naudoti mediana? (1 - taip, 0 - ne): ";
+            cin >> a;
+            if (a == "0") {
+                Median = false;
+                break;
+            } else if (a == "1") {
+                Median = true;
+                break;
+            } else {
+                throw invalid_argument("Neteisinga ivestis. Prasome ivesti 0 arba 1.");
+            }
+        } catch (const invalid_argument& e) {
+            cout << e.what() << endl;
         }
     }
     vector<Student> students;
     int number;
     int moreStudents;
     do {
-        number = Menu();
+        try {
+            number = Menu();
+        } catch (const exception& e) {
+            cerr << "Ivyko klaida: " << e.what() << '\n';
+            continue;
+        }
         switch (number) {
             case 1: {
                 do {
-                    input(data, Median);
-                    students.push_back(data);
-                    cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
-                    cin >> moreStudents;
+                    try {
+                        input(data, Median);
+                        students.push_back(data);
+                    } catch (const exception& e) {
+                        cerr << e.what() << '\n';
+                    }
+                    while (true) { 
+                        cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
+                        cin >> moreStudents;
+                        if (moreStudents == 0 || moreStudents == 1) {
+                            break; 
+                        } else {
+                            cerr << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
+                        }
+                    }
                 } while (moreStudents == 1);
                 break;
             }
             case 2: {
                 do {
-                    cout << "Iveskite studento varda: ";
-                    cin >> data.firstName;
-                    cout << "Iveskite studento pavarde: ";
-                    cin >> data.lastName;
-                    for (int j = 0; j < 5; j++) {
-                        data.homeworkResults.push_back(generateGrade());
+                    try {
+                        cout << "Iveskite studento varda: ";
+                        cin >> data.firstName;
+                        cout << "Iveskite studento pavarde: ";
+                        cin >> data.lastName;
+                        for (int j = 0; j < 5; j++) {
+                            data.homeworkResults.push_back(generateGrade());
+                        }
+                        data.examResults = generateGrade();
+                        students.push_back(data);
+                        while (true) { 
+                            cout << "Ar norite sugeneruoti dar vieno studento pazymius? (1 - taip, 0 - ne): ";
+                            cin >> moreStudents;
+                            if (moreStudents == 0 || moreStudents == 1) {
+                                break; 
+                            } else {
+                                cerr << "Neteisinga ivestis. Prasome ivesti 0 arba 1." << endl;
+                            }
+                        }
+                    } catch (const exception& e) {
+                        cerr << "Ivyko klaida: " << e.what() << '\n';
                     }
-                    data.examResults = generateGrade();
-                    students.push_back(data);
-                    cout << "Ar norite ivesti dar viena studenta? (1 - taip, 0 - ne): ";
-                    cin >> moreStudents;
                 } while (moreStudents == 1);
                 break;
             }
             case 3: {
                 do {
-                    data.firstName = generateName();
-                    data.lastName = generateLastName();
-                    for (int i = 0; i < 5; i++) {
-                        data.homeworkResults.push_back(generateGrade());
+                    try {
+                        data.firstName = generateName();
+                        data.lastName = generateLastName();
+                        for (int i = 0; i < 5; i++) {
+                            data.homeworkResults.push_back(generateGrade());
+                        }
+                        data.examResults = generateGrade();
+                        students.push_back(data);
+                        cout << "Ar norite sugeneruoti dar vieno studento duomenis? (1 - taip, 0 - ne): ";
+                        cin >> moreStudents;
+                        if (moreStudents != 0 && moreStudents != 1) {
+                            throw invalid_argument("Neteisinga ivestis. Prasome ivesti 0 arba 1.");
+                        }
+                    } catch (const exception& e) {
+                        cerr << "Ivyko klaida: " << e.what() << '\n';
+                        continue;
                     }
-                    data.examResults = generateGrade();
-                    students.push_back(data);
-                    cout << "Ar norite sugeneruoti dar vieno studento duomenis? (1 - taip, 0 - ne): ";
-                    cin >> moreStudents;
                 } while (moreStudents == 1);
                 break;
             }
             case 4: {
-                string filename = getFilenameFromUser();
-                ifstream fin(filename); 
-                if (!fin) {
-                    cout << "Nepavyko nuskaityti failo: " << '"' << filename << '"' << endl;
-                } else {
+                try {
+                    string filename = getFilenameFromUser();
+                    ifstream fin(filename); 
                     cout << "\nFailas " << '"' << filename << '"' << " nuskaitytas sekmingai." << endl;
                     readData(fin, students);
+                } catch (const runtime_error& e) {
+                    cerr << e.what() << '\n';
+                } catch (const exception& e) {
+                    cerr << "Ivyko klaida: " << e.what() << '\n';
                 }
                 break;
             }
             case 5: {
-                string filename = getFilenameFromUser();
-                vector<string> filenames;
-                filenames.push_back(filename);
-                openFiles(filenames);
+                try {
+                    string filename = getFilenameFromUser();
+                    ifstream fin(filename); 
+                    cout << "\nFailas " << '"' << filename << '"' << " atidarytas sekmingai." << endl;
+                    vector<string> filenames;
+                    filenames.push_back(filename);
+                    openFiles(filenames);
+                } catch (const runtime_error& e) {
+                    cerr << e.what() << '\n';
+                } catch (const exception& e) {
+                    cerr << "Ivyko klaida: " << e.what() << '\n';
+                }
                 break;
             }
             case 6: {
@@ -140,8 +190,12 @@ int main() {
                     cout << "Iveskite kaip norite isrusiuoti studentus: 1 - pagal varda, 2 - pagal pavarde, 3 - pagal galutini bala: ";
                     int criteria;
                     cin >> criteria;
-                    sortStudents(students, criteria);
-                    output(students, students.size(), Median);
+                    try {
+                        sortStudents(students, criteria);
+                        output(students, students.size(), Median);
+                    } catch (const exception& e) {
+                        cerr << "Ivyko klaida rusiuojant / isvedant studentus \n";
+                    }
                 } 
                 break;
             }
@@ -165,6 +219,9 @@ int Menu() {
     cout << "6 - Baigti darba / Isvedimas\n";
     cout << "\nIveskite skaiciu: ";
     cin >> number;
+    if (number < 1 || number > 6) {
+        throw runtime_error("Netinkama ivestis, iveskite skaiciu tarp 1 ir 6.");
+    }
     return number;
 }
 
@@ -172,6 +229,10 @@ string getFilenameFromUser() {
     cout << "Iveskite norimo failo pavadinima (kursiokai.txt, studentai10000.txt, studentai100000.txt, studentai1000000.txt): \n";
     string filename;
     cin >> filename;
+    ifstream fin(filename);
+    if (!fin) {
+        throw runtime_error("Failas " + filename + " nerastas.");
+    }
     return filename;
 }
 
@@ -185,11 +246,10 @@ void readData(ifstream& fin, vector<Student>& students) {
         ss >> s.firstName >> s.lastName; 
         int grade;
         while (ss >> grade) { // skaitome pazymius is eilutes
-            if (ss.good()) { // jei nuskaitymas pavyko, pridedame pazymi i vektoriu
-                grades.push_back(grade);
-            } else { 
-                break; 
-            }
+            grades.push_back(grade);
+        }
+        if (ss.fail() && !ss.eof()) { // patikriname ar nuskaitymas pavyko
+            throw runtime_error("Nepavyko nuskaityti pazymio.");
         }
         if (!grades.empty()) {
             s.examResults = grades.back(); // paskutinis nuskaitytas skaicius yra egzamino pazymys
@@ -203,28 +263,21 @@ void readData(ifstream& fin, vector<Student>& students) {
 void openFiles(const vector<string>& filenames) {
     int numTests = 3; 
     double sum = 0.0;
-    for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { // praeina pro kiekviena string'a vektoriuje
+    for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { 
         ifstream fin(*it); 
-        if (!fin) {
-            cout << "Nepavyko atidaryti failo: " << '"' << *it << '"' << endl;
-            continue;
-        } else {
-            cout << "\nFailas " << '"' << *it << '"' << " atidarytas sekmingai." << endl;
-        }
         for (int test = 0; test < numTests; ++test) {
-            clock_t start = clock(); // pradedame skaiciuoti laika
+            clock_t start = clock(); 
             vector<Student> students;
             readData(fin, students);
-            clock_t end = clock(); // baigiame skaiciuoti laika
-            double sec = double(end - start) / CLOCKS_PER_SEC; // laikas sekundemis
+            clock_t end = clock(); 
+            double sec = double(end - start) / CLOCKS_PER_SEC; 
             sum += sec; 
-            //cout << "Laikas, praleistas apdorojant duomenis is " << '"' << *it << '"' << " per " << test+1 << " testa: " << sec << " sekundes" << endl;
-            fin.clear(); // isvalome failo busena
-            fin.seekg(0); // nustatome failo skaitymo pozicija i pradzia
+            fin.clear(); 
+            fin.seekg(0); 
         }
         fin.close();
     }
-    double average = sum / (filenames.size() * numTests); // apskaiciuojame vidurki
+    double average = sum / (filenames.size() * numTests); 
     cout << "\nKeliu testu laiku vidurkis: " << average << " sekundes" << endl;
 }
 
