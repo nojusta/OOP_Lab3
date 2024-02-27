@@ -41,8 +41,7 @@ int isGrade(const string& prompt) {
             int result;
             cout << prompt;
             cin >> result;
-            if (cin.fail() || cin.peek() != '\n' || (result < 1 && result != -1) || result > 10) { // check if input is a number and if it's between 1 and 10 or -1
-                cin.clear(); 
+            if (cin.fail() || cin.peek() != '\n' || (result < 1 && result != -1) || result > 10) { // patikrina ar ivestis yra sveikas skaicius nuo 1 iki 10 arba -1
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 throw runtime_error("Netinkama įvestis, įveskite sveiką skaičių nuo 1 iki 10 arba -1 jei baigėte."); 
             }

@@ -6,8 +6,6 @@
 #include "student.h" 
 #include "calculations.h"
 
-// Function declarations
-
 int generateGrade();
 std::string generateName();
 std::string generateLastName();
