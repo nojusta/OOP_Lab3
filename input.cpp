@@ -47,7 +47,7 @@ void processStudents(vector<Student>& students, bool Median) {
                         cerr << e.what() << '\n';
                     }
                     while (true) { 
-                        cout << "Ar norite sugeneruoti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
+                        cout << "Ar norite suvesti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
                         cin >> moreStudents;
                         if (cin.fail()) {
                             cin.clear();
