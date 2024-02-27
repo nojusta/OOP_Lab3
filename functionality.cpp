@@ -15,7 +15,7 @@ string generateName() {
 }
 
 string generateLastName() {
-    string lastNames[] = {"Kazlauskas", "Sabonis", "Stankevičius", "Petrauskas", "Navickas", "Urbonas"};
+    string lastNames[] = {"Kazlauskas", "Sabonis", "Stankevicius", "Petrauskas", "Navickas", "Urbonas"};
     return lastNames[rand() % 6]; 
 }
 
