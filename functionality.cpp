@@ -51,10 +51,11 @@ int isGrade(const string& prompt) {
         }
     }
 }
+
 void generateFile(int n) {
-    ofstream fout("studentai_" + to_string(n) + ".txt");
+    ofstream fout("studentai" + to_string(n) + ".txt");
     if (!fout) {
-        cerr << "Nepavyko sukurti failo 'studentai_" << n << ".txt'\n";
+        cerr << "Nepavyko sukurti failo 'studentai" << n << ".txt'\n";
         return;
     }
 
@@ -71,6 +72,7 @@ void generateFile(int n) {
         }
         fout << setw(5) << generateGrade() << endl;
     }
+    cout << "Failas 'studentai" << n << ".txt' sukurtas.\n";
 }
 
 void output(const vector<Student>& students, size_t m, bool Median){

@@ -147,6 +147,18 @@ void processStudents(vector<Student>& students, bool Median) {
                 break;
             }
             case 6: {
+                try {
+                    int studentCounts[] = {1000, 10000, 100000, 1000000, 10000000};
+                    for (int i = 0; i < sizeof(studentCounts)/sizeof(studentCounts[0]); i++) {
+                        generateFile(studentCounts[i]);
+                    }
+                    cout << "\nFailai sukurti sėkmingai." << endl;
+                } catch (const exception& e) {
+                    cerr << "Įvyko klaida: " << e.what() << '\n';
+                }
+                break;
+            }
+            case 7: {
                 if (!students.empty()) {
                     cout << "Įveskite kaip norite išrušiuoti studentus: 1 - pagal vardą, 2 - pagal pavardę, 3 - pagal galutinį balą: ";
                     int criteria;
@@ -176,7 +188,7 @@ void processStudents(vector<Student>& students, bool Median) {
                 break;
             }
         }
-    } while (number != 6);
+    } while (number != 7);
 }
 
 int Menu() {
@@ -186,17 +198,18 @@ int Menu() {
     cout << "3 - Generuoti ir pažymius ir studentų vardus, pavardes\n";
     cout << "4 - Skaityti duomenis iš failo\n";
     cout << "5 - Atidaryti testavimo failus\n";
-    cout << "6 - Baigti darbą / Išvedimas\n";
+    cout << "6 - Sugeneruoti penkis atsitiktinius studentų sąrašų failus\n";
+    cout << "7 - Baigti darbą / Išvedimas\n";
     cout << "\nĮveskite skaičių: ";
     cin >> number;
-    if (number < 1 || number > 6) {
-        throw runtime_error("Netinkama įvestis, įveskite skaičių tarp 1 ir 6.");
+    if (number < 1 || number > 7) {
+        throw runtime_error("Netinkama įvestis, įveskite skaičių tarp 1 ir 7.");
     }
     return number;
 }
 
 string getFilenameFromUser() {
-    cout << "Įveskite norimo failo pavadinimą (kursiokai.txt, studentai10000.txt, studentai100000.txt, studentai1000000.txt): \n";
+    cout << "Įveskite norimo failo pavadinimą (kursiokai.txt, studentai1000.txt, studentai10000.txt, studentai100000.txt, studentai1000000.txt, studentai10000000.txt): \n";
     string filename;
     cin >> filename;
     ifstream fin(filename);

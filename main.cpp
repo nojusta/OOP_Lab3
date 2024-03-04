@@ -11,7 +11,6 @@ int main() {
     bool Median = getMedianPreference();
     vector<Student> students;
     processStudents(students, Median);
-    generateFile(1000);
     return 0; 
 }
 
