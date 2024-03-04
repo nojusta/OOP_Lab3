@@ -51,6 +51,27 @@ int isGrade(const string& prompt) {
         }
     }
 }
+void generateFile(int n) {
+    ofstream fout("studentai_" + to_string(n) + ".txt");
+    if (!fout) {
+        cerr << "Nepavyko sukurti failo 'studentai_" << n << ".txt'\n";
+        return;
+    }
+
+    fout << left << setw(16) << "Vardas" << setw(16) << "Pavarde";
+    for (int i = 1; i <= 15; i++) {
+        fout << setw(5) << "ND" + to_string(i);
+    }
+    fout << setw(5) << "Egz." << endl;
+
+    for (int i = 1; i <= n; i++) {
+        fout << setw(16) << "Vardas" + to_string(i) << setw(16) << "Pavarde" + to_string(i);
+        for (int j = 0; j < 15; j++) {
+            fout << setw(5) << generateGrade();
+        }
+        fout << setw(5) << generateGrade() << endl;
+    }
+}
 
 void output(const vector<Student>& students, size_t m, bool Median){
     int choice;

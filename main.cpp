@@ -11,7 +11,8 @@ int main() {
     bool Median = getMedianPreference();
     vector<Student> students;
     processStudents(students, Median);
-    return 0;
+    generateFile(1000);
+    return 0; 
 }
 
 // g++ -o main main.cpp functionality.cpp input.cpp calculations.cpp
