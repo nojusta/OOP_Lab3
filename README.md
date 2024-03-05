@@ -10,7 +10,7 @@ Laboratinio darbo nr. 1 v.0.4 versija
 7. Projektas išskaidytas į kelis failus (.h ir .cpp).
 8. Generuoja penkis atsitiktinius studentų sąrašų failus, sudarytus iš: 1 000, 10 000, 100 000, 1 000 000, 10 000 000 įrašų
 9. Atlieka tyrimus / testavimus su sugeneruotais failais.
-10. Surūšiuoja studentus ir išvesda į du naujus failus.
+10. Surūšiuoja studentus ir išveda į du naujus failus.
 
 ## Tyrimo rezultatai
 
