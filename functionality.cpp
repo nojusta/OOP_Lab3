@@ -75,43 +75,19 @@ void generateFile(int n) {
     cout << "Failas 'studentai" << n << ".txt' sukurtas.\n";
 }
 
-void output(const vector<Student>& students, size_t m, bool Median){
-    int choice;
-    while (true) {
-        try {
-            cout << "Įveskite 1 jei norite, kad duomenys būtų išvesti į ekraną, arba 2 jei norite, kad būtų įrašyti į failą: ";
-            cin >> choice;
-            if(cin.fail()) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                throw runtime_error("Netinkama įvestis, įveskite skaičių 1 arba 2.");
+void output(const vector<Student>& students, size_t m, bool Median, const string& filename){
+    cout << "\n" << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
+    cout << "-------------------------------------------------------" << endl;
+    for (int i = 0; i < m; i++) {
+        double finalGrade = calculateFinalGrade(students[i], Median);
+        if (filename.empty()) {
+            cout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
+        } else {
+            ofstream fout(filename, ios::app);
+            if (!fout) {
+                throw runtime_error("Nepavyko įrašyti į '" + filename + "'");
             }
-            if (choice != 1 && choice != 2) {
-                throw runtime_error("Netinkama įvestis, įveskite skaičių 1 arba 2.");
-            }
-
-            if (choice == 1){
-                cout << "\n" << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
-                cout << "-------------------------------------------------------" << endl;
-                for (int i = 0; i < m; i++) {
-                double finalGrade = calculateFinalGrade(students[i], Median);
-                cout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
-                }
-            } else if (choice == 2){
-                ofstream fout("rezultatai.txt");
-                if (!fout) {
-                    throw runtime_error("Nepavyko įrašyti į 'rezultatai.txt'");
-                }
-                fout << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
-                fout << "-------------------------------------------------------" << endl;
-                for (int i = 0; i < m; i++) {
-                    double finalGrade = calculateFinalGrade(students[i], Median);
-                    fout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
-                }
-            }
-            break;
-        } catch (const runtime_error& e) {
-            cout << e.what() << endl;
+            fout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
         }
     }
 }

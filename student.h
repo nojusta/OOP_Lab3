@@ -9,5 +9,7 @@ struct Student {
     std::vector<int> homeworkResults;
     int examResults;
 };
+extern std::vector<Student> kietiakai;
+extern std::vector<Student> nuskriaustukai;
 
 #endif // STUDENT_H

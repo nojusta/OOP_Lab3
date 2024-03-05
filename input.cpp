@@ -180,7 +180,27 @@ void processStudents(vector<Student>& students, bool Median) {
                     }
                     try {
                         sortStudents(students, criteria);
-                        output(students, students.size(), Median);
+                        vector<Student> kietiakai;
+                        vector<Student> nuskriaustukai;
+                        for (vector<Student>::iterator it = students.begin(); it != students.end(); ++it) {
+                            double finalGrade = calculateFinalGrade(*it, Median);
+                            if (finalGrade < 5.0) {
+                                nuskriaustukai.push_back(*it);
+                            } else {
+                                kietiakai.push_back(*it);
+                            }
+                        }
+                        cout << "Įveskite kaip norite išvesti studentus: 1 - į ekraną, 2 - į failus: ";
+                        int choice;
+                        cin >> choice;
+                        if (choice == 1) {
+                            output(nuskriaustukai, nuskriaustukai.size(), Median);
+                            output(kietiakai, kietiakai.size(), Median);
+                        } else if (choice == 2) {
+                            output(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
+                            output(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
+                        }
+
                     } catch (const exception& e) {
                         cerr << "Įvyko klaida rušiuojant / išvedant studentus \n";
                     }

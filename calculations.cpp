@@ -43,6 +43,7 @@ double calculateMedian(vector<int> homeworkResults) {
         return homeworkResults[size / 2];
     }
 }
+
 void sortStudents(vector<Student>& students, int criteria) {
     if (criteria == 1) {
         sort(students.begin(), students.end(), compareByFirstName);
