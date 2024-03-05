@@ -75,19 +75,30 @@ void generateFile(int n) {
     cout << "Failas 'studentai" << n << ".txt' sukurtas.\n";
 }
 
-void output(const vector<Student>& students, size_t m, bool Median, const string& filename){
-    cout << "\n" << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
+void outputToTerminal(const vector<Student>& studentsLow, const vector<Student>& studentsHigh, bool Median){
+    cout <<"\nNuskriaustukai: \n\n";
+    cout << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
     cout << "-------------------------------------------------------" << endl;
+    for (const auto& student : studentsLow) {
+        double finalGrade = calculateFinalGrade(student, Median);
+        cout << setw(15) << student.lastName << setw(15) << student.firstName << fixed << setprecision(2) << finalGrade << endl;
+    }
+    cout <<"\nKietiakai: \n\n";
+    cout << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
+    cout << "-------------------------------------------------------" << endl;
+    for (const auto& student : studentsHigh) {
+        double finalGrade = calculateFinalGrade(student, Median);
+        cout << setw(15) << student.lastName << setw(15) << student.firstName << fixed << setprecision(2) << finalGrade << endl;
+    }
+}
+
+void outputToFile(const vector<Student>& students, size_t m, bool Median, const string& filename){
+    ofstream fout(filename);
+    fout << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
+    fout << "-------------------------------------------------------" << endl;
     for (int i = 0; i < m; i++) {
         double finalGrade = calculateFinalGrade(students[i], Median);
-        if (filename.empty()) {
-            cout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
-        } else {
-            ofstream fout(filename, ios::app);
-            if (!fout) {
-                throw runtime_error("Nepavyko įrašyti į '" + filename + "'");
-            }
-            fout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
-        }
+        fout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
     }
+    fout.close();
 }

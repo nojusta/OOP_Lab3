@@ -194,13 +194,11 @@ void processStudents(vector<Student>& students, bool Median) {
                         int choice;
                         cin >> choice;
                         if (choice == 1) {
-                            output(nuskriaustukai, nuskriaustukai.size(), Median);
-                            output(kietiakai, kietiakai.size(), Median);
+                            outputToTerminal(nuskriaustukai, kietiakai, Median);
                         } else if (choice == 2) {
-                            output(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
-                            output(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
+                            outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
+                            outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
                         }
-
                     } catch (const exception& e) {
                         cerr << "Įvyko klaida rušiuojant / išvedant studentus \n";
                     }
