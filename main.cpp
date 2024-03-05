@@ -14,4 +14,4 @@ int main() {
     return 0; 
 }
 
-// g++ -o main main.cpp functionality.cpp input.cpp calculations.cpp
+// g++ -std=c++11 -o main main.cpp functionality.cpp input.cpp calculations.cpp

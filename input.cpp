@@ -134,11 +134,9 @@ void processStudents(vector<Student>& students, bool Median) {
             case 5: {
                 try {
                     string filename = getFilenameFromUser();
-                    ifstream fin(filename); 
-                    cout << "\nFailas " << '"' << filename << '"' << " atidarytas sėkmingai." << endl;
                     vector<string> filenames;
                     filenames.push_back(filename);
-                    openFiles(filenames);
+                    openFiles(filenames, Median);
                 } catch (const runtime_error& e) {
                     cerr << e.what() << '\n';
                 } catch (const exception& e) {
@@ -261,25 +259,49 @@ void readData(ifstream& fin, vector<Student>& students) {
     }
 }
 
-void openFiles(const vector<string>& filenames) {
-    int numTests = 3; 
-    double sum = 0.0;
-    for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { 
-        ifstream fin(*it); 
-        for (int test = 0; test < numTests; ++test) {
-            clock_t start = clock(); 
-            vector<Student> students;
-            readData(fin, students);
-            clock_t end = clock(); 
-            double sec = double(end - start) / CLOCKS_PER_SEC; 
-            sum += sec; 
-            fin.clear(); 
-            fin.seekg(0); 
+void openFiles(const vector<string>& filenames, bool Median) {
+    double sumRead = 0.0, sumSort = 0.0, sumOutput = 0.0;
+    for (const auto& filename : filenames) { 
+        ifstream fin(filename); 
+        vector<Student> students;
+
+        // Matuojame laika nuskaitymui
+        auto startRead = chrono::high_resolution_clock::now();
+        readData(fin, students);
+        auto endRead = chrono::high_resolution_clock::now();
+        sumRead += chrono::duration<double>(endRead - startRead).count();
+
+        // Matuoja laika rusiavimui 
+        auto startSort = chrono::high_resolution_clock::now();
+        sortStudents(students, 3);
+        vector<Student> kietiakai, nuskriaustukai;
+        for (auto& student : students) {
+            double finalGrade = calculateFinalGrade(student, Median);
+            if (finalGrade < 5.0) {
+                nuskriaustukai.push_back(student);
+            } else {
+                kietiakai.push_back(student);
+            }
         }
+        auto endSort = chrono::high_resolution_clock::now();
+        sumSort += chrono::duration<double>(endSort - startSort).count();
+
+        // Matuojame laika isvedimui i du failus
+        auto startOutput = chrono::high_resolution_clock::now();
+        outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
+        outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
+        auto endOutput = chrono::high_resolution_clock::now();
+        sumOutput += chrono::duration<double>(endOutput - startOutput).count();
+
+        fin.clear(); 
+        fin.seekg(0); 
+
         fin.close();
     }
-    double average = sum / (filenames.size() * numTests); 
-    cout << "\nKelių testų laikų vidurkis: " << average << " sekundės" << endl;
+
+    cout << "\nLaikas sugaištas duomenų nuskaitymui: " << std::fixed << std::setprecision(6) << sumRead << " sekundės" << endl;
+    cout << "Laikas sugaištas duomenų rušiavimui: " << std::fixed << std::setprecision(6) << sumSort << " sekundės" << endl;
+    cout << "Laikas sugaištas duomenų išvedimui į du failus: " << std::fixed << std::setprecision(6) << sumOutput << " sekundės" << endl;
 }
 
 void input(Student& data, bool& Median){

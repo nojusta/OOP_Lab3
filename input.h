@@ -18,7 +18,7 @@ std::string getFilenameFromUser();
 
 void readData(std::ifstream& fin, std::vector<Student>& students);
 
-void openFiles(const std::vector<std::string>& filenames);
+void openFiles(const std::vector<std::string>& filenames, bool Median);
 
 void input(Student& data, bool& Median);
 
