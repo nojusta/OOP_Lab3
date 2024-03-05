@@ -52,11 +52,33 @@ int isGrade(const string& prompt) {
     }
 }
 
-void generateFile(int n) {
+void testFiles(const vector<string>& filenames) {
+    int numTests = 3; 
+    double sum = 0.0;
+    for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { 
+        ifstream fin(*it); 
+        for (int test = 0; test < numTests; ++test) {
+            clock_t start = clock(); 
+            vector<Student> students;
+            readData(fin, students);
+            clock_t end = clock(); 
+            double sec = double(end - start) / CLOCKS_PER_SEC; 
+            sum += sec; 
+            fin.clear(); 
+            fin.seekg(0); 
+        }
+        fin.close();
+    }
+    double average = sum / (filenames.size() * numTests); 
+    cout << "\nKelių testų laikų vidurkis: " << average << " sekundės" << endl;
+}
+
+double generateFile(int n) {
+    auto start = chrono::high_resolution_clock::now();
     ofstream fout("studentai" + to_string(n) + ".txt");
     if (!fout) {
         cerr << "Nepavyko sukurti failo 'studentai" << n << ".txt'\n";
-        return;
+        return -1.0;
     }
 
     fout << left << setw(16) << "Vardas" << setw(16) << "Pavarde";
@@ -72,7 +94,8 @@ void generateFile(int n) {
         }
         fout << setw(5) << generateGrade() << endl;
     }
-    cout << "Failas 'studentai" << n << ".txt' sukurtas.\n";
+    auto end = chrono::high_resolution_clock::now();
+    return chrono::duration<double>(end - start).count();
 }
 
 void outputToTerminal(const vector<Student>& studentsLow, const vector<Student>& studentsHigh, bool Median){
