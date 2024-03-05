@@ -26,7 +26,7 @@ bool getMedianPreference() {
     }
 }
 
-void processStudents(vector<Student>& students, bool Median) {
+void processStudents(vector<Student>& students, bool Median, chrono::high_resolution_clock::time_point startTotal) {
     Student data;
     int number;
     int moreStudents;
@@ -152,22 +152,20 @@ void processStudents(vector<Student>& students, bool Median) {
                     for (int i = 0; i < sizeof(studentCounts)/sizeof(studentCounts[0]); i++) {
                         auto startTotal = chrono::high_resolution_clock::now(); 
                         
-                        generateFile(studentCounts[i]);
+                        generateFile(studentCounts[i]); // sugeneruojame failus
                         
-                        vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"};
+                        vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"}; // sudedame sugeneruotus failus i vektoriu
                         openFiles(filenames, Median); 
                         
-                        auto endTotal = chrono::high_resolution_clock::now(); 
+                        auto endTotal = chrono::high_resolution_clock::now();  
                         chrono::duration<double> diffTotal = endTotal-startTotal;
-                        double timeCreateFile = diffTotal.count();
+                        double timeCreateFile = diffTotal.count(); // laikas, matuojantis kiek uztruko viso failo generavimas ir testavimas
                         
                         cout << "\nVisas sugaištas laikas: " << std::fixed << std::setprecision(6) << timeCreateFile << " sekundės\n" << endl;
                     }
                 } catch (const exception& e) {
                     cerr << "Įvyko klaida: " << e.what() << '\n';
-                } catch (...) {
-                    cerr << "An unknown error occurred.\n";
-                }
+                } 
                 break;
             }
             case 7: {
@@ -194,7 +192,7 @@ void processStudents(vector<Student>& students, bool Median) {
                         sortStudents(students, criteria);
                         vector<Student> kietiakai;
                         vector<Student> nuskriaustukai;
-                        for (vector<Student>::iterator it = students.begin(); it != students.end(); ++it) {
+                        for (vector<Student>::iterator it = students.begin(); it != students.end(); ++it) { // skirstome studentus i dvi kategorijas
                             double finalGrade = calculateFinalGrade(*it, Median);
                             if (finalGrade < 5.0) {
                                 nuskriaustukai.push_back(*it);
@@ -214,6 +212,11 @@ void processStudents(vector<Student>& students, bool Median) {
                     } catch (const exception& e) {
                         cerr << "Įvyko klaida rušiuojant / išvedant studentus \n";
                     }
+                auto endTotal = chrono::high_resolution_clock::now();
+                chrono::duration<double> diffTotal = endTotal-startTotal;
+                double totalTime = diffTotal.count();
+
+                cout << "\nVisos programos veikimo laikas: " << std::fixed << std::setprecision(6) << totalTime << " sekundės\n" << endl;
                 } 
                 break;
             }
@@ -274,13 +277,13 @@ void readData(ifstream& fin, vector<Student>& students) {
 }
 
 void openFiles(const vector<string>& filenames, bool Median) {
-    for (const auto& filename : filenames) { 
+    for (const auto& filename : filenames) { // einame per visus failus
         ifstream fin(filename); 
         vector<Student> students;
         double sumRead = 0.0, sumSort = 0.0, sumOutput = 0.0;
 
         // Matuojame laika nuskaitymui
-        auto startRead = chrono::high_resolution_clock::now();
+        auto startRead = chrono::high_resolution_clock::now(); 
         readData(fin, students);
         auto endRead = chrono::high_resolution_clock::now();
         sumRead = chrono::duration<double>(endRead - startRead).count();
