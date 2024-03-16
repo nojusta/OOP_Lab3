@@ -5,6 +5,24 @@
 
 using namespace std;
 
+int getContainerTypeFromUser() {
+    int containerType;
+
+    cout << "Pasirinkite konteinerio tipą: \n";
+    cout << "1 - Vector\n";
+    cout << "2 - Deque\n";
+    cout << "3 - List\n";
+    cout << "Pasirinkite: ";
+    cin >> containerType;
+
+    while (containerType < 1 || containerType > 3) {
+        cout << "Invalid choice. Please enter a number between 1 and 3: ";
+        cin >> containerType;
+    }
+
+    return containerType;
+}
+
 int generateGrade() {
     return rand() % 10 + 1; // grazina skaiciu nuo 1 iki 10 (pazymi)
 }
@@ -52,33 +70,13 @@ int isGrade(const string& prompt) {
     }
 }
 
-void testFiles(const vector<string>& filenames) {
-    int numTests = 3; 
-    double sum = 0.0;
-    for (vector<string>::const_iterator it = filenames.begin(); it != filenames.end(); ++it) { 
-        ifstream fin(*it); 
-        for (int test = 0; test < numTests; ++test) {
-            clock_t start = clock(); 
-            vector<Student> students;
-            readData(fin, students);
-            clock_t end = clock(); 
-            double sec = double(end - start) / CLOCKS_PER_SEC; 
-            sum += sec; 
-            fin.clear(); 
-            fin.seekg(0); 
-        }
-        fin.close();
-    }
-    double average = sum / (filenames.size() * numTests); 
-    cout << "\nKelių testų laikų vidurkis: " << average << " sekundės" << endl;
-}
+void generateFile(int n) {
+    auto start = std::chrono::high_resolution_clock::now(); 
 
-double generateFile(int n) {
-    auto start = chrono::high_resolution_clock::now();
     ofstream fout("studentai" + to_string(n) + ".txt");
     if (!fout) {
         cerr << "Nepavyko sukurti failo 'studentai" << n << ".txt'\n";
-        return -1.0;
+        return;
     }
 
     fout << left << setw(16) << "Vardas" << setw(16) << "Pavarde";
@@ -94,8 +92,11 @@ double generateFile(int n) {
         }
         fout << setw(5) << generateGrade() << endl;
     }
-    auto end = chrono::high_resolution_clock::now();
-    return chrono::duration<double>(end - start).count();
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end-start; 
+
+    cout << "Failas 'studentai" << n << ".txt' sukurtas per " << diff.count() << " sekundes.\n";
 }
 
 void outputToTerminal(const vector<Student>& studentsLow, const vector<Student>& studentsHigh, bool Median){

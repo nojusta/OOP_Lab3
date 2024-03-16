@@ -30,6 +30,7 @@ void processStudents(vector<Student>& students, bool Median, chrono::high_resolu
     Student data;
     int number;
     int moreStudents;
+    int studentCounts[] = {1000, 10000, 100000, 1000000, 10000000};
     do {
         try {
             number = Menu();
@@ -133,14 +134,10 @@ void processStudents(vector<Student>& students, bool Median, chrono::high_resolu
             }
             case 5: {
                 try {
-                    string filename = getFilenameFromUser();
-                    ifstream fin(filename); 
-                    cout << "\nFailas " << '"' << filename << '"' << " atidarytas sėkmingai." << endl;
-                    vector<string> filenames;
-                    filenames.push_back(filename);
-                    testFiles(filenames);
-                } catch (const runtime_error& e) {
-                    cerr << e.what() << '\n';
+                    for (int i = 0; i < sizeof(studentCounts)/sizeof(studentCounts[0]); i++) {
+                        generateFile(studentCounts[i]);
+                    }
+                    cout << "\nFailai sukurti sėkmingai." << endl;
                 } catch (const exception& e) {
                     cerr << "Įvyko klaida: " << e.what() << '\n';
                 }
@@ -148,20 +145,16 @@ void processStudents(vector<Student>& students, bool Median, chrono::high_resolu
             }
             case 6: {
                 try {
-                    int studentCounts[] = {1000, 10000, 100000, 1000000, 10000000};
                     for (int i = 0; i < sizeof(studentCounts)/sizeof(studentCounts[0]); i++) {
-                        auto startTotal = chrono::high_resolution_clock::now(); 
-                        
-                        generateFile(studentCounts[i]); // sugeneruojame failus
-                        
                         vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"}; // sudedame sugeneruotus failus i vektoriu
                         openFiles(filenames, Median); 
-                        
-                        auto endTotal = chrono::high_resolution_clock::now();  
-                        chrono::duration<double> diffTotal = endTotal-startTotal;
-                        double timeCreateFile = diffTotal.count(); // laikas, matuojantis kiek uztruko viso failo generavimas ir testavimas
-                        
-                        cout << "\nVisas sugaištas laikas: " << std::fixed << std::setprecision(6) << timeCreateFile << " sekundės\n" << endl;
+                        cout << "Įveskite 1 norėdami tęsti.\n\n";
+                        int userInput;
+                        while(!(cin >> userInput) || userInput != 1) {
+                            cout << "Neteisinga įvestis. Prašome įvesti 1, norint tęsti.\n";
+                            cin.clear();  // clear the error flag
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // ignore the rest of the line
+                        }
                     }
                 } catch (const exception& e) {
                     cerr << "Įvyko klaida: " << e.what() << '\n';
@@ -230,8 +223,8 @@ int Menu() {
     cout << "2 - Generuoti pažymius\n";
     cout << "3 - Generuoti ir pažymius ir studentų vardus, pavardes\n";
     cout << "4 - Skaityti duomenis iš failo\n";
-    cout << "5 - Atidaryti testavimo failus\n";
-    cout << "6 - Sugeneruoti ir testuoti penkis atsitiktinius studentų sąrašų failus\n";
+    cout << "5 - Sugeneruoti penkis atsitiktinius studentų sąrašų failus\n";
+    cout << "6 - Testuoti penkis atsitiktinius studentų sąrašų failus\n";
     cout << "7 - Baigti darbą / Išvedimas\n";
     cout << "\nĮveskite skaičių: ";
     cin >> number;
@@ -280,7 +273,7 @@ void openFiles(const vector<string>& filenames, bool Median) {
     for (const auto& filename : filenames) { // einame per visus failus
         ifstream fin(filename); 
         vector<Student> students;
-        double sumRead = 0.0, sumSort = 0.0, sumOutput = 0.0;
+        double sumRead = 0.0, sumSort = 0.0, sumOutput = 0.0, sumDistribution = 0.0;
 
         // Matuojame laika nuskaitymui
         auto startRead = chrono::high_resolution_clock::now(); 
@@ -291,6 +284,11 @@ void openFiles(const vector<string>& filenames, bool Median) {
         // Matuoja laika rusiavimui 
         auto startSort = chrono::high_resolution_clock::now();
         sortStudents(students, 3);
+        auto endSort = chrono::high_resolution_clock::now();
+        sumSort = chrono::duration<double>(endSort - startSort).count();
+
+        // Matuoja laika skirstymui
+        auto startDistribution = chrono::high_resolution_clock::now();
         vector<Student> kietiakai, nuskriaustukai;
         for (auto& student : students) {
             double finalGrade = calculateFinalGrade(student, Median);
@@ -300,8 +298,8 @@ void openFiles(const vector<string>& filenames, bool Median) {
                 kietiakai.push_back(student);
             }
         }
-        auto endSort = chrono::high_resolution_clock::now();
-        sumSort = chrono::duration<double>(endSort - startSort).count();
+        auto endDistribution = chrono::high_resolution_clock::now();
+        sumDistribution = chrono::duration<double>(endDistribution - startSort).count();
 
         // Matuojame laika isvedimui i du failus
         auto startOutput = chrono::high_resolution_clock::now();
@@ -315,9 +313,13 @@ void openFiles(const vector<string>& filenames, bool Median) {
         fin.close();
 
         cout << "\nFailas: " << filename << endl;
-        cout << "Laikas sugaištas duomenų nuskaitymui: " << std::fixed << std::setprecision(6) << sumRead << " sekundės" << endl;
-        cout << "Laikas sugaištas duomenų rušiavimui: " << std::fixed << std::setprecision(6) << sumSort << " sekundės" << endl;
-        cout << "Laikas sugaištas duomenų išvedimui į du failus: " << std::fixed << std::setprecision(6) << sumOutput << " sekundės" << endl;
+        cout << "Laikas sugaištas duomenų nuskaitymui: " << fixed << setprecision(6) << sumRead << " sekundės" << endl;
+        cout << "Laikas sugaištas duomenų rušiavimui: " << fixed << setprecision(6) << sumSort << " sekundės" << endl;
+        cout << "Laikas sugaištas duomenų skirstymui į dvi grupes: " << fixed << setprecision(6) << sumDistribution << " sekundės" << endl;
+        //cout << "Laikas sugaištas duomenų išvedimui į du failus: " << fixed << setprecision(6) << sumOutput << " sekundės" << endl;
+        
+        double timeCreateFile = sumRead + sumSort + sumOutput;
+        cout << "\nVisas sugaištas laikas: " << fixed << setprecision(6) << timeCreateFile << " sekundės\n" << endl;
     }
 }
 
