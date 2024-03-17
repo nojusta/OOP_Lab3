@@ -15,6 +15,13 @@ Laboratinio darbo nr. 1 v1.0_pradinė versija
 
 ## Konteinerių testavimas
 
+### Testavimo sistemos parametrai:
+
+- Saugykla: 256 GB, Integruota NVMe SSD
+- Atmintis: 8 GB RAM
+- Procesorius: Apple M1
+
+
 ### Naudojant Vector tipo konteinerius:
 
 | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
