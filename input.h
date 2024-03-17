@@ -10,7 +10,8 @@
 
 bool getMedianPreference();
 
-void processStudents(std::vector<Student>& students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
+template <typename Container>
+void processStudents(Container& students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
 
 int Menu();
 
