@@ -149,7 +149,7 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
                     for (int i = 0; i < sizeof(studentCounts)/sizeof(studentCounts[0]); i++) {
                         vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"}; // sudedame sugeneruotus failus i vektoriu
                         openFiles<Container>(filenames, students, Median); 
-                        cout << "Įveskite 1 norėdami tęsti.\n\n";
+                        cout << "Įveskite 1 norėdami tęsti: ";
                         int userInput;
                         while(!(cin >> userInput) || userInput != 1) {
                             cout << "Neteisinga įvestis. Prašome įvesti 1, norint tęsti.\n";
@@ -253,25 +253,25 @@ string getFilenameFromUser() {
 template <typename Container>
 void readData(ifstream& fin, Container& students) {
     string buffer; 
-    getline(fin, buffer); // nuskaitome pirma eilute, nes joje yra tik antrastes
-    while (getline(fin, buffer)) { // skaitome faila eilute po eilutes
+    getline(fin, buffer); // skip the header line
+    while (getline(fin, buffer)) {
         stringstream ss(buffer); 
         vector<int> grades;
         Student s; 
         ss >> s.firstName >> s.lastName; 
         int grade;
-        while (ss >> grade) { // skaitome pazymius is eilutes
+        while (ss >> grade) {
             grades.push_back(grade);
         }
-        if (ss.fail() && !ss.eof()) { // patikriname ar nuskaitymas pavyko
-            throw runtime_error("Nepavyko nuskaityti pažymio.");
+        if (ss.fail() && !ss.eof()) {
+            throw runtime_error("Failed to read grade.");
         }
         if (!grades.empty()) {
-            s.examResults = grades.back(); // paskutinis nuskaitytas skaicius yra egzamino pazymys
-            grades.pop_back(); // istriname egzamino pazymi is vektoriaus
-        }   
-        s.homeworkResults = grades; // priskiriame namu darbu pazymiams
-        students.push_back(s); // pridedame studenta i vektoriu
+            s.examResults = grades.back();
+            grades.pop_back();
+        }
+        s.homeworkResults = std::move(grades);
+        students.push_back(std::move(s));
     }
 }
 
@@ -312,11 +312,11 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
         sumDistribution = chrono::duration<double>(endDistribution - startSort).count();
 
         // Matuojame laika isvedimui i du failus
-        auto startOutput = chrono::high_resolution_clock::now();
-        outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
-        outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
-        auto endOutput = chrono::high_resolution_clock::now();
-        sumOutput = chrono::duration<double>(endOutput - startOutput).count();
+        //auto startOutput = chrono::high_resolution_clock::now();
+        //outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
+        //outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
+        //auto endOutput = chrono::high_resolution_clock::now();
+        //sumOutput = chrono::duration<double>(endOutput - startOutput).count();
 
         fin.clear(); 
         fin.seekg(0); 
@@ -328,7 +328,7 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
         cout << "Laikas sugaištas duomenų skirstymui į dvi grupes: " << fixed << setprecision(6) << sumDistribution << " sekundės" << endl;
         //cout << "Laikas sugaištas duomenų išvedimui į du failus: " << fixed << setprecision(6) << sumOutput << " sekundės" << endl;
         
-        double timeCreateFile = sumRead + sumSort + sumOutput;
+        double timeCreateFile = sumRead + sumSort + sumDistribution;
         cout << "\nVisas sugaištas laikas: " << fixed << setprecision(6) << timeCreateFile << " sekundės\n" << endl;
     }
 }
