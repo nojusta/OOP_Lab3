@@ -16,7 +16,7 @@ int getContainerTypeFromUser() {
     cin >> containerType;
 
     while (containerType < 1 || containerType > 3) {
-        cout << "Invalid choice. Please enter a number between 1 and 3: ";
+        cout << "Netinkama įvestis, įveskite skaičių tarp 1 ir 3. \n";
         cin >> containerType;
     }
 
@@ -116,13 +116,18 @@ void outputToTerminal(const vector<Student>& studentsLow, const vector<Student>&
     }
 }
 
-void outputToFile(const vector<Student>& students, size_t m, bool Median, const string& filename){
+template <typename Container>
+void outputToFile(const Container& students, size_t m, bool Median, const std::string& filename) {
     ofstream fout(filename);
     fout << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
     fout << "-------------------------------------------------------" << endl;
-    for (int i = 0; i < m; i++) {
-        double finalGrade = calculateFinalGrade(students[i], Median);
-        fout << setw(15) << students[i].lastName << setw(15) << students[i].firstName << fixed << setprecision(2) << finalGrade << endl;
+    for (const auto& student : students) {
+        double finalGrade = calculateFinalGrade(student, Median);
+        fout << setw(15) << student.lastName << setw(15) << student.firstName << fixed << setprecision(2) << finalGrade << endl;
     }
     fout.close();
 }
+
+template void outputToFile<std::vector<Student>>(const std::vector<Student>&, size_t, bool, const std::string&);
+template void outputToFile<std::deque<Student>>(const std::deque<Student>&, size_t, bool, const std::string&);
+template void outputToFile<std::list<Student>>(const std::list<Student>&, size_t, bool, const std::string&);
