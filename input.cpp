@@ -25,6 +25,7 @@ bool getMedianPreference() {
         }
     }
 }
+
 template <typename Container>
 void processStudents(Container& students, bool Median, std::chrono::high_resolution_clock::time_point startTotal) {
     Student data;
@@ -147,7 +148,7 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
                 try {
                     for (int i = 0; i < sizeof(studentCounts)/sizeof(studentCounts[0]); i++) {
                         vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"}; // sudedame sugeneruotus failus i vektoriu
-                        openFiles(filenames, Median); 
+                        openFiles<Container>(filenames, students, Median); 
                         cout << "Įveskite 1 norėdami tęsti.\n\n";
                         int userInput;
                         while(!(cin >> userInput) || userInput != 1) {
@@ -185,7 +186,7 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
                         sortStudents(students, criteria);
                         vector<Student> kietiakai;
                         vector<Student> nuskriaustukai;
-                        for (vector<Student>::iterator it = students.begin(); it != students.end(); ++it) { // skirstome studentus i dvi kategorijas
+                        for (auto it = students.begin(); it != students.end(); ++it) { // skirstome studentus i dvi kategorijas
                             double finalGrade = calculateFinalGrade(*it, Median);
                             if (finalGrade < 5.0) {
                                 nuskriaustukai.push_back(*it);
@@ -218,6 +219,8 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
 }
 
 template void processStudents(std::vector<Student>& students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
+template void processStudents(std::deque<Student>& students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
+template void processStudents(std::list<Student>& students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
 
 int Menu() {
     int number;
@@ -247,7 +250,8 @@ string getFilenameFromUser() {
     return filename;
 }
 
-void readData(ifstream& fin, vector<Student>& students) {
+template <typename Container>
+void readData(ifstream& fin, Container& students) {
     string buffer; 
     getline(fin, buffer); // nuskaitome pirma eilute, nes joje yra tik antrastes
     while (getline(fin, buffer)) { // skaitome faila eilute po eilutes
@@ -271,10 +275,14 @@ void readData(ifstream& fin, vector<Student>& students) {
     }
 }
 
-void openFiles(const vector<string>& filenames, bool Median) {
+template void readData(std::ifstream& fin, std::vector<Student>& students);
+template void readData(std::ifstream& fin, std::deque<Student>& students);
+template void readData(std::ifstream& fin, std::list<Student>& students);
+
+template <typename Container>
+void openFiles(const vector<string>& filenames, Container& students, bool Median) {
     for (const auto& filename : filenames) { // einame per visus failus
         ifstream fin(filename); 
-        vector<Student> students;
         double sumRead = 0.0, sumSort = 0.0, sumOutput = 0.0, sumDistribution = 0.0;
 
         // Matuojame laika nuskaitymui
@@ -291,7 +299,7 @@ void openFiles(const vector<string>& filenames, bool Median) {
 
         // Matuoja laika skirstymui
         auto startDistribution = chrono::high_resolution_clock::now();
-        vector<Student> kietiakai, nuskriaustukai;
+        Container kietiakai, nuskriaustukai;
         for (auto& student : students) {
             double finalGrade = calculateFinalGrade(student, Median);
             if (finalGrade < 5.0) {
@@ -324,6 +332,10 @@ void openFiles(const vector<string>& filenames, bool Median) {
         cout << "\nVisas sugaištas laikas: " << fixed << setprecision(6) << timeCreateFile << " sekundės\n" << endl;
     }
 }
+
+template void openFiles(const std::vector<std::string>& filenames, std::vector<Student>& students, bool Median);
+template void openFiles(const std::vector<std::string>& filenames, std::deque<Student>& students, bool Median);
+template void openFiles(const std::vector<std::string>& filenames, std::list<Student>& students, bool Median);
 
 void input(Student& data, bool& Median){
     data.firstName = isString("Įveskite studento vardą: ");

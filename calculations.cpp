@@ -44,7 +44,8 @@ double calculateMedian(vector<int> homeworkResults) {
     }
 }
 
-void sortStudents(vector<Student>& students, int criteria) {
+template <typename Container>
+void sortStudents(Container& students, int criteria) {
     if (criteria == 1) {
         sort(students.begin(), students.end(), compareByFirstName);
     } else if (criteria == 2) {
@@ -53,3 +54,17 @@ void sortStudents(vector<Student>& students, int criteria) {
         sort(students.begin(), students.end(), compareByGrade);
     }
 }
+
+template <>
+void sortStudents<std::list<Student>>(std::list<Student>& students, int criteria) {
+    if (criteria == 1) {
+        students.sort(compareByFirstName);
+    } else if (criteria == 2) {
+        students.sort(compareByLastName);
+    } else if (criteria == 3) {
+        students.sort(compareByGrade);
+    }
+}
+
+template void sortStudents<std::vector<Student>>(std::vector<Student>&, int);
+template void sortStudents<std::deque<Student>>(std::deque<Student>&, int);

@@ -12,7 +12,8 @@ struct Student {
     int examResults;
 };
 
-extern std::vector<Student> kietiakai;
-extern std::vector<Student> nuskriaustukai;
+extern std::vector<Student> studentVector;
+extern std::list<Student> studentList;
+extern std::deque<Student> studentDeque;
 
 #endif // STUDENT_H

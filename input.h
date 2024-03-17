@@ -17,9 +17,11 @@ int Menu();
 
 std::string getFilenameFromUser();
 
-void readData(std::ifstream& fin, std::vector<Student>& students);
+template <typename Container>
+void readData(std::ifstream& fin, Container& students);
 
-void openFiles(const std::vector<std::string>& filenames, bool Median);
+template <typename Container>
+void openFiles(const std::vector<std::string>& filenames, Container& students, bool Median);
 
 void input(Student& data, bool& Median);
 
