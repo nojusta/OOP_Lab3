@@ -8,11 +8,11 @@ using namespace std;
 int getContainerTypeFromUser() {
     int containerType;
 
-    cout << "Pasirinkite konteinerio tipą: \n";
+    cout << "\nPasirinkite konteinerio tipą: \n";
     cout << "1 - Vector\n";
     cout << "2 - Deque\n";
     cout << "3 - List\n";
-    cout << "Pasirinkite: ";
+    cout << "\nPasirinkite: ";
     cin >> containerType;
 
     while (containerType < 1 || containerType > 3) {

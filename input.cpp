@@ -161,7 +161,7 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
                         while(!(cin >> userInput) || userInput != 1) {
                             cout << "Neteisinga įvestis. Prašome įvesti 1, norint tęsti.\n";
                             cin.clear();  // clear the error flag
-                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // ignore the rest of the line
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
                         }
                     }
                 } catch (const exception& e) {
@@ -260,7 +260,7 @@ string getFilenameFromUser() {
 template <typename Container>
 void readData(ifstream& fin, Container& students) {
     string buffer; 
-    getline(fin, buffer); // skip the header line
+    getline(fin, buffer); 
     while (getline(fin, buffer)) {
         stringstream ss(buffer); 
         vector<int> grades;
@@ -327,6 +327,14 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
                 }
             }
             kietiakai = students; 
+        } else if (strategy == 3) {
+            auto partitionPoint = partition(students.begin(), students.end(), [&](const Student& student) { // skirstome studentus i dvi kategorijas
+                return calculateFinalGrade(student, Median) >= 5.0;
+            });
+
+            // kopijuojame i naujus vektorius
+            copy(students.begin(), partitionPoint, back_inserter(kietiakai));
+            copy(partitionPoint, students.end(), back_inserter(nuskriaustukai)); 
         }
         auto endDistribution = chrono::high_resolution_clock::now();
         sumDistribution = chrono::duration<double>(endDistribution - startDistribution).count();
@@ -354,7 +362,7 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
 }
 
 template void openFiles(const std::vector<std::string>& filenames, std::vector<Student>& students, bool Median, int strategy);
-template void openFiles(const std::vector<std::string>& filenames, std::deque<Student>& students, bool Median, int strategy);
+template void openFiles(const std::vector<std::string>& filenames, std::deque<Student>& students, bool Median, int strategy);   
 template void openFiles(const std::vector<std::string>& filenames, std::list<Student>& students, bool Median, int strategy);
 
 void input(Student& data, bool& Median){
