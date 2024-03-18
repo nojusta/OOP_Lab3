@@ -21,7 +21,7 @@ template <typename Container>
 void readData(std::ifstream& fin, Container& students);
 
 template <typename Container>
-void openFiles(const std::vector<std::string>& filenames, Container& students, bool Median);
+void openFiles(const std::vector<std::string>& filenames, Container& students, bool Median, int strategy);
 
 void input(Student& data, bool& Median);
 
