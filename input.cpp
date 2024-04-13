@@ -67,12 +67,12 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
             case 2: {
                 do {
                     try {
-                        data.firstName = isString("Įveskite studento vardą: ");
-                        data.lastName = isString("Įveskite studento pavardę: ");
+                        data.setFirstName(isString("Įveskite studento vardą: "));
+                        data.setLastName(isString("Įveskite studento pavardę: "));
                         for (int j = 0; j < 5; j++) {
-                            data.homeworkResults.push_back(generateGrade());
+                            data.addHomeworkResult(generateGrade());
                         }
-                        data.examResults = generateGrade();
+                        data.setExamResults(generateGrade());
                         students.push_back(data);
                         while (true) { 
                             cout << "Ar norite sugeneruoti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
@@ -110,12 +110,12 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
                     }
                 }
                 for (int i = 0; i < numStudents; i++) {
-                    data.firstName = generateName();
-                    data.lastName = generateLastName();
+                    data.setFirstName(generateName());
+                    data.setLastName(generateLastName());
                     for (int j = 0; j < 5; j++) {
-                        data.homeworkResults.push_back(generateGrade());
+                        data.addHomeworkResult(generateGrade());
                     }
-                    data.examResults = generateGrade();
+                    data.setExamResults(generateGrade());
                     students.push_back(data);
                 }
                 break;
@@ -193,8 +193,8 @@ void processStudents(Container& students, bool Median, std::chrono::high_resolut
                         sortStudents(students, criteria);
                         vector<Student> kietiakai;
                         vector<Student> nuskriaustukai;
-                        for (auto it = students.begin(); it != students.end(); ++it) { // skirstome studentus i dvi kategorijas
-                            double finalGrade = calculateFinalGrade(*it, Median);
+                       for (auto it = students.begin(); it != students.end(); ++it) {  // skirstome studentus i dvi kategorijas
+                            double finalGrade = it->calculateFinalGrade(Median); // calculate final grade using the method
                             if (finalGrade < 5.0) {
                                 nuskriaustukai.push_back(*it);
                             } else {
@@ -265,7 +265,10 @@ void readData(ifstream& fin, Container& students) {
         stringstream ss(buffer); 
         vector<int> grades;
         Student s; 
-        ss >> s.firstName >> s.lastName; 
+        string tempFirstName, tempLastName;
+        ss >> tempFirstName >> tempLastName;
+        s.setFirstName(tempFirstName);
+        s.setLastName(tempLastName);
         int grade;
         while (ss >> grade) {
             grades.push_back(grade);
@@ -274,10 +277,10 @@ void readData(ifstream& fin, Container& students) {
             throw runtime_error("Failed to read grade.");
         }
         if (!grades.empty()) {
-            s.examResults = grades.back();
+            s.setExamResults(grades.back());
             grades.pop_back();
         }
-        s.homeworkResults = std::move(grades);
+        s.setHomeworkResults(std::move(grades));
         students.push_back(std::move(s));
     }
 }
@@ -316,12 +319,14 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
                     kietiakai.push_back(student);
                 }
             }
+        students.clear();
         } else if (strategy == 2) {
             for (auto it = students.begin(); it != students.end();) {
                 double finalGrade = calculateFinalGrade(*it, Median);
                 if (finalGrade < 5.0) {
                     nuskriaustukai.push_back(*it);
-                    it = students.erase(it); 
+                    swap(*it, students.back()); // apkeiciame studentus vietomis
+                    students.pop_back(); // istriname paskutini elementa
                 } else {
                     ++it;
                 }
@@ -335,6 +340,7 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
             // kopijuojame i naujus vektorius
             copy(students.begin(), partitionPoint, back_inserter(kietiakai));
             copy(partitionPoint, students.end(), back_inserter(nuskriaustukai)); 
+            students.clear(); 
         }
         auto endDistribution = chrono::high_resolution_clock::now();
         sumDistribution = chrono::duration<double>(endDistribution - startDistribution).count();
@@ -366,15 +372,15 @@ template void openFiles(const std::vector<std::string>& filenames, std::deque<St
 template void openFiles(const std::vector<std::string>& filenames, std::list<Student>& students, bool Median, int strategy);
 
 void input(Student& data, bool& Median){
-    data.firstName = isString("Įveskite studento vardą: ");
-    data.lastName = isString("Įveskite studento pavardę: ");
-    data.homeworkResults.clear(); // isvalome vektoriu
+    data.setFirstName(isString("Įveskite studento vardą: "));
+    data.setLastName(isString("Įveskite studento pavardę: "));
+    data.clearHomeworkResults(); // isvalome vektoriu
     while (true) {
         int result = isGrade("Įveskite namų darbo pažymį arba -1, jei baigėte: ");
         if (result == -1) {
             break;
         }
-        data.homeworkResults.push_back(result);
+        data.addHomeworkResult(result);
     }
-    data.examResults = isGrade("Įveskite studento egzamino rezultatą: ");
+    data.setExamResults(isGrade("Įveskite studento egzamino rezultatą: "));
 }

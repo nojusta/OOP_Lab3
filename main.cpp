@@ -1,16 +1,17 @@
+#include <vector>
+#include <deque>
+#include <list>
 #include "student.h"
 #include "input.h"
 #include "calculations.h"
 #include "functionality.h"
 
-using namespace std;
-
 std::vector<Student> studentVector;
-std::list<Student> studentList;
 std::deque<Student> studentDeque;
+std::list<Student> studentList;
 
 int main() {
-    auto startTotal = chrono::high_resolution_clock::now();
+    auto startTotal = std::chrono::high_resolution_clock::now();
     setlocale(LC_ALL, "lt_LT.UTF-8");
     srand(time(0));
     bool Median = getMedianPreference();

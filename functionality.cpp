@@ -105,14 +105,14 @@ void outputToTerminal(const vector<Student>& studentsLow, const vector<Student>&
     cout << "-------------------------------------------------------" << endl;
     for (const auto& student : studentsLow) {
         double finalGrade = calculateFinalGrade(student, Median);
-        cout << setw(15) << student.lastName << setw(15) << student.firstName << fixed << setprecision(2) << finalGrade << endl;
+        cout << setw(15) << student.getLastName() << setw(15) << student.getFirstName() << fixed << setprecision(2) << finalGrade << endl;
     }
     cout <<"\nKietiakai: \n\n";
     cout << left << setw(15) << "Pavardė" << setw(15) << " Vardas" << setw(20) << (Median ? "Galutinis (Med.)" : "Galutinis (Vid.)") << endl; 
     cout << "-------------------------------------------------------" << endl;
     for (const auto& student : studentsHigh) {
         double finalGrade = calculateFinalGrade(student, Median);
-        cout << setw(15) << student.lastName << setw(15) << student.firstName << fixed << setprecision(2) << finalGrade << endl;
+        cout << setw(15) << student.getLastName() << setw(15) << student.getFirstName() << fixed << setprecision(2) << finalGrade << endl;
     }
 }
 
@@ -123,7 +123,7 @@ void outputToFile(const Container& students, size_t m, bool Median, const std::s
     fout << "-------------------------------------------------------" << endl;
     for (const auto& student : students) {
         double finalGrade = calculateFinalGrade(student, Median);
-        fout << setw(15) << student.lastName << setw(15) << student.firstName << fixed << setprecision(2) << finalGrade << endl;
+        fout << setw(15) << student.getLastName() << setw(15) << student.getFirstName() << fixed << setprecision(2) << finalGrade << endl;
     }
     fout.close();
 }

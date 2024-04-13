@@ -4,11 +4,11 @@
 using namespace std;
 
 bool compareByFirstName(const Student& a, const Student& b) {
-    return a.firstName < b.firstName;
+    return a.getFirstName() < b.getFirstName();
 }
 
 bool compareByLastName(const Student& a, const Student& b) {
-    return a.lastName < b.lastName;
+    return a.getLastName() < b.getLastName();
 }
 
 bool compareByGrade(const Student& a, const Student& b) {
@@ -17,7 +17,7 @@ bool compareByGrade(const Student& a, const Student& b) {
 
 double calculateAverage(const vector<int>& homeworkResults) {
     if (homeworkResults.empty()) {
-        return 0; // jei vektorius tuscias, grazina 0
+        return 0;
     }
     double sum = 0;
     for (int i = 0; i < homeworkResults.size(); i++) {
@@ -27,15 +27,15 @@ double calculateAverage(const vector<int>& homeworkResults) {
 }
 
 double calculateFinalGrade(const Student& data, bool Median) {
-    double homeworkGrade = Median ? calculateMedian(data.homeworkResults) : calculateAverage(data.homeworkResults); // jei Median = true, naudoja mediana, jei ne, naudoja vidurki
-    return 0.4 * homeworkGrade + 0.6 * data.examResults;
+    double homeworkGrade = Median ? calculateMedian(data.getHomeworkResults()) : calculateAverage(data.getHomeworkResults());
+    return 0.4 * homeworkGrade + 0.6 * data.getExamResults();
 }
 
 double calculateMedian(vector<int> homeworkResults) {
     if (homeworkResults.empty()) {
-        return 0; // jei vektorius tuscias, grazina 0
+        return 0;
     }
-    sort(homeworkResults.begin(), homeworkResults.end()); // surusiuoja vektoriu didejimo tvarka 
+    sort(homeworkResults.begin(), homeworkResults.end());
     int size = homeworkResults.size();
     if (size % 2 == 0) { 
         return (homeworkResults[size / 2 - 1] + homeworkResults[size / 2]) / 2.0; 
