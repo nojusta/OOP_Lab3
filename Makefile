@@ -8,7 +8,7 @@ CXXFLAGS = -std=c++14
 TARGET = v1
 
 # Šaltinio failai
-SRCS = main.cpp functionality.cpp input.cpp calculations.cpp
+SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp
 
 # Objektų failai
 OBJS = $(SRCS:.cpp=.o)
