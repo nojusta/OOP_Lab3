@@ -291,28 +291,25 @@ template void readData(std::ifstream& fin, std::list<Student>& students);
 
 template <typename Container>
 void openFiles(const vector<string>& filenames, Container& students, bool Median, int strategy){
-    for (const auto& filename : filenames) { // einame per visus failus
+    for (const auto& filename : filenames) { 
         ifstream fin(filename); 
         double sumRead = 0.0, sumSort = 0.0, sumOutput = 0.0, sumDistribution = 0.0;
 
-        // Matuojame laika nuskaitymui
         auto startRead = chrono::high_resolution_clock::now(); 
         readData(fin, students);
         auto endRead = chrono::high_resolution_clock::now();
         sumRead = chrono::duration<double>(endRead - startRead).count();
 
-        // Matuoja laika rusiavimui 
         auto startSort = chrono::high_resolution_clock::now();
         sortStudents(students, 3);
         auto endSort = chrono::high_resolution_clock::now();
         sumSort = chrono::duration<double>(endSort - startSort).count();
 
-        // Matuoja laika skirstymui
         auto startDistribution = chrono::high_resolution_clock::now();
         Container kietiakai, nuskriaustukai;
         if (strategy == 1) {
             for (auto& student : students) {
-                double finalGrade = calculateFinalGrade(student, Median);
+                double finalGrade = student.calculateFinalGrade(Median);
                 if (finalGrade < 5.0) {
                     nuskriaustukai.push_back(student);
                 } else {
@@ -322,35 +319,27 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
         students.clear();
         } else if (strategy == 2) {
             for (auto it = students.begin(); it != students.end();) {
-                double finalGrade = calculateFinalGrade(*it, Median);
+                double finalGrade = it->calculateFinalGrade(Median); 
                 if (finalGrade < 5.0) {
                     nuskriaustukai.push_back(*it);
-                    swap(*it, students.back()); // apkeiciame studentus vietomis
-                    students.pop_back(); // istriname paskutini elementa
+                    swap(*it, students.back()); 
+                    students.pop_back(); 
                 } else {
                     ++it;
                 }
             }
             kietiakai = students; 
         } else if (strategy == 3) {
-            auto partitionPoint = partition(students.begin(), students.end(), [&](const Student& student) { // skirstome studentus i dvi kategorijas
-                return calculateFinalGrade(student, Median) >= 5.0;
+            auto partitionPoint = partition(students.begin(), students.end(), [&](const Student& student) { 
+                return student.calculateFinalGrade(Median) >= 5.0;
             });
 
-            // kopijuojame i naujus vektorius
             copy(students.begin(), partitionPoint, back_inserter(kietiakai));
             copy(partitionPoint, students.end(), back_inserter(nuskriaustukai)); 
             students.clear(); 
         }
         auto endDistribution = chrono::high_resolution_clock::now();
         sumDistribution = chrono::duration<double>(endDistribution - startDistribution).count();
-
-        // Matuojame laika isvedimui i du failus
-        //auto startOutput = chrono::high_resolution_clock::now();
-        //outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
-        //outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
-        //auto endOutput = chrono::high_resolution_clock::now();
-        //sumOutput = chrono::duration<double>(endOutput - startOutput).count();
 
         fin.clear(); 
         fin.seekg(0); 
@@ -360,7 +349,6 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
         cout << "Laikas sugaištas duomenų nuskaitymui: " << fixed << setprecision(6) << sumRead << " sekundės" << endl;
         cout << "Laikas sugaištas duomenų rušiavimui: " << fixed << setprecision(6) << sumSort << " sekundės" << endl;
         cout << "Laikas sugaištas duomenų skirstymui į dvi grupes: " << fixed << setprecision(6) << sumDistribution << " sekundės" << endl;
-        //cout << "Laikas sugaištas duomenų išvedimui į du failus: " << fixed << setprecision(6) << sumOutput << " sekundės" << endl;
         
         double timeCreateFile = sumRead + sumSort + sumDistribution;
         cout << "\nVisas sugaištas laikas: " << fixed << setprecision(6) << timeCreateFile << " sekundės\n" << endl;
