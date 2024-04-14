@@ -1,4 +1,4 @@
-# v1.0
+# v1.1
 
 ## Diegimo instrukcija
 
@@ -91,134 +91,244 @@ make distclean
   - Surūšiuoja studentus ir išveda į du naujus failus.
   - Yra 3 skirtingi konteinerio tipo pasirinkimai testavimui - vector, deque, list.
   - Yra 3 skirtingos strategijos duomenų skirstymui.
+  - Naudojama klasė, saugojant studentų duomenis.
 - Norėdami baigti darbą su programa, pasirinkite atitinkamą skaičių.
 
+## Programos sparta naudojant skirtingus kompiliatoriaus optimizavimo lygius
+
+### Be optimizavimo testavimas
+
+  |           | Greitis(1mln.) | Greitis(10mln.) | Failo dydis  |
+  |-----------|----------------|-----------------|--------------|
+  | Struct    |    12.111s     |    130.058s     |    411kb     |
+  | Klasė     |    11.358s     |    118.430s     |    404kb     |
+  
+<details>
+  <summary>Peržiūrėti</summary>
+    
+  ![O0 Struct](./Images/no_flag/Struct.png)
+  **Struktūros testavimo rezultatai**
+  
+  ![O0 Struct_exe](./Images/no_flag/Struct_exe.png)
+  **Struktūros failo dydis**
+
+  ![O0 Klase](./Images/no_flag/Klase.png)
+  **Klasės testavimo rezultatai**
+
+  ![O0 Klase_exe](./Images/no_flag/Klase_exe.png)
+  **Klasės failo dydis**
+  
+</details>
+
+### O1 optimizavimo lygio testavimas
+
+  |           | Greitis(1mln.) | Greitis(10mln.) | Failo dydis  |
+  |-----------|----------------|-----------------|--------------|
+  | Struct    |     2.790s     |     30.391s     |    162kb     |
+  | Klasė     |    11.489s     |    117.949s     |    147kb     |
+
+- Su struktūra greitesni testavimo rezultatai, naudojant šį optimizavimo raktą.
+- Struktūros ir klasių failų dydžiai mažesni, naudojant šį optimizavimo raktą.
+  
+<details>
+  <summary>Peržiūrėti</summary>
+    
+  ![O1 Struct](./Images/O1_flag/Struct.png)
+  **Struktūros testavimo rezultatai**
+  
+  ![O1 Struct_exe](./Images/O1_flag/Struct_exe.png)
+  **Struktūros failo dydis**
+
+  ![O1 Klase](./Images/O1_flag/Klase.png)
+  **Klasės testavimo rezultatai**
+
+  ![O1 Klase_exe](./Images/O1_flag/Klase_exe.png)
+  **Klasės failo dydis**
+  
+</details>
+
+### O2 optimizavimo lygio testavimas
+
+  |           | Greitis(1mln.) | Greitis(10mln.) | Failo dydis  |
+  |-----------|----------------|-----------------|--------------|
+  | Struct    |     2.662s     |     30.459s     |    162kb     |
+  | Klasė     |     2.767s     |     29.540s     |    147kb     |
+
+- Su klase greitesni testavimo rezultatai, naudojant šį optimizavimo raktą.
+- Struktūros ir klasių failų dydžiai išliko tokie patys, kaip su praeitu optimizavimo raktu.
+  
+<details>
+  <summary>Peržiūrėti</summary>
+    
+  ![O2 Struct](./Images/O2_flag/Struct.png)
+  **Struktūros testavimo rezultatai**
+  
+  ![O2 Struct_exe](./Images/O2_flag/Struct_exe.png)
+  **Struktūros failo dydis**
+
+  ![O2 Klase](./Images/O2_flag/Klase.png)
+  **Klasės testavimo rezultatai**
+
+  ![O2 Klase_exe](./Images/O2_flag/Klase_exe.png)
+  **Klasės failo dydis**
+  
+</details>
+
+### O3 optimizavimo lygio testavimas
+
+  |           | Greitis(1mln.) | Greitis(10mln.) | Failo dydis  |
+  |-----------|----------------|-----------------|--------------|
+  | Struct    |     2.734s     |     28.984s     |    161kb     |
+  | Klasė     |     2.738s     |     29.735s     |    162kb     |
+
+- Testavimo greičio rezultatai panašūs su praeitu optimizavimo raktu.
+- Failų dydžiai minimaliai pasikeitė.
+  
+<details>
+  <summary>Peržiūrėti</summary>
+    
+  ![O3 Struct](./Images/O3_flag/Struct.png)
+  **Struktūros testavimo rezultatai**
+  
+  ![O3 Struct_exe](./Images/O3_flag/Struct_exe.png)
+  **Struktūros failo dydis**
+
+  ![O3 Klase](./Images/O3_flag/Klase.png)
+  **Klasės testavimo rezultatai**
+
+  ![O3 Klase_exe](./Images/O3_flag/Klase_exe.png)
+  **Klasės failo dydis**
+  
+</details>
+
 ## Konteinerių testavimas
-
-### Testavimo sistemos parametrai:
-
-- Saugykla: 256 GB, Integruota NVMe SSD
-- Atmintis: 8 GB RAM
-- Procesorius: Apple M1
-
-## 1 strategija
-
-### Naudojant Vector tipo konteinerius:
-
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.023s           | 0.004s           | 0.005s           | 0.033s         |
-| 10 000      | 0.113s           | 0.018s           | 0.023s           | 0.155s         |
-| 100 000     | 0.763s           | 0.188s           | 0.237s           | 1.189s         |
-| 1 000 000   | 7.448s           | 2.105s           | 2.673s           | 12.227s        |
-| 10 000 000  | 74.810s          | 24.911s          | 31.783s          | 131.505s       |
-
 <details>
-  <summary>peržiūrėti</summary>
-  
-  ![Vector_1](./Images/Vector_pradine.png)
-</details>
+  <summary>Peržiūrėti</summary>
 
-### Naudojant Deque tipo konteinerius:
+  ### Testavimo sistemos parametrai:
 
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.023s           | 0.004s           | 0.005s           | 0.034s         |
-| 10 000      | 0.093s           | 0.019s           | 0.023s           | 0.136s         |
-| 100 000     | 0.766s           | 0.193s           | 0.239s           | 1.198s         |
-| 1 000 000   | 7.312s           | 2.160s           | 2.638s           | 12.111s        |
-| 10 000 000  | 73.857s          | 25.580s          | 30.620s          | 130.058s       |
+  - Saugykla: 256 GB, Integruota NVMe SSD
+  - Atmintis: 8 GB RAM
+  - Procesorius: Apple M1
 
-<details>
-  <summary>peržiūrėti</summary>
-  
-  ![Deque_1](./Images/Deque_pradine.png)
-</details>
+  ## 1 strategija
 
-### Naudojant List tipo konteinerius:
+  ### Naudojant Vector tipo konteinerius:
 
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.023s           | 0.003s           | 0.004s           | 0.031s         |
-| 10 000      | 0.112s           | 0.018s           | 0.023s           | 0.154s         |
-| 100 000     | 0.761s           | 0.247s           | 0.296s           | 1.305s         |
-| 1 000 000   | 7.352s           | 3.322s           | 3.818s           | 14.493s        |
-| 10 000 000  | 73.862s          | 42.406s          | 47.849s          | 164.118s       |
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.023s           | 0.004s           | 0.005s           | 0.033s         |
+  | 10 000      | 0.113s           | 0.018s           | 0.023s           | 0.155s         |
+  | 100 000     | 0.763s           | 0.188s           | 0.237s           | 1.189s         |
+  | 1 000 000   | 7.448s           | 2.105s           | 2.673s           | 12.227s        |
+  | 10 000 000  | 74.810s          | 24.911s          | 31.783s          | 131.505s       |
 
-<details>
-  <summary>peržiūrėti</summary>
-  
-![List_1](./Images/List_pradine.png)
-</details>
+  <details>
+    <summary>peržiūrėti</summary>
+    
+    ![Vector_1](./Images/Vector_pradine.png)
+  </details>
 
-## 2 strategija
+  ### Naudojant Deque tipo konteinerius:
 
-### Naudojant Vector tipo konteinerius:
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.023s           | 0.004s           | 0.005s           | 0.034s         |
+  | 10 000      | 0.093s           | 0.019s           | 0.023s           | 0.136s         |
+  | 100 000     | 0.766s           | 0.193s           | 0.239s           | 1.198s         |
+  | 1 000 000   | 7.312s           | 2.160s           | 2.638s           | 12.111s        |
+  | 10 000 000  | 73.857s          | 25.580s          | 30.620s          | 130.058s       |
 
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.024s           | 0.004s           | 0.035s           | 0.064s         |
-| 10 000      | 0.112s           | 0.018s           | 1.879s           | 2.010s         |
-| 100 000     | 0.762s           | 0.184s           | 184.637s         | 184.637s       |
+  <details>
+    <summary>peržiūrėti</summary>
+    
+    ![Deque_1](./Images/Deque_pradine.png)
+  </details>
 
-<details>
-  <summary>peržiūrėti</summary>
-  
-  ![Vector_2](./Images/Vector_2.png)
-</details>
+  ### Naudojant List tipo konteinerius:
 
-- Rezultatų su 1 000 000 ir 10 000 000 nėra, nes per ilgai trunka skaičiavimai (>10min).
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.023s           | 0.003s           | 0.004s           | 0.031s         |
+  | 10 000      | 0.112s           | 0.018s           | 0.023s           | 0.154s         |
+  | 100 000     | 0.761s           | 0.247s           | 0.296s           | 1.305s         |
+  | 1 000 000   | 7.352s           | 3.322s           | 3.818s           | 14.493s        |
+  | 10 000 000  | 73.862s          | 42.406s          | 47.849s          | 164.118s       |
 
-### Naudojant Deque tipo konteinerius:
+  <details>
+    <summary>peržiūrėti</summary>
+    
+  ![List_1](./Images/List_pradine.png)
+  </details>
 
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.021s           | 0.004s           | 0.006s           | 0.032s         |
-| 10 000      | 0.114s           | 0.019s           | 0.025s           | 0.158s         |
-| 100 000     | 0.765s           | 0.192s           | 0.252s           | 1.210s         |
-| 1 000 000   | 7.337s           | 2.128s           | 2.772s           | 12.238s        |
+  ## 2 strategija
 
-<details>
-  <summary>peržiūrėti</summary>
-  
-  ![Deque_2](./Images/Deque_2.png)
-</details>
+  ### Naudojant Vector tipo konteinerius:
 
-- Rezultatų su 10 000 000 nėra, nes per ilgai trunka skaičiavimai (>10min).
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.024s           | 0.004s           | 0.035s           | 0.064s         |
+  | 10 000      | 0.112s           | 0.018s           | 1.879s           | 2.010s         |
+  | 100 000     | 0.762s           | 0.184s           | 184.637s         | 184.637s       |
 
-### Naudojant List tipo konteinerius:
+  <details>
+    <summary>peržiūrėti</summary>
+    
+    ![Vector_2](./Images/Vector_2.png)
+  </details>
 
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.023s           | 0.003s           | 0.001s           | 0.028s         |
-| 10 000      | 0.113s           | 0.018s           | 0.005s           | 0.137s         |
-| 100 000     | 0.761s           | 0.239s           | 0.061s           | 1.062s         |
-| 1 000 000   | 7.433s           | 3.324s           | 0.668s           | 11.344s        |
-| 10 000 000  | 72.891s          | 42.406s          | 8.586s           | 123.646s       |
+  - Rezultatų su 1 000 000 ir 10 000 000 nėra, nes per ilgai trunka skaičiavimai (>10min).
 
-<details>
-  <summary>peržiūrėti</summary>
-  
-  ![List_2](./Images/List_2.png)
-</details>
+  ### Naudojant Deque tipo konteinerius:
 
-## 3 strategija
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.021s           | 0.004s           | 0.006s           | 0.032s         |
+  | 10 000      | 0.114s           | 0.019s           | 0.025s           | 0.158s         |
+  | 100 000     | 0.765s           | 0.192s           | 0.252s           | 1.210s         |
+  | 1 000 000   | 7.337s           | 2.128s           | 2.772s           | 12.238s        |
 
-### Naudojant Vector tipo konteinerius:
+  <details>
+    <summary>peržiūrėti</summary>
+    
+    ![Deque_2](./Images/Deque_2.png)
+  </details>
 
-| Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
-|-------------|------------------|------------------|------------------|----------------|
-| 1 000       | 0.023s           | 0.004s           | 0.001s           | 0.033s         |
-| 10 000      | 0.112s           | 0.019s           | 0.005s           | 0.155s         |
-| 100 000     | 0.758s           | 0.191s           | 0.051s           | 1.189s         |
-| 1 000 000   | 7.303s           | 2.263s           | 0.622s           | 12.227s        |
-| 10 000 000  | 73.373s          | 24.204s          | 8.597s           | 131.505s       |
+  - Rezultatų su 10 000 000 nėra, nes per ilgai trunka skaičiavimai (>10min).
 
-<details>
-  <summary>peržiūrėti</summary>
-  
-  ![Vector_3](./Images/Vector_3.png)
-</details>
+  ### Naudojant List tipo konteinerius:
+
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.023s           | 0.003s           | 0.001s           | 0.028s         |
+  | 10 000      | 0.113s           | 0.018s           | 0.005s           | 0.137s         |
+  | 100 000     | 0.761s           | 0.239s           | 0.061s           | 1.062s         |
+  | 1 000 000   | 7.433s           | 3.324s           | 0.668s           | 11.344s        |
+  | 10 000 000  | 72.891s          | 42.406s          | 8.586s           | 123.646s       |
+
+  <details>
+    <summary>peržiūrėti</summary>
+    
+    ![List_2](./Images/List_2.png)
+  </details>
+
+  ## 3 strategija
+
+  ### Naudojant Vector tipo konteinerius:
+
+  | Failo dydis | Skaitymo laikas  | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+  |-------------|------------------|------------------|------------------|----------------|
+  | 1 000       | 0.023s           | 0.004s           | 0.001s           | 0.028s         |
+  | 10 000      | 0.112s           | 0.019s           | 0.005s           | 0.137s         |
+  | 100 000     | 0.758s           | 0.191s           | 0.051s           | 1.001s         |
+  | 1 000 000   | 7.303s           | 2.263s           | 0.622s           | 10.189s        |
+  | 10 000 000  | 73.373s          | 24.204s          | 8.597s           | 106.176s       |
+
+  <details>
+    <summary>peržiūrėti</summary>
+    
+    ![Vector_3](./Images/Vector_3.png)
+  </details>
 
 ## Išvados
 
@@ -231,7 +341,9 @@ Remiantis atliktų testų rezultatais, galime padaryti keletą išvadų:
 3. **List tipo konteineriai**: List tipo konteineriai parodė geriausius rezultatus su didesniais failų dydžiais. Jie buvo ypač efektyvūs naudojant antrąją strategiją.
 
 Bendra išvada yra, kad konteinerio tipo ir strategijos pasirinkimas gali turėti didelę įtaką programos veikimo laikui, ypač dirbant su didelėmis duomenų apimtimis.
-  
+
+</details>  
+
 ## Senesnių versijų aprašymai
 
 - v.pradinė: Pradinė versija. Nuskaito vartotojo įvestį, patikrina ją, leidžia vartotojui pasirinkti tarp dviejų galutinio balo skaičiavimo būdų (vidurkis ar mediana), ir išveda duomenis ekrane.
@@ -245,4 +357,6 @@ Bendra išvada yra, kad konteinerio tipo ir strategijos pasirinkimas gali turėt
 - v0.4: Prideda galimybę generuoti penkis atsitiktinius studentų sąrašų failus, sudarytus iš: 1 000, 10 000, 100 000, 1 000 000, 10 000 000 įrašų. Atlieka tyrimus / testavimus su sugeneruotais failais. Surūšiuoja studentus ir išveda į du naujus failus.
 
 - v1.0_pradinė: Prideda 3 skirtingus konteinerio tipo pasirinkimus testavimui - vector, deque, list.
+
+- v1.0: Yra 3 skirtingos konteinerių testavimo strategijos ir galimybė sukompiliuoti programą, naudojant Makefile.
   
