@@ -301,7 +301,7 @@ void openFiles(const vector<string>& filenames, Container& students, bool Median
         sumRead = chrono::duration<double>(endRead - startRead).count();
 
         auto startSort = chrono::high_resolution_clock::now();
-        sortStudents(students, 3);
+        sortStudents(students, 3); // rusiuojame studentus pagal galutini bala
         auto endSort = chrono::high_resolution_clock::now();
         sumSort = chrono::duration<double>(endSort - startSort).count();
 

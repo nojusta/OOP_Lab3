@@ -16,34 +16,21 @@ private:
     int examResults;
 
 public:
-
+    
     Student(); // konstruktorius
-
-    // konstruktorius su parametrais
-    Student(const std::string& firstName, const std::string& lastName, int examResults, const std::vector<int>& homeworkResults); 
-
-    // copy konstruktorius
-    Student(const Student& other)
-        : firstName(other.firstName), lastName(other.lastName),
-          homeworkResults(other.homeworkResults), examResults(other.examResults) {}
-
-    Student& operator=(const Student& other) { // priskyrimo operatorius
-        if (this != &other) { // patikrinimas ar nera lygus pats sau 
-            firstName = other.firstName; //
-            lastName = other.lastName; 
-            homeworkResults = other.homeworkResults;
-            examResults = other.examResults;
-        }
-        return *this; // grazina objekta
-    }
+    Student(const std::string& firstName, const std::string& lastName, int examResults, const std::vector<int>& homeworkResults); // konstruktorius su parametrais
+    Student(const Student& other);// copy konstruktorius
+    Student(Student&& other) noexcept; // move konstruktorius
+    Student& operator=(const Student& other); // copy priskyrimo operatorius
+    Student& operator=(Student&& other) noexcept; // move priskyrimo operatorius
 
     ~Student() {} // destruktorius
 
-    // geteriai ir seteriai 
-    inline std::string getFirstName() const { return firstName; }
+    // get'eriai ir set'eriai
+    inline std::string getFirstName() const { return firstName; } 
     inline std::string getLastName() const { return lastName; }
-    inline std::vector<int> getHomeworkResults() const { return homeworkResults; }
-    inline int getExamResults() const { return examResults; }
+    const std::vector<int>& getHomeworkResults() const { return homeworkResults; }
+    int getExamResults() const { return examResults; }
 
     void setFirstName(std::string firstName) { this->firstName = std::move(firstName); }
     void setLastName(std::string lastName) { this->lastName = std::move(lastName); }
@@ -52,7 +39,6 @@ public:
     void setExamResults(int examResults) { this->examResults = examResults; }
     void setHomeworkResults(std::vector<int> results) { homeworkResults = std::move(results); }
 
-    // funkcijos
     double calculateMedian() const;
     double calculateAverage() const;
     double calculateFinalGrade(bool median) const;
