@@ -26,12 +26,13 @@ public:
 
     ~Student() {} // destruktorius
 
-    // get'eriai ir set'eriai
+    // get'eriai
     inline std::string getFirstName() const { return firstName; } 
     inline std::string getLastName() const { return lastName; }
     const std::vector<int>& getHomeworkResults() const { return homeworkResults; }
     int getExamResults() const { return examResults; }
 
+    // set'eriai
     void setFirstName(std::string firstName) { this->firstName = std::move(firstName); }
     void setLastName(std::string lastName) { this->lastName = std::move(lastName); }
     void addHomeworkResult(int result) { homeworkResults.push_back(result); }
@@ -39,6 +40,7 @@ public:
     void setExamResults(int examResults) { this->examResults = examResults; }
     void setHomeworkResults(std::vector<int> results) { homeworkResults = std::move(results); }
 
+    // funkcijos 
     double calculateMedian() const;
     double calculateAverage() const;
     double calculateFinalGrade(bool median) const;
