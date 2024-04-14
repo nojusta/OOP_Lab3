@@ -96,6 +96,12 @@ make distclean
 
 ## Programos sparta naudojant skirtingus kompiliatoriaus optimizavimo lygius
 
+  ### Testavimo sistemos parametrai:
+
+  - Saugykla: 256 GB, Integruota NVMe SSD
+  - Atmintis: 8 GB RAM
+  - Procesorius: Apple M1
+
 ### Be optimizavimo testavimas
 
   |           | Greitis(1mln.) | Greitis(10mln.) | Failo dydis  |
