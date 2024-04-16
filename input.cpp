@@ -260,27 +260,17 @@ string getFilenameFromUser() {
 template <typename Container>
 void readData(ifstream& fin, Container& students) {
     string buffer; 
-    getline(fin, buffer); 
+    getline(fin, buffer);
     while (getline(fin, buffer)) {
         stringstream ss(buffer); 
-        vector<int> grades;
         Student s; 
-        string tempFirstName, tempLastName;
-        ss >> tempFirstName >> tempLastName;
-        s.setFirstName(tempFirstName);
-        s.setLastName(tempLastName);
-        int grade;
-        while (ss >> grade) {
-            grades.push_back(grade);
+        if (!(ss >> s)) {
+            throw runtime_error("Nepavyko nuskaityti.");
         }
-        if (ss.fail() && !ss.eof()) {
-            throw runtime_error("Failed to read grade.");
+        if (!s.getHomeworkResults().empty()) {
+            s.setExamResults(s.getExamGrade());
+            s.removeLastHomeworkGrade();
         }
-        if (!grades.empty()) {
-            s.setExamResults(grades.back());
-            grades.pop_back();
-        }
-        s.setHomeworkResults(std::move(grades));
         students.push_back(std::move(s));
     }
 }
@@ -363,12 +353,17 @@ void input(Student& data, bool& Median){
     data.setFirstName(isString("Įveskite studento vardą: "));
     data.setLastName(isString("Įveskite studento pavardę: "));
     data.clearHomeworkResults(); // isvalome vektoriu
+    vector<int> grades;
     while (true) {
         int result = isGrade("Įveskite namų darbo pažymį arba -1, jei baigėte: ");
         if (result == -1) {
             break;
         }
-        data.addHomeworkResult(result);
+        grades.push_back(result);
     }
-    data.setExamResults(isGrade("Įveskite studento egzamino rezultatą: "));
+    if (!grades.empty()) {
+        data.setExamResults(grades.back());
+        grades.pop_back();
+    }
+    data.setHomeworkResults(std::move(grades));
 }

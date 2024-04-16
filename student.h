@@ -10,6 +10,7 @@
 #include <list>
 #include <istream>
 #include <ostream>
+#include <iomanip>
 
 class Student { // klase Student
 private:
@@ -26,6 +27,7 @@ public:
     Student& operator=(const Student& other); // copy priskyrimo operatorius
     Student& operator=(Student&& other) noexcept; // move priskyrimo operatorius
     friend std::istream& operator>>(std::istream& is, Student& s); // ivesties operatorius
+    friend std::ostream& operator<<(std::ostream& os, const Student& s); // isvesties operatorius
 
     ~Student() {} // destruktorius
 
@@ -34,6 +36,8 @@ public:
     inline std::string getLastName() const { return lastName; }
     const std::vector<int>& getHomeworkResults() const { return homeworkResults; }
     int getExamResults() const { return examResults; }
+    int getExamGrade() const { return homeworkResults.back(); }
+    void removeLastHomeworkGrade() { homeworkResults.pop_back(); }
 
     // set'eriai
     void setFirstName(std::string firstName) { this->firstName = std::move(firstName); }
