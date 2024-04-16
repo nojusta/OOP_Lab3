@@ -25,7 +25,7 @@ public:
     Student(Student&& other) noexcept; // move konstruktorius
     Student& operator=(const Student& other); // copy priskyrimo operatorius
     Student& operator=(Student&& other) noexcept; // move priskyrimo operatorius
-    friend std::istream& operator>>(std::istream& is, Student& student); // ivesties operatorius
+    friend std::istream& operator>>(std::istream& is, Student& s); // ivesties operatorius
 
     ~Student() {} // destruktorius
 

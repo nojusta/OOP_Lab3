@@ -39,12 +39,30 @@ Student& Student::operator=(Student&& other) noexcept {
 }
 
 // ivesties operatorius
-std::istream& operator>>(std::istream& is, Student& student) {
-    is >> student.firstName >> student.lastName >> student.examResults;
-    int result;
-    while (is >> result) {
-        student.homeworkResults.push_back(result);
+std::istream& operator>>(std::istream& is, Student& s) {
+    std::string tempFirstName, tempLastName;
+    if (!(is >> tempFirstName >> tempLastName)) {
+        // patikrina ar pavyko nuskaityti varda ir pavarde
+        return is;
     }
+    s.setFirstName(tempFirstName);
+    s.setLastName(tempLastName);
+
+    std::vector<int> grades;
+    int grade;
+    while (is >> grade) {
+        grades.push_back(grade);
+    }
+    if (is.fail() && !is.eof()) {
+        // patikrina ar pavyko nuskaityti pazymius
+        is.clear(); // isvalo klaidos busena
+    }
+    if (!grades.empty()) {
+        s.setExamResults(grades.back());
+        grades.pop_back();
+    }
+    s.setHomeworkResults(std::move(grades));
+
     return is;
 }
 
