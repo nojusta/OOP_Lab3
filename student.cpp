@@ -38,6 +38,16 @@ Student& Student::operator=(Student&& other) noexcept {
     return *this;
 }
 
+// ivesties operatorius
+std::istream& operator>>(std::istream& is, Student& student) {
+    is >> student.firstName >> student.lastName >> student.examResults;
+    int result;
+    while (is >> result) {
+        student.homeworkResults.push_back(result);
+    }
+    return is;
+}
+
 double Student::calculateAverage() const {
     if (homeworkResults.empty()) {
         return 0;

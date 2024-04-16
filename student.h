@@ -8,6 +8,8 @@
 #include <numeric>
 #include <deque>
 #include <list>
+#include <istream>
+#include <ostream>
 
 class Student { // klase Student
 private:
@@ -23,6 +25,7 @@ public:
     Student(Student&& other) noexcept; // move konstruktorius
     Student& operator=(const Student& other); // copy priskyrimo operatorius
     Student& operator=(Student&& other) noexcept; // move priskyrimo operatorius
+    friend std::istream& operator>>(std::istream& is, Student& student); // ivesties operatorius
 
     ~Student() {} // destruktorius
 
