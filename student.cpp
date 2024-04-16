@@ -41,22 +41,27 @@ Student& Student::operator=(Student&& other) noexcept {
 // ivesties operatorius (nuskaitymui is failo)
 std::istream& operator>>(std::istream& is, Student& s) {
     std::string tempFirstName, tempLastName;
+    std::vector<int> grades;
+    int grade;
+
     if (!(is >> tempFirstName >> tempLastName)) {
         return is;
     }
     s.setFirstName(tempFirstName);
     s.setLastName(tempLastName);
 
-    std::vector<int> grades;
-    int grade;
     while (is >> grade) {
         grades.push_back(grade);
     }
+
+    // Clear the fail state if end of file is reached
     if (is.eof()) {
         is.clear();
-    } else if (is.fail()) {
-        is.clear();
-        is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    if (!grades.empty()) {
+        s.setExamResults(grades.back()); // Set the last grade as the exam result
+        grades.pop_back(); // Remove the last grade from the homework results
     }
     s.setHomeworkResults(std::move(grades));
 

@@ -25,4 +25,6 @@ void openFiles(const std::vector<std::string>& filenames, Container& students, b
 
 void input(Student& data, bool& Median);
 
+std::string studentData(const Student& s);
+
 #endif // INPUT_H
