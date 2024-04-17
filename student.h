@@ -13,15 +13,16 @@
 #include <iomanip>
 #include <sstream>
 
-class Student
-{ // klase Student
+ //extern int numDestructed = 0;
+
+class Student { // klase Student
 private:
     std::string firstName, lastName;
     std::vector<int> homeworkResults;
     int examResults;
 
 public:
-    static int numDestructed;
+   
     Student();                                                                                                                    // konstruktorius
     Student(const std::string &firstName, const std::string &lastName, int examResults, const std::vector<int> &homeworkResults); // konstruktorius su parametrais
     Student(const Student &other);                                                                                                // copy konstruktorius
@@ -31,7 +32,10 @@ public:
     friend std::istream &operator>>(std::istream &is, Student &s);                                                                // ivesties operatorius
     friend std::ostream &operator<<(std::ostream &os, const Student &s);                                                          // isvesties operatorius
 
-    ~Student() { numDestructed++; } // destruktorius
+    ~Student() { // destruktorius
+        homeworkResults.clear();
+        //numDestructed++;
+    } 
 
     // get'eriai
     inline std::string getFirstName() const { return firstName; }
@@ -41,7 +45,7 @@ public:
     int getExamResults() const { return examResults; }
     int getExamGrade() const { return homeworkResults.back(); }
     void removeLastHomeworkGrade() { if (!homeworkResults.empty()) { homeworkResults.pop_back(); } }
-    static int getNumDestructed() { return numDestructed; }
+   // static int getNumDestructed() { return numDestructed; }
 
     // set'eriai
     void setFirstName(std::string firstName) { this->firstName = std::move(firstName); }

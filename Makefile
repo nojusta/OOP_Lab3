@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -std=c++14 -O3
 
 # Vykdymo failo pavadinimas
-TARGET = v1_1
+TARGET = v1_2
 
 # Šaltinio failai
 SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp

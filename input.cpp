@@ -56,58 +56,22 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
         }
         switch (number)
         {
-        case 1:
-        {
-            do
+            case 1:
             {
-                try
+                do
                 {
-                    input(data, Median);
-                    students.push_back(data);
-                }
-                catch (const exception &e)
-                {
-                    cerr << e.what() << '\n';
-                }
-                while (true)
-                {
-                    cout << "Ar norite suvesti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
-                    cin >> moreStudents;
-                    if (cin.fail())
+                    try
                     {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        cerr << "Neteisinga įvestis. Prašome įvesti 0 arba 1." << endl;
+                        input(data, Median);
+                        students.push_back(data);
                     }
-                    else if (moreStudents == 0 || moreStudents == 1)
+                    catch (const exception &e)
                     {
-                        break;
+                        cerr << e.what() << '\n';
                     }
-                    else
-                    {
-                        cerr << "Neteisinga įvestis. Prašome įvesti 0 arba 1." << endl;
-                    }
-                }
-            } while (moreStudents == 1);
-            break;
-        }
-        case 2:
-        {
-            do
-            {
-                try
-                {
-                    data.setFirstName(isString("Įveskite studento vardą: "));
-                    data.setLastName(isString("Įveskite studento pavardę: "));
-                    for (int j = 0; j < 5; j++)
-                    {
-                        data.addHomeworkResult(generateGrade());
-                    }
-                    data.setExamResults(generateGrade());
-                    students.push_back(data);
                     while (true)
                     {
-                        cout << "Ar norite sugeneruoti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
+                        cout << "Ar norite suvesti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
                         cin >> moreStudents;
                         if (cin.fail())
                         {
@@ -124,276 +88,318 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                             cerr << "Neteisinga įvestis. Prašome įvesti 0 arba 1." << endl;
                         }
                     }
-                }
-                catch (const exception &e)
-                {
-                    cerr << "Įvyko klaida: " << e.what() << '\n';
-                }
-            } while (moreStudents == 1);
-            break;
-        }
-        case 3:
-        {
-            int numStudents;
-            while (true)
+                } while (moreStudents == 1);
+                break;
+            }
+            case 2:
             {
-                try
+                do
                 {
-                    cout << "Įveskite kiek studentų duomenų norite sugeneruoti: ";
-                    cin >> numStudents;
-                    if (cin.fail() || numStudents < 1)
+                    try
                     {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                        throw invalid_argument("Neteisinga įvestis. Prašome įvesti teigiamą skaičių.");
+                        data.setFirstName(isString("Įveskite studento vardą: "));
+                        data.setLastName(isString("Įveskite studento pavardę: "));
+                        for (int j = 0; j < 5; j++)
+                        {
+                            data.addHomeworkResult(generateGrade());
+                        }
+                        data.setExamResults(generateGrade());
+                        students.push_back(data);
+                        while (true)
+                        {
+                            cout << "Ar norite sugeneruoti dar vieno studento pažymius? (1 - taip, 0 - ne): ";
+                            cin >> moreStudents;
+                            if (cin.fail())
+                            {
+                                cin.clear();
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                cerr << "Neteisinga įvestis. Prašome įvesti 0 arba 1." << endl;
+                            }
+                            else if (moreStudents == 0 || moreStudents == 1)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                cerr << "Neteisinga įvestis. Prašome įvesti 0 arba 1." << endl;
+                            }
+                        }
                     }
-                    break;
-                }
-                catch (const exception &e)
-                {
-                    cerr << "Įvyko klaida: " << e.what() << '\n';
-                }
-            }
-            for (int i = 0; i < numStudents; i++)
-            {
-                data.setFirstName(generateName());
-                data.setLastName(generateLastName());
-                for (int j = 0; j < 5; j++)
-                {
-                    data.addHomeworkResult(generateGrade());
-                }
-                data.setExamResults(generateGrade());
-                students.push_back(data);
-            }
-            break;
-        }
-        case 4:
-        {
-            try
-            {
-                string filename = getFilenameFromUser();
-                ifstream fin(filename);
-                cout << "\nFailas " << '"' << filename << '"' << " nuskaitytas sėkmingai." << endl;
-                readData(fin, students);
-            }
-            catch (const runtime_error &e)
-            {
-                cerr << e.what() << '\n';
-            }
-            catch (const exception &e)
-            {
-                cerr << "Įvyko klaida: " << e.what() << '\n';
-            }
-            break;
-        }
-        case 5:
-        {
-            try
-            {
-                for (int i = 0; i < sizeof(studentCounts) / sizeof(studentCounts[0]); i++)
-                {
-                    generateFile(studentCounts[i]);
-                }
-                cout << "\nFailai sukurti sėkmingai." << endl;
-            }
-            catch (const exception &e)
-            {
-                cerr << "Įvyko klaida: " << e.what() << '\n';
-            }
-            break;
-        }
-        case 6:
-        {
-            try
-            {
-                cout << "Pasirinkite strategiją (1, 2, 3): ";
-                int strategy;
-                while (!(cin >> strategy) || (strategy != 1 && strategy != 2 && strategy != 3))
-                {
-                    cout << "Neteisinga įvestis. Prašome įvesti 1, 2 arba 3.\n";
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                }
-                for (int i = 0; i < sizeof(studentCounts) / sizeof(studentCounts[0]); i++)
-                {
-                    vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"}; // sudedame sugeneruotus failus i vektoriu
-                    openFiles<Container>(filenames, students, Median, strategy);
-                    cout << "Įveskite 1 norėdami tęsti: ";
-                    int userInput;
-                    while (!(cin >> userInput) || userInput != 1)
+                    catch (const exception &e)
                     {
-                        cout << "Neteisinga įvestis. Prašome įvesti 1, norint tęsti.\n";
-                        cin.clear(); // clear the error flag
-                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        cerr << "Įvyko klaida: " << e.what() << '\n';
                     }
-                }
+                } while (moreStudents == 1);
+                break;
             }
-            catch (const exception &e)
+            case 3:
             {
-                cerr << "Įvyko klaida: " << e.what() << '\n';
-            }
-            break;
-        }
-        case 7:
-        {
-            if (!students.empty())
-            {
-                cout << "Įveskite kaip norite išrušiuoti studentus: 1 - pagal vardą, 2 - pagal pavardę, 3 - pagal galutinį balą: ";
-                int criteria;
+                int numStudents;
                 while (true)
                 {
                     try
                     {
-                        cin >> criteria;
-                        if (cin.fail())
+                        cout << "Įveskite kiek studentų duomenų norite sugeneruoti: ";
+                        cin >> numStudents;
+                        if (cin.fail() || numStudents < 1)
                         {
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            throw runtime_error("Netinkama įvestis, įveskite skaičių 1, 2 arba 3.");
-                        }
-                        if (criteria != 1 && criteria != 2 && criteria != 3)
-                        {
-                            throw runtime_error("Netinkama įvestis, įveskite skaičių 1, 2 arba 3.");
+                            throw invalid_argument("Neteisinga įvestis. Prašome įvesti teigiamą skaičių.");
                         }
                         break;
                     }
-                    catch (const runtime_error &e)
+                    catch (const exception &e)
                     {
-                        cout << e.what() << endl;
+                        cerr << "Įvyko klaida: " << e.what() << '\n';
                     }
                 }
+                for (int i = 0; i < numStudents; i++)
+                {
+                    data.setFirstName(generateName());
+                    data.setLastName(generateLastName());
+                    for (int j = 0; j < 5; j++)
+                    {
+                        data.addHomeworkResult(generateGrade());
+                    }
+                    data.setExamResults(generateGrade());
+                    students.push_back(data);
+                }
+                break;
+            }
+            case 4:
+            {
                 try
                 {
-                    sortStudents(students, criteria);
-                    vector<Student> kietiakai;
-                    vector<Student> nuskriaustukai;
-                    for (auto it = students.begin(); it != students.end(); ++it)
-                    {                                                        // skirstome studentus i dvi kategorijas
-                        double finalGrade = it->calculateFinalGrade(Median); // calculate final grade using the method
-                        if (finalGrade < 5.0)
-                        {
-                            nuskriaustukai.push_back(*it);
-                        }
-                        else
-                        {
-                            kietiakai.push_back(*it);
-                        }
-                    }
-                    cout << "Įveskite kaip norite išvesti studentus: 1 - į ekraną, 2 - į failus: ";
-                    int choice;
-                    cin >> choice;
-                    if (choice == 1)
+                    string filename = getFilenameFromUser();
+                    ifstream fin(filename);
+                    cout << "\nFailas " << '"' << filename << '"' << " nuskaitytas sėkmingai." << endl;
+                    readData(fin, students);
+                }
+                catch (const runtime_error &e)
+                {
+                    cerr << e.what() << '\n';
+                }
+                catch (const exception &e)
+                {
+                    cerr << "Įvyko klaida: " << e.what() << '\n';
+                }
+                break;
+            }
+            case 5:
+            {
+                try
+                {
+                    for (int i = 0; i < sizeof(studentCounts) / sizeof(studentCounts[0]); i++)
                     {
-                        outputToTerminal(nuskriaustukai, kietiakai, Median);
+                        generateFile(studentCounts[i]);
                     }
-                    else if (choice == 2)
+                    cout << "\nFailai sukurti sėkmingai." << endl;
+                }
+                catch (const exception &e)
+                {
+                    cerr << "Įvyko klaida: " << e.what() << '\n';
+                }
+                break;
+            }
+            case 6:
+            {
+                try
+                {
+                    cout << "Pasirinkite strategiją (1, 2, 3): ";
+                    int strategy;
+                    while (!(cin >> strategy) || (strategy != 1 && strategy != 2 && strategy != 3))
                     {
-                        outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
-                        outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
+                        cout << "Neteisinga įvestis. Prašome įvesti 1, 2 arba 3.\n";
+                        cin.clear();
+                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    }
+                    for (int i = 0; i < sizeof(studentCounts) / sizeof(studentCounts[0]); i++)
+                    {
+                        vector<string> filenames = {"studentai" + to_string(studentCounts[i]) + ".txt"}; // sudedame sugeneruotus failus i vektoriu
+                        openFiles<Container>(filenames, students, Median, strategy);
+                        cout << "Įveskite 1 norėdami tęsti: ";
+                        int userInput;
+                        while (!(cin >> userInput) || userInput != 1)
+                        {
+                            cout << "Neteisinga įvestis. Prašome įvesti 1, norint tęsti.\n";
+                            cin.clear(); // clear the error flag
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        }
                     }
                 }
                 catch (const exception &e)
                 {
-                    cerr << "Įvyko klaida rušiuojant / išvedant studentus \n";
+                    cerr << "Įvyko klaida: " << e.what() << '\n';
                 }
+                break;
+            }
+            case 7:
+            {
+                if (!students.empty())
+                {
+                    cout << "Įveskite kaip norite išrušiuoti studentus: 1 - pagal vardą, 2 - pagal pavardę, 3 - pagal galutinį balą: ";
+                    int criteria;
+                    while (true)
+                    {
+                        try
+                        {
+                            cin >> criteria;
+                            if (cin.fail())
+                            {
+                                cin.clear();
+                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                throw runtime_error("Netinkama įvestis, įveskite skaičių 1, 2 arba 3.");
+                            }
+                            if (criteria != 1 && criteria != 2 && criteria != 3)
+                            {
+                                throw runtime_error("Netinkama įvestis, įveskite skaičių 1, 2 arba 3.");
+                            }
+                            break;
+                        }
+                        catch (const runtime_error &e)
+                        {
+                            cout << e.what() << endl;
+                        }
+                    }
+                    try
+                    {
+                        sortStudents(students, criteria);
+                        vector<Student> kietiakai;
+                        vector<Student> nuskriaustukai;
+                        for (auto it = students.begin(); it != students.end(); ++it)
+                        {                                                        // skirstome studentus i dvi kategorijas
+                            double finalGrade = it->calculateFinalGrade(Median); // calculate final grade using the method
+                            if (finalGrade < 5.0)
+                            {
+                                nuskriaustukai.push_back(*it);
+                            }
+                            else
+                            {
+                                kietiakai.push_back(*it);
+                            }
+                        }
+                        cout << "Įveskite kaip norite išvesti studentus: 1 - į ekraną, 2 - į failus: ";
+                        int choice;
+                        cin >> choice;
+                        if (choice == 1)
+                        {
+                            outputToTerminal(nuskriaustukai, kietiakai, Median);
+                        }
+                        else if (choice == 2)
+                        {
+                            outputToFile(nuskriaustukai, nuskriaustukai.size(), Median, "nuskriaustukai.txt");
+                            outputToFile(kietiakai, kietiakai.size(), Median, "kietiakai.txt");
+                        }
+                    }
+                    catch (const exception &e)
+                    {
+                        cerr << "Įvyko klaida rušiuojant / išvedant studentus \n";
+                    }
+                }
+                break;
+            }
+            case 8:
+            {
+                try
+                {
+                    // Testujame 'Rule of five' metodus
+                    // Testuojame konstruktorius
+                    std::vector<int> homeworkResults = {5, 6, 7, 8};
+                    Student s1("Martynas", "Kazlauskas", 10, homeworkResults);
+                    Student s2(s1); // Kopijavimo konstruktorius
+                    if (!(s2.getFirstName() == s1.getFirstName() && s2.getLastName() == s1.getLastName() && s2.getExamResults() == s1.getExamResults() && s2.getHomeworkResults() == s1.getHomeworkResults()))
+                    {
+                        std::cerr << "\nKopijavimo konstruktoriaus testas nepavyko.\n\n";
+                        return;
+                    }
+                    else
+                    {
+                        std::cout << "\nKopijavimo konstruktoriaus testas sėkmingas.\n\n";
+                    }
+
+                    Student s3(std::move(s1)); // Perkėlimo konstruktorius
+                    if (!(s3.getFirstName() == "Martynas" && s3.getLastName() == "Kazlauskas" && s3.getExamResults() == 10 && s3.getHomeworkResults() == homeworkResults))
+                    {
+                        std::cerr << "Perkėlimo konstruktoriaus testas nepavyko.\n\n";
+                        return;
+                    }
+                    else
+                    {
+                        std::cout << "Perkėlimo konstruktoriaus testas sėkmingas.\n\n";
+                        std::cout<< s1;
+                    }
+
+                    // Testuojame priskyrimo operatorius
+                    Student s4;
+                    s4 = s2; // Kopijavimo priskyrimo operatorius
+                    if (!(s4.getFirstName() == s2.getFirstName() && s4.getLastName() == s2.getLastName() && s4.getExamResults() == s2.getExamResults() && s4.getHomeworkResults() == s2.getHomeworkResults()))
+                    {
+                        std::cerr << "Kopijavimo priskyrimo operatorius nepavyko.\n\n";
+                        return;
+                    }
+                    else
+                    {
+                        std::cout << "Kopijavimo priskyrimo operatorius sėkmingas.\n\n";
+                    }
+
+                    Student s5;
+                    s5 = std::move(s4); // Perkėlimo priskyrimo operatorius
+                    if (!(s5.getFirstName() == "Martynas" && s5.getLastName() == "Kazlauskas" && s5.getExamResults() == 10 && s5.getHomeworkResults() == homeworkResults))
+                    {
+                        std::cerr << "Perkėlimo priskyrimo operatoriaus testas nepavyko.\n\n";
+                        return;
+                    }
+                    else
+                    {
+                        std::cout << "Perkėlimo priskyrimo operatoriaus testas sėkmingas.\n\n";
+                    }
+
+                    // Testuojame įvesties operatoriu
+                    std::string expectedFirstName = "Martynas";
+                    std::string expectedLastName = "Kazlauskas";
+                    std::vector<int> expectedHomeworkResults = {5, 6, 7, 8};
+                    int expectedExamResults = 10;
+
+                    std::istringstream iss("Martynas Kazlauskas 5 6 7 8 10");
+                    Student s6;
+                    iss >> s6; // Įvesties operatorius
+
+                    if (!(s6.getFirstName() == expectedFirstName && s6.getLastName() == expectedLastName && s6.getExamResults() == expectedExamResults && s6.getHomeworkResults() == expectedHomeworkResults)) {
+                        std::cerr << "Įvesties operatoriaus testas nepavyko. \n\n";
+                        return;
+                    } else {
+                        std::cout << "Įvesties operatoriaus testas sėkmingas.\n\n";
+                    }
+
+                    // Testuojame išvesties operatorių
+                    std::string expectedOutput = "Martynas Kazlauskas 5 6 7 8 10";
+                    std::stringstream ss;
+                    ss << s6;
+                    if (ss.str() != expectedOutput) {
+                        std::cerr << "Išvesties operatoriaus testas nepavyko. \n\n";
+                        return;
+                    } else {
+                        std::cout << "Išvesties operatoriaus testas sėkmingas.\n\n";
+                    }
+                    std::cout << "Testai baigti.\n\n";
+                }
+                catch (const std::exception &e)
+                {
+                    std::cerr << "Įvyko klaida: " << e.what() << '\n';
+                }
+                //std::cout << "Destruktorius buvo iškviestas " << Student::getNumDestructed() << " kartus(-ų).\n\n";
+                break;
+            }
+            case 9:
+            {
                 auto endTotal = chrono::high_resolution_clock::now();
                 chrono::duration<double> diffTotal = endTotal - startTotal;
                 double totalTime = diffTotal.count();
 
-                cout << "\nVisos programos veikimo laikas: " << std::fixed << std::setprecision(6) << totalTime << " sekundės\n"
-                     << endl;
+                cout << "\nVisos programos veikimo laikas: " << std::fixed << std::setprecision(6) << totalTime << " sekundės\n" << endl;
+                exit(0);
             }
-            break;
-        }
-        case 8:
-        {
-            try
-            {
-                // Testujame 'Rule of five' metodus
-                // Testuojame konstruktorius
-                std::vector<int> homeworkResults = {5, 6, 7, 8};
-                Student s1("Martynas", "Kazlauskas", 10, homeworkResults);
-                Student s2(s1); // Kopijavimo konstruktorius
-                if (!(s2.getFirstName() == s1.getFirstName() && s2.getLastName() == s1.getLastName() && s2.getExamResults() == s1.getExamResults() && s2.getHomeworkResults() == s1.getHomeworkResults()))
-                {
-                    std::cerr << "\nKopijavimo konstruktoriaus testas nepavyko.\n\n";
-                    return;
-                }
-                else
-                {
-                    std::cout << "\nKopijavimo konstruktoriaus testas sėkmingas.\n\n";
-                }
-
-                Student s3(std::move(s1)); // Perkėlimo konstruktorius
-                if (!(s3.getFirstName() == "Martynas" && s3.getLastName() == "Kazlauskas" && s3.getExamResults() == 10 && s3.getHomeworkResults() == homeworkResults))
-                {
-                    std::cerr << "Perkėlimo konstruktoriaus testas nepavyko.\n\n";
-                    return;
-                }
-                else
-                {
-                    std::cout << "Perkėlimo konstruktoriaus testas sėkmingas.\n\n";
-                }
-
-                // Testuojame priskyrimo operatorius
-                Student s4;
-                s4 = s2; // Kopijavimo priskyrimo operatorius
-                if (!(s4.getFirstName() == s2.getFirstName() && s4.getLastName() == s2.getLastName() && s4.getExamResults() == s2.getExamResults() && s4.getHomeworkResults() == s2.getHomeworkResults()))
-                {
-                    std::cerr << "Kopijavimo priskyrimo operatorius nepavyko.\n\n";
-                    return;
-                }
-                else
-                {
-                    std::cout << "Kopijavimo priskyrimo operatorius sėkmingas.\n\n";
-                }
-
-                Student s5;
-                s5 = std::move(s4); // Perkėlimo priskyrimo operatorius
-                if (!(s5.getFirstName() == "Martynas" && s5.getLastName() == "Kazlauskas" && s5.getExamResults() == 10 && s5.getHomeworkResults() == homeworkResults))
-                {
-                    std::cerr << "Perkėlimo priskyrimo operatoriaus testas nepavyko.\n\n";
-                    return;
-                }
-                else
-                {
-                    std::cout << "Perkėlimo priskyrimo operatoriaus testas sėkmingas.\n\n";
-                }
-
-                // Testuojame įvesties ir išvesties operatorius
-                std::istringstream iss("Martynas Kazlauskas 5 6 7 8 10");
-                Student s6;
-                iss >> s6; // Ivesties operatorius
-                if (!(s6.getFirstName() == "Martynas" && s6.getLastName() == "Kazlauskas" && s6.getExamResults() == 10 && s6.getHomeworkResults() == std::vector<int>{5, 6, 7, 8}))
-                {
-                    std::cerr << "Įvesties operatoriaus testas nepavyko. \n\n";
-                    return;
-                }
-                else
-                {
-                    std::cout << "Įvesties operatoriaus testas sėkmingas.\n\n";
-                }
-
-                // Testuojame išvesties operatorių
-                std::string expectedOutput = "Martynas Kazlauskas 5 6 7 8 10";
-                if (studentData(s6) != expectedOutput)
-                {
-                    std::cerr << "Išvesties operatoriaus testas nepavyko. \n\n";
-                    return;
-                }
-                else
-                {
-                    std::cout << "Išvesties operatoriaus testas sėkmingas.\n\n";
-                }
-                std::cout << "Testai baigti.\n\n";
-            }
-            catch (const std::exception &e)
-            {
-                std::cerr << "Įvyko klaida: " << e.what() << '\n';
-            }
-            std::cout << "Destruktorius buvo iškviestas " << Student::getNumDestructed() << " kartus(-ų).\n\n";
-            break;
-        }
         }
     } while (number != 8);
 }
@@ -411,13 +417,16 @@ int Menu()
     cout << "4 - Skaityti duomenis iš failo\n";
     cout << "5 - Sugeneruoti penkis atsitiktinius studentų sąrašų failus\n";
     cout << "6 - Testuoti penkis atsitiktinius studentų sąrašų failus\n";
-    cout << "7 - Baigti darbą / Išvedimas\n";
+    cout << "7 - Išvedimas\n";
     cout << "8 - 'Rule of five' + I/O operatorių Testavimas\n";
+    cout << "9 - Išjungti programą\n";
     cout << "\nĮveskite skaičių: ";
     cin >> number;
-    if (number < 1 || number > 8)
+    if (number < 1 || number > 9 || cin.fail())
     {
-        throw runtime_error("Netinkama įvestis, įveskite skaičių tarp 1 ir 8.");
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        throw runtime_error("Netinkama įvestis, įveskite skaičių nuo 1 iki 9.");
     }
     return number;
 }

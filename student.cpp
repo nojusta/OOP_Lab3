@@ -1,7 +1,5 @@
 #include "student.h"
 
-int Student::numDestructed = 0;
-
 Student::Student() : firstName(""), lastName(""), examResults(0) {} //  konstruktorius
 
 //  konstruktorius su parametrais
@@ -13,10 +11,15 @@ Student::Student(const Student& other)
     : firstName(other.firstName), lastName(other.lastName),
       homeworkResults(other.homeworkResults), examResults(other.examResults) {}
 
-//  move konstruktorius
+// move konstruktorius
 Student::Student(Student&& other) noexcept
     : firstName(std::move(other.firstName)), lastName(std::move(other.lastName)),
-      homeworkResults(std::move(other.homeworkResults)), examResults(other.examResults) {}
+      homeworkResults(std::move(other.homeworkResults)), examResults(std::move(other.examResults)) {
+    other.firstName.clear();
+    other.lastName.clear();
+    other.homeworkResults.clear();
+    other.examResults = 0;
+}
 
 // copy priskyrimo operatorius
 Student& Student::operator=(const Student& other) {
@@ -35,10 +38,15 @@ Student& Student::operator=(Student&& other) noexcept {
         firstName = std::move(other.firstName);
         lastName = std::move(other.lastName);
         homeworkResults = std::move(other.homeworkResults);
-        examResults = other.examResults;
+        examResults = std::move(other.examResults);
+        other.firstName.clear();
+        other.lastName.clear();
+        other.homeworkResults.clear();
+        other.examResults = 0;
     }
     return *this;
 }
+
 
 // ivesties operatorius (nuskaitymui is failo)
 std::istream& operator>>(std::istream& is, Student& s) {
@@ -72,8 +80,11 @@ std::istream& operator>>(std::istream& is, Student& s) {
 
 // isvesties operatorius 
 std::ostream& operator<<(std::ostream& os, const Student& s) {
-    os << std::setw(15) << s.getLastName() 
-       << std::setw(15) << s.getFirstName();
+    os << s.getFirstName() << " " << s.getLastName();
+    for (const auto& result : s.getHomeworkResults()) {
+        os << " " << result;
+    }
+    os << " " << s.getExamResults();
     return os;
 }
 
