@@ -1,4 +1,4 @@
-# v1.1
+# v1.2
 
 ## Diegimo instrukcija
 
@@ -93,6 +93,30 @@ make distclean
   - Yra 3 skirtingos strategijos duomenų skirstymui.
   - Naudojama klasė, saugojant studentų duomenis.
 - Norėdami baigti darbą su programa, pasirinkite atitinkamą skaičių.
+
+## Klasės naudojami "Rule of five" ir I/O operatoriai.
+
+"Rule of five" yra C++ programavimo kalbos konceptas, kuris apima penkis pagrindinius komponentus, reikalingus objektų valdymui: destruktorius, kopijavimo konstruktorius, kopijavimo priskyrimo operatorius, perkeliamasis konstruktorius ir perkeliamasis priskyrimo operatorius. Šiame projekte "Rule of five" yra taikomas `Student` klasei.
+
+1. **Destruktorius**: Šis komponentas naudojamas išvalyti `Student` objektą, kai jis nebereikalingas.
+
+2. **Kopijavimo konstruktorius**: Šis komponentas leidžia sukurti naują `Student` objektą, kuris yra identiškas esamam `Student` objektui.
+
+3. **Kopijavimo priskyrimo operatorius**: Šis operatorius leidžia priskirti vieno `Student` objekto vertę kitam `Student` objektui.
+
+4. **Perkeliamasis konstruktorius**: Šis komponentas leidžia "perkelti" `Student` objektą, o ne kopijuoti jį. Tai yra efektyvesnis būdas sukurti naują `Student` objektą, kai turime laikiną `Student` objektą, kurio mums nebereikia.
+
+5. **Perkeliamasis priskyrimo operatorius**: Šis operatorius leidžia "perkelti" vieno `Student` objekto vertę į kitą `Student` objektą, o ne kopijuoti ją.
+
+Be to, šiame projekte yra naudojami įvesties (`>>`) ir išvesties (`<<`) operatoriai.
+
+**Įvesties operatorius (`>>`)**: Šis operatorius naudojamas nuskaitant duomenis iš įvesties srauto (pvz., `std::cin` ar `std::istringstream`) į `Student` objektą.
+
+**Išvesties operatorius (`<<`)**: Šis operatorius naudojamas rašant `Student` objektą į išvesties srautą (pvz., `std::cout` ar `std::ostringstream`).
+
+Šie operatoriai leidžia lengvai ir efektyviai manipuliuoti `Student` objektais, nuskaitant duomenis iš įvesties srautų ir rašant juos į išvesties srautus.
+
+Visiems konstruktoriams / operatoriams yra atlikti testai, siekiantys patikrinti ar visi jie veikia. Testus galima atlikti pasirinkus tai per meniu.
 
 ## Programos sparta naudojant skirtingus kompiliatoriaus optimizavimo lygius
 

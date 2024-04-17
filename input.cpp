@@ -309,88 +309,89 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
         {
             try
             {
-                // 
+                // Testujame 'Rule of five' metodus
+                // Testuojame konstruktorius
                 std::vector<int> homeworkResults = {5, 6, 7, 8};
                 Student s1("Martynas", "Kazlauskas", 10, homeworkResults);
-                Student s2(s1); // Copy constructor
+                Student s2(s1); // Kopijavimo konstruktorius
                 if (!(s2.getFirstName() == s1.getFirstName() && s2.getLastName() == s1.getLastName() && s2.getExamResults() == s1.getExamResults() && s2.getHomeworkResults() == s1.getHomeworkResults()))
                 {
-                    std::cerr << "Kopijavimo konstruktoriaus testas nepavyko.\n";
+                    std::cerr << "\nKopijavimo konstruktoriaus testas nepavyko.\n\n";
                     return;
                 }
                 else
                 {
-                    std::cout << "Kopijavimo konstruktoriaus testas sėkmingas.\n";
+                    std::cout << "\nKopijavimo konstruktoriaus testas sėkmingas.\n\n";
                 }
 
-                Student s3(std::move(s1)); // Move constructor
+                Student s3(std::move(s1)); // Perkėlimo konstruktorius
                 if (!(s3.getFirstName() == "Martynas" && s3.getLastName() == "Kazlauskas" && s3.getExamResults() == 10 && s3.getHomeworkResults() == homeworkResults))
                 {
-                    std::cerr << "Perkėlimo konstruktoriaus testas nepavyko.\n";
+                    std::cerr << "Perkėlimo konstruktoriaus testas nepavyko.\n\n";
                     return;
                 }
                 else
                 {
-                    std::cout << "Perkėlimo konstruktoriaus testas sėkmingas.\n";
+                    std::cout << "Perkėlimo konstruktoriaus testas sėkmingas.\n\n";
                 }
 
-                // Test assignment operators
+                // Testuojame priskyrimo operatorius
                 Student s4;
-                s4 = s2; // Copy assignment operator
+                s4 = s2; // Kopijavimo priskyrimo operatorius
                 if (!(s4.getFirstName() == s2.getFirstName() && s4.getLastName() == s2.getLastName() && s4.getExamResults() == s2.getExamResults() && s4.getHomeworkResults() == s2.getHomeworkResults()))
                 {
-                    std::cerr << "Kopijavimo priskyrimo operatorius nepavyko.\n";
+                    std::cerr << "Kopijavimo priskyrimo operatorius nepavyko.\n\n";
                     return;
                 }
                 else
                 {
-                    std::cout << "Kopijavimo priskyrimo operatorius sėkmingas.\n";
+                    std::cout << "Kopijavimo priskyrimo operatorius sėkmingas.\n\n";
                 }
 
                 Student s5;
-                s5 = std::move(s4); // Move assignment operator
+                s5 = std::move(s4); // Perkėlimo priskyrimo operatorius
                 if (!(s5.getFirstName() == "Martynas" && s5.getLastName() == "Kazlauskas" && s5.getExamResults() == 10 && s5.getHomeworkResults() == homeworkResults))
                 {
-                    std::cerr << "Perkėlimo priskyrimo operatorius nepavyko.\n";
+                    std::cerr << "Perkėlimo priskyrimo operatoriaus testas nepavyko.\n\n";
                     return;
                 }
                 else
                 {
-                    std::cout << "Perkėlimo priskyrimo operatorius sėkmingas.\n";
+                    std::cout << "Perkėlimo priskyrimo operatoriaus testas sėkmingas.\n\n";
                 }
 
-                // Test input operator
+                // Testuojame įvesties ir išvesties operatorius
                 std::istringstream iss("Martynas Kazlauskas 5 6 7 8 10");
                 Student s6;
-                iss >> s6; // Input operator
+                iss >> s6; // Ivesties operatorius
                 if (!(s6.getFirstName() == "Martynas" && s6.getLastName() == "Kazlauskas" && s6.getExamResults() == 10 && s6.getHomeworkResults() == std::vector<int>{5, 6, 7, 8}))
                 {
-                    std::cerr << "Įvesties operatoriaus testas nepavyko. \n";
+                    std::cerr << "Įvesties operatoriaus testas nepavyko. \n\n";
                     return;
                 }
                 else
                 {
-                    std::cout << "Įvesties operatoriaus testas sėkmingas.\n";
+                    std::cout << "Įvesties operatoriaus testas sėkmingas.\n\n";
                 }
 
-                // Test output operator
+                // Testuojame išvesties operatorių
                 std::string expectedOutput = "Martynas Kazlauskas 5 6 7 8 10";
                 if (studentData(s6) != expectedOutput)
                 {
-                    std::cerr << "Išvesties operatoriaus testas nepavyko. \n";
+                    std::cerr << "Išvesties operatoriaus testas nepavyko. \n\n";
                     return;
                 }
                 else
                 {
-                    std::cout << "Išvesties operatoriaus testas sėkmingas.\n";
+                    std::cout << "Išvesties operatoriaus testas sėkmingas.\n\n";
                 }
-
-                std::cout << "Testai baigti. Visi metodai veikia.\n";
+                std::cout << "Testai baigti.\n\n";
             }
             catch (const std::exception &e)
             {
-                std::cerr << "An error occurred: " << e.what() << '\n';
+                std::cerr << "Įvyko klaida: " << e.what() << '\n';
             }
+            std::cout << "Destruktorius buvo iškviestas " << Student::getNumDestructed() << " kartus(-ų).\n\n";
             break;
         }
         }

@@ -1,12 +1,14 @@
 #include "student.h"
 
+int Student::numDestructed = 0;
+
 Student::Student() : firstName(""), lastName(""), examResults(0) {} //  konstruktorius
 
 //  konstruktorius su parametrais
 Student::Student(const std::string& firstName, const std::string& lastName, int examResults, const std::vector<int>& homeworkResults)
     : firstName(firstName), lastName(lastName), examResults(examResults), homeworkResults(homeworkResults) {}
 
-//  konstruktorius su parametrais
+//  copy konstruktorius
 Student::Student(const Student& other)
     : firstName(other.firstName), lastName(other.lastName),
       homeworkResults(other.homeworkResults), examResults(other.examResults) {}
@@ -16,7 +18,7 @@ Student::Student(Student&& other) noexcept
     : firstName(std::move(other.firstName)), lastName(std::move(other.lastName)),
       homeworkResults(std::move(other.homeworkResults)), examResults(other.examResults) {}
 
-//  copy konstruktorius
+// copy priskyrimo operatorius
 Student& Student::operator=(const Student& other) {
     if (this != &other) {
         firstName = other.firstName;
@@ -27,7 +29,7 @@ Student& Student::operator=(const Student& other) {
     return *this;
 }
 
-//  move konstruktorius
+// move priskyrimo operatorius
 Student& Student::operator=(Student&& other) noexcept {
     if (this != &other) {
         firstName = std::move(other.firstName);
@@ -54,14 +56,14 @@ std::istream& operator>>(std::istream& is, Student& s) {
         grades.push_back(grade);
     }
 
-    // Clear the fail state if end of file is reached
+    // Isvalome klaidinga bita, jei pavyko nuskaityti visus duomenis
     if (is.eof()) {
         is.clear();
     }
 
     if (!grades.empty()) {
-        s.setExamResults(grades.back()); // Set the last grade as the exam result
-        grades.pop_back(); // Remove the last grade from the homework results
+        s.setExamResults(grades.back()); // Nustatome egzamino rezultata
+        grades.pop_back(); // Istriname egzamino rezultata is namu darbu rezultatu
     }
     s.setHomeworkResults(std::move(grades));
 
