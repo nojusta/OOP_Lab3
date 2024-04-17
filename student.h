@@ -1,21 +1,11 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <string>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <numeric>
-#include <deque>
-#include <list>
-#include <istream>
-#include <ostream>
-#include <iomanip>
-#include <sstream>
+#include "person.h"
 
  //extern int numDestructed = 0;
 
-class Student { // klase Student
+class Student : public Person { // klase Student
 private:
     std::string firstName, lastName;
     std::vector<int> homeworkResults;

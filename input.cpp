@@ -302,7 +302,10 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
             case 8:
             {
                 try
-                {
+                { 
+                    // Person P; 
+                    // Jei atkomentuojame eilute virs sitos, gausime klaida, nes Person klase yra abstrakti
+                    
                     // Testujame 'Rule of five' metodus
                     // Testuojame konstruktorius
                     std::vector<int> homeworkResults = {5, 6, 7, 8};
@@ -327,7 +330,6 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     else
                     {
                         std::cout << "Perkėlimo konstruktoriaus testas sėkmingas.\n\n";
-                        std::cout<< s1;
                     }
 
                     // Testuojame priskyrimo operatorius
@@ -365,10 +367,13 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     Student s6;
                     iss >> s6; // Įvesties operatorius
 
-                    if (!(s6.getFirstName() == expectedFirstName && s6.getLastName() == expectedLastName && s6.getExamResults() == expectedExamResults && s6.getHomeworkResults() == expectedHomeworkResults)) {
+                    if (!(s6.getFirstName() == expectedFirstName && s6.getLastName() == expectedLastName && s6.getExamResults() == expectedExamResults && s6.getHomeworkResults() == expectedHomeworkResults)) 
+                    {
                         std::cerr << "Įvesties operatoriaus testas nepavyko. \n\n";
                         return;
-                    } else {
+                    } 
+                    else 
+                    {
                         std::cout << "Įvesties operatoriaus testas sėkmingas.\n\n";
                     }
 
@@ -376,10 +381,13 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     std::string expectedOutput = "Martynas Kazlauskas 5 6 7 8 10";
                     std::stringstream ss;
                     ss << s6;
-                    if (ss.str() != expectedOutput) {
+                    if (ss.str() != expectedOutput) 
+                    {
                         std::cerr << "Išvesties operatoriaus testas nepavyko. \n\n";
                         return;
-                    } else {
+                    } 
+                    else 
+                    {
                         std::cout << "Išvesties operatoriaus testas sėkmingas.\n\n";
                     }
                     std::cout << "Testai baigti.\n\n";
