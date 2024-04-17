@@ -57,7 +57,7 @@ Tada gausite tokį rezultatą:
 
 - Paleiskite programą naudodami šią komandą:
 ```
-./v1
+./v1_5
 ```
 
 ### Valymo instrukcija
@@ -93,7 +93,7 @@ make distclean
   - Yra 3 skirtingos strategijos duomenų skirstymui.
   - Naudojama klasė, saugojant studentų duomenis.
   - Galima testuoti visus "Rule of five" konstruktorius ir I/O operatorius.
-  - Yra abstrakti klase Person, Student klase yra sios klases isvestine klase.
+  - Yra abstrakti klasė Person. Student klasė yra Person klasės išvestinė klasė.
 - Norėdami baigti darbą su programa, pasirinkite atitinkamą skaičių.
 
 ## Klasės naudojami "Rule of five" ir I/O operatoriai.
