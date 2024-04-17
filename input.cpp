@@ -396,7 +396,6 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                 {
                     std::cerr << "Įvyko klaida: " << e.what() << '\n';
                 }
-                //std::cout << "Destruktorius buvo iškviestas " << Student::getNumDestructed() << " kartus(-ų).\n\n";
                 break;
             }
             case 9:

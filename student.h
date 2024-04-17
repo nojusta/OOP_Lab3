@@ -5,7 +5,7 @@
 
  //extern int numDestructed = 0;
 
-class Student : public Person { // klase Student
+class Student : public Person { // klase Student paveldi Person klase
 private:
     std::string firstName, lastName;
     std::vector<int> homeworkResults;
@@ -24,7 +24,6 @@ public:
 
     ~Student() { // destruktorius
         homeworkResults.clear();
-        //numDestructed++;
     } 
 
     // get'eriai
@@ -35,7 +34,6 @@ public:
     int getExamResults() const { return examResults; }
     int getExamGrade() const { return homeworkResults.back(); }
     void removeLastHomeworkGrade() { if (!homeworkResults.empty()) { homeworkResults.pop_back(); } }
-   // static int getNumDestructed() { return numDestructed; }
 
     // set'eriai
     void setFirstName(std::string firstName) { this->firstName = std::move(firstName); }

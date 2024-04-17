@@ -15,9 +15,10 @@
 
 class Person {
 public:
-    virtual ~Person() = default;
-    virtual std::string getFirstName() const = 0;
-    virtual std::string getLastName() const = 0;
+    virtual ~Person() = default; // destruktorius
+    // get'eriai
+    virtual std::string getFirstName() const = 0; 
+    virtual std::string getLastName() const = 0; 
     virtual std::string getName() const = 0;
 };
 
