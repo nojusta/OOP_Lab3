@@ -1,4 +1,4 @@
-# v1.2
+# v1.5
 
 ## Diegimo instrukcija
 
@@ -23,7 +23,7 @@ CXX = g++
 CXXFLAGS = -std=c++14 -O3
 
 # Vykdymo failo pavadinimas
-TARGET = v1_2
+TARGET = v1_5
 
 # Šaltinio failai
 SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp
@@ -93,6 +93,7 @@ make distclean
   - Yra 3 skirtingos strategijos duomenų skirstymui.
   - Naudojama klasė, saugojant studentų duomenis.
   - Galima testuoti visus "Rule of five" konstruktorius ir I/O operatorius.
+  - Yra abstrakti klase Person, Student klase yra sios klases isvestine klase.
 - Norėdami baigti darbą su programa, pasirinkite atitinkamą skaičių.
 
 ## Klasės naudojami "Rule of five" ir I/O operatoriai.
@@ -392,3 +393,5 @@ Bendra išvada yra, kad konteinerio tipo ir strategijos pasirinkimas gali turėt
 - v1.0: Yra 3 skirtingos konteinerių testavimo strategijos ir galimybė sukompiliuoti programą, naudojant Makefile.
 
 - v1.1: Naudojamos klasės su destruktoriais ir konstruktoriais, vietoj struktūrų.
+
+- v1.2: Prideda galimybė testuoti visus "Rule of five" konstruktorius ir I/O operatorius.
