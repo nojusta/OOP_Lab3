@@ -4,7 +4,7 @@
 
 - Atsisiųskite projekto kodą iš GitHub naudodami `git clone` komandą su projekto URL:
 ```
-git clone https://github.com/nojusta/LabDarbas_nr1
+git clone https://github.com/nojusta/LabDarbas_nr2
 ```
 
 - Pereikite į projekto katalogą naudodami cd komandą. Pavyzdžiui:
@@ -20,32 +20,32 @@ cd *projekto vieta kompiuteryje*
 CXX = g++
 
 # Kompiliatoriaus parametrai
-CXXFLAGS = -std=c++14
+CXXFLAGS = -std=c++14 -O3
 
 # Vykdymo failo pavadinimas
-TARGET = v1
+TARGET = v1_2
 
 # Šaltinio failai
-SRCS = main.cpp functionality.cpp input.cpp calculations.cpp
+SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp
 
 # Objektų failai
 OBJS = $(SRCS:.cpp=.o)
 
 # Taisyklė programa susieti
 $(TARGET): $(OBJS)
-    $(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 # Taisyklė kompiliuoti šaltinio failus
 .cpp.o:
-    $(CXX) $(CXXFLAGS) -c $<  -o $@
+	$(CXX) $(CXXFLAGS) -c $<  -o $@
 
 # Taisyklė išvalyti tarpinius failus
 clean:
-    $(RM) $(OBJS)
+	$(RM) $(OBJS)
 
 # Taisyklė išvalyti viską
 distclean: clean
-    $(RM) $(TARGET)
+	$(RM) $(TARGET)
 ```
 - Sukompiliuokite programą naudodami make komandą:
 ```
@@ -392,4 +392,3 @@ Bendra išvada yra, kad konteinerio tipo ir strategijos pasirinkimas gali turėt
 - v1.0: Yra 3 skirtingos konteinerių testavimo strategijos ir galimybė sukompiliuoti programą, naudojant Makefile.
 
 - v1.1: Naudojamos klasės su destruktoriais ir konstruktoriais, vietoj struktūrų.
-  
