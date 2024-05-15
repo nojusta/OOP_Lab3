@@ -2,29 +2,51 @@
 CXX = g++
 
 # Kompiliatoriaus parametrai
-CXXFLAGS = -std=c++14 -O3
+CXXFLAGS = -std=c++14 -O3 -mmacosx-version-min=14.3
 
-# Vykdymo failo pavadinimas
-TARGET = v1_5
+# Vykdomo failo pavadinimas
+TARGET = v3
 
-# Šaltinio failai
+# Source failai
 SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp
 
-# Objektų failai
+# Object failai
 OBJS = $(SRCS:.cpp=.o)
+
+# Google Test biblioteka
+GTEST = /usr/local/lib/libgtest.a /usr/local/lib/libgtest_main.a
+
+# Bibliotekos
+LIBS = $(GTEST)
+
+# Testuojami failai
+TEST_SRCS = myVector_test.cpp student_test.cpp
+
+# Testuojami objekto failai
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
+
+# Testuojamo failo pavadinimas
+TEST_TARGET = myVector_test student_test
 
 # Taisyklė programa susieti
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Taisyklė kompiliuoti šaltinio failus
+# Taisyklė testams susieti
+myVector_test: student.o myVector_test.o
+	$(CXX) $(CXXFLAGS) -o myVector_test student.o myVector_test.o $(LIBS)
+
+student_test: student.o student_test.o
+	$(CXX) $(CXXFLAGS) -o student_test student.o student_test.o $(LIBS)
+
+# Taisyklė kompiliuoti failus
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $<  -o $@
 
 # Taisyklė išvalyti tarpinius failus
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(TEST_OBJS)
 
 # Taisyklė išvalyti viską
 distclean: clean
-	$(RM) $(TARGET)
+	$(RM) $(TARGET) myVector_test student_test
