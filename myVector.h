@@ -3,7 +3,7 @@
 #include <memory> // allocator_traits tipams
 
 template <typename T, typename Allocator = std::allocator<T>>
-class MyVector {
+class MyVector {    
 public:
     // Member types
     using value_type = T;
@@ -31,5 +31,26 @@ public:
     // Destructor
     ~MyVector() {
         allocator_type().deallocate(arr, capacity);
+    }
+    reference at(size_type pos) {
+        if (pos >= current) {
+            throw std::out_of_range("MyVector::at");
+        }
+        return arr[pos];
+    }
+
+    const_reference at(size_type pos) const {
+        if (pos >= current) {
+            throw std::out_of_range("MyVector::at");
+        }
+        return arr[pos];
+    }
+
+    reference operator[](size_type pos) {
+        return arr[pos];
+    }
+
+    const_reference operator[](size_type pos) const {
+        return arr[pos];
     }
 };
