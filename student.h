@@ -3,8 +3,6 @@
 
 #include "person.h"
 
- //extern int numDestructed = 0;
-
 class Student : public Person { // klase Student paveldi Person klase
 private:
     std::string firstName, lastName;
