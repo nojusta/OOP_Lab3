@@ -25,6 +25,8 @@ private:
     size_type current;
 
 public:
+    // Member functions
+
     // Constructor
     MyVector() : arr(allocator_type().allocate(1)), capacity(1), current(0) {}
 
@@ -202,7 +204,7 @@ public:
     }
 
     // capacity
-    size_type capacity() const noexcept {
+    size_type get_capacity() const noexcept {
         return capacity;
     }
 
@@ -323,3 +325,59 @@ public:
         std::swap(capacity, other.capacity);
     }
 };
+
+// Non-member functions
+
+// operator==
+template <typename T>
+bool operator==(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+    return lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+// operator!=
+template <typename T>
+bool operator!=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+    return !(lhs == rhs);
+}
+
+// operator<
+template <typename T>
+bool operator<(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+// operator<=
+template <typename T>
+bool operator<=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+    return !(rhs < lhs);
+}
+
+// operator>
+template <typename T>
+bool operator>(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+    return rhs < lhs;
+}
+
+// operator>=
+template <typename T>
+bool operator>=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+    return !(lhs < rhs);
+}
+
+// std::swap
+template <typename T>
+void swap(MyVector<T>& lhs, MyVector<T>& rhs) noexcept {
+    lhs.swap(rhs);
+}
+
+// erase
+template <typename T, typename Pred>
+void erase(MyVector<T>& vec, Pred pred) {
+    vec.erase(std::remove_if(vec.begin(), vec.end(), pred), vec.end());
+}
+
+// erase_if
+template <typename T, typename Pred>
+void erase_if(MyVector<T>& vec, Pred pred) {
+    vec.erase(std::remove_if(vec.begin(), vec.end(), pred), vec.end());
+}
