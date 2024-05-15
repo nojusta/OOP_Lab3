@@ -555,6 +555,7 @@ void openFiles(const vector<string> &filenames, Container &students, bool Median
 template void openFiles(const std::vector<std::string> &filenames, std::vector<Student> &students, bool Median, int strategy);
 template void openFiles(const std::vector<std::string> &filenames, std::deque<Student> &students, bool Median, int strategy);
 template void openFiles(const std::vector<std::string> &filenames, std::list<Student> &students, bool Median, int strategy);
+template void openFiles(const std::vector<std::string> &filenames, MyVector<Student> &students, bool Median, int strategy);
 
 void input(Student &data, bool &Median)
 {
