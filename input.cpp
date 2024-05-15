@@ -414,6 +414,7 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
 template void processStudents(std::vector<Student> &students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
 template void processStudents(std::deque<Student> &students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
 template void processStudents(std::list<Student> &students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
+template void processStudents(MyVector<Student> &students, bool Median, std::chrono::high_resolution_clock::time_point startTotal);
 
 int Menu()
 {
@@ -468,6 +469,7 @@ void readData(ifstream& fin, Container& students) {
 template void readData(std::ifstream &fin, std::vector<Student> &students);
 template void readData(std::ifstream &fin, std::deque<Student> &students);
 template void readData(std::ifstream &fin, std::list<Student> &students);
+template void readData(std::ifstream &fin, MyVector<Student> &students);
 
 template <typename Container>
 void openFiles(const vector<string> &filenames, Container &students, bool Median, int strategy)

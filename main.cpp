@@ -9,6 +9,7 @@
 std::vector<Student> studentVector;
 std::deque<Student> studentDeque;
 std::list<Student> studentList;
+MyVector<Student> studentMyVector;
 
 int main() {
     auto startTotal = std::chrono::high_resolution_clock::now();
@@ -28,7 +29,9 @@ int main() {
         case 3:
             processStudents(studentList, Median, startTotal);
             break;
+        case 4:
+            processStudents(studentMyVector, Median, startTotal);
+            break;
     }
-
     return 0; 
 }

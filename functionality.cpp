@@ -12,11 +12,12 @@ int getContainerTypeFromUser() {
     cout << "1 - Vector\n";
     cout << "2 - Deque\n";
     cout << "3 - List\n";
+    cout << "4 - STL Vector\n";
     cout << "\nPasirinkite: ";
     cin >> containerType;
 
-    while (containerType < 1 || containerType > 3) {
-        cout << "Netinkama įvestis, įveskite skaičių tarp 1 ir 3. \n";
+    while (containerType < 1 || containerType > 4) {
+        cout << "Netinkama įvestis, įveskite skaičių tarp 1 ir 4. \n";
         cin >> containerType;
     }
 
@@ -131,3 +132,4 @@ void outputToFile(const Container& students, size_t m, bool Median, const std::s
 template void outputToFile<std::vector<Student>>(const std::vector<Student>&, size_t, bool, const std::string&);
 template void outputToFile<std::deque<Student>>(const std::deque<Student>&, size_t, bool, const std::string&);
 template void outputToFile<std::list<Student>>(const std::list<Student>&, size_t, bool, const std::string&);
+template void outputToFile<MyVector<Student>>(const MyVector<Student>&, size_t, bool, const std::string&);
