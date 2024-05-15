@@ -216,5 +216,110 @@ public:
             capacity = current;
         }
     }
-    
+    // clear
+    void clear() noexcept {
+        allocator_type().deallocate(arr, capacity);
+        arr = allocator_type().allocate(0);
+        current = 0;
+        capacity = 0;
+    }
+
+    // insert
+    iterator insert(const_iterator pos, const T& value) {
+        size_type index = std::distance(cbegin(), pos);
+        if (current == capacity) {
+            reserve(capacity == 0 ? 1 : capacity * 2);
+        }
+        std::move_backward(arr + index, arr + current, arr + current + 1);
+        arr[index] = value;
+        ++current;
+        return arr + index;
+    }
+
+    // insert_range
+    template <typename InputIt>
+    void insert(const_iterator pos, InputIt first, InputIt last) {
+        size_type index = std::distance(cbegin(), pos);
+        size_type count = std::distance(first, last);
+        if (current + count > capacity) {
+            reserve(current + count);
+        }
+        std::move_backward(arr + index, arr + current, arr + current + count);
+        std::copy(first, last, arr + index);
+        current += count;
+    }
+
+    // emplace
+    template <typename... Args>
+    iterator emplace(const_iterator pos, Args&&... args) {
+        size_type index = std::distance(cbegin(), pos);
+        if (current == capacity) {
+            reserve(capacity == 0 ? 1 : capacity * 2);
+        }
+        std::move_backward(arr + index, arr + current, arr + current + 1);
+        arr[index] = T(std::forward<Args>(args)...);
+        ++current;
+        return arr + index;
+    }
+
+    // erase
+    iterator erase(const_iterator pos) {
+        size_type index = std::distance(cbegin(), pos);
+        std::move(arr + index + 1, arr + current, arr + index);
+        --current;
+        return arr + index;
+    }
+
+    // push_back
+    void push_back(const T& value) {
+        if (current == capacity) {
+            reserve(capacity == 0 ? 1 : capacity * 2);
+        }
+        arr[current] = value;
+        ++current;
+    }
+
+    // emplace_back
+    template <typename... Args>
+    void emplace_back(Args&&... args) {
+        if (current == capacity) {
+            reserve(capacity == 0 ? 1 : capacity * 2);
+        }
+        arr[current] = T(std::forward<Args>(args)...);
+        ++current;
+    }
+
+    // append_range
+    template <typename InputIt>
+    void append_range(InputIt first, InputIt last) {
+        size_type count = std::distance(first, last);
+        if (current + count > capacity) {
+            reserve(current + count);
+        }
+        std::copy(first, last, arr + current);
+        current += count;
+    }
+
+    // pop_back
+    void pop_back() {
+        --current;
+    }
+
+    // resize
+    void resize(size_type count, T value = T()) {
+        if (count > capacity) {
+            reserve(count);
+        }
+        if (count > current) {
+            std::fill(arr + current, arr + count, value);
+        }
+        current = count;
+    }
+
+    // swap
+    void swap(MyVector& other) noexcept {
+        std::swap(arr, other.arr);
+        std::swap(current, other.current);
+        std::swap(capacity, other.capacity);
+    }
 };
