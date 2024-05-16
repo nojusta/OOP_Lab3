@@ -1,9 +1,12 @@
-#include <cstddef> // size_t ir ptrdiff_t tipams
-#include <iterator> // reverse_iterator tipui
-#include <memory> // allocator_traits tipams
+#include <cstddef>
+#include <iterator>
+#include <memory>
+#include <stdexcept>
+#include <algorithm>
+#include <utility>
 
 template <typename T, typename Allocator = std::allocator<T>>
-class MyVector {    
+class MyVector {
 public:
     // Member types
     using value_type = T;
@@ -20,22 +23,84 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 private:
+    allocator_type allocator;
     pointer arr;
     size_type capacity;
     size_type current;
 
-public:
-    // Member functions
+    void destroy_elements() {
+        for (size_type i = 0; i < current; ++i) {
+            std::allocator_traits<Allocator>::destroy(allocator, arr + i);
+        }
+        current = 0;
+    }
 
+public:
     // Constructor
     MyVector() : arr(nullptr), capacity(0), current(0) {}
 
     // Destructor
     ~MyVector() {
-        allocator_type().deallocate(arr, capacity);
+        destroy_elements();
+        if (arr) {
+            allocator.deallocate(arr, capacity);
+        }
     }
 
-    // at
+    // Copy constructor
+    MyVector(const MyVector& other) : allocator(other.allocator), arr(nullptr), capacity(0), current(0) {
+        if (other.current > 0) {
+            arr = allocator.allocate(other.capacity);
+            try {
+                for (current = 0; current < other.current; ++current) {
+                    std::allocator_traits<Allocator>::construct(allocator, arr + current, other.arr[current]);
+                }
+                capacity = other.capacity;
+            } catch (...) {
+                destroy_elements();
+                allocator.deallocate(arr, other.capacity);
+                throw;
+            }
+        }
+    }
+
+    // Copy assignment operator
+    MyVector& operator=(const MyVector& other) {
+        if (this != &other) {
+            MyVector temp(other);
+            swap(temp);
+        }
+        return *this;
+    }
+
+    // Move constructor
+    MyVector(MyVector&& other) noexcept : allocator(std::move(other.allocator)), arr(other.arr), capacity(other.capacity), current(other.current) {
+        other.arr = nullptr;
+        other.capacity = 0;
+        other.current = 0;
+    }
+
+    // Move assignment operator
+    MyVector& operator=(MyVector&& other) noexcept {
+        if (this != &other) {
+            destroy_elements();
+            if (arr) {
+                allocator.deallocate(arr, capacity);
+            }
+
+            allocator = std::move(other.allocator);
+            arr = other.arr;
+            capacity = other.capacity;
+            current = other.current;
+
+            other.arr = nullptr;
+            other.capacity = 0;
+            other.current = 0;
+        }
+        return *this;
+    }
+
+    // Element access
     reference at(size_type pos) {
         if (pos >= current) {
             throw std::out_of_range("MyVector::at");
@@ -50,7 +115,6 @@ public:
         return arr[pos];
     }
 
-    // operator[]
     reference operator[](size_type pos) {
         return arr[pos];
     }
@@ -59,59 +123,11 @@ public:
         return arr[pos];
     }
 
-    // Copy assignment operator
-    MyVector& operator=(const MyVector& other) {
-        if (this == &other) {
-            return *this;
-        }
-        if (this != &other) {
-            allocator_type().deallocate(arr, capacity);
-            arr = allocator_type().allocate(other.capacity);
-            capacity = other.capacity;
-            current = other.current;
-            std::copy(other.arr, other.arr + other.current, arr);
-        }
-        return *this;
-    }
-
-    // Copy constructor
-    MyVector(const MyVector& other) {
-        arr = allocator_type().allocate(other.capacity);
-        capacity = other.capacity;
-        current = other.current;
-        std::copy(other.arr, other.arr + other.current, arr);
-    }
-
-    // assign
-    void assign(size_type count, const T& value) {
-        if (count > capacity) {
-            allocator_type().deallocate(arr, capacity);
-            arr = allocator_type().allocate(count);
-            capacity = count;
-        }
-        current = count;
-        std::fill(arr, arr + count, value);
-    }
-
-    // assign_range
-    template <typename InputIt>
-    void assign(InputIt first, InputIt last) {
-        size_type count = std::distance(first, last);
-        if (count > capacity) {
-            allocator_type().deallocate(arr, capacity);
-            arr = allocator_type().allocate(count);
-            capacity = count;
-        }
-        current = count;
-        std::copy(first, last, arr);
-    }
-
     // get_allocator
     allocator_type get_allocator() const noexcept {
         return allocator_type();
     }
 
-    // front
     reference front() {
         return arr[0];
     }
@@ -120,7 +136,6 @@ public:
         return arr[0];
     }
 
-    // back
     reference back() {
         return arr[current - 1];
     }
@@ -129,7 +144,6 @@ public:
         return arr[current - 1];
     }
 
-    // data
     T* data() noexcept {
         return arr;
     }
@@ -138,7 +152,7 @@ public:
         return arr;
     }
 
-    // begin
+    // Iterators
     iterator begin() noexcept {
         return arr;
     }
@@ -151,7 +165,6 @@ public:
         return arr;
     }
 
-    // end
     iterator end() noexcept {
         return arr + current;
     }
@@ -164,7 +177,6 @@ public:
         return arr + current;
     }
 
-    // rbegin
     reverse_iterator rbegin() noexcept {
         return reverse_iterator(end());
     }
@@ -177,7 +189,6 @@ public:
         return const_reverse_iterator(end());
     }
 
-    // rend
     reverse_iterator rend() noexcept {
         return reverse_iterator(begin());
     }
@@ -190,78 +201,122 @@ public:
         return const_reverse_iterator(begin());
     }
 
-    // empty
+    // Capacity
     bool empty() const noexcept {
         return current == 0;
     }
 
-    // size
     size_type size() const noexcept {
         return current;
     }
 
-    // max_size
     size_type max_size() const noexcept {
-        return allocator_type().max_size();
+        return allocator.max_size();
     }
 
-    // reserve
     void reserve(size_type new_cap) {
         if (new_cap > capacity) {
-            T* new_arr = allocator_type().allocate(new_cap);
-            std::copy(arr, arr + current, new_arr);
-            allocator_type().deallocate(arr, capacity);
+            pointer new_arr = allocator.allocate(new_cap);
+            try {
+                for (size_type i = 0; i < current; ++i) {
+                    std::allocator_traits<Allocator>::construct(allocator, new_arr + i, std::move_if_noexcept(arr[i]));
+                }
+            } catch (...) {
+                for (size_type i = 0; i < current; ++i) {
+                    std::allocator_traits<Allocator>::destroy(allocator, new_arr + i);
+                }
+                allocator.deallocate(new_arr, new_cap);
+                throw;
+            }
+            destroy_elements();
+            allocator.deallocate(arr, capacity);
             arr = new_arr;
             capacity = new_cap;
         }
     }
 
-    // capacity
     size_type getCapacity() const noexcept {
         return capacity;
     }
 
-    // shrink_to_fit
     void shrink_to_fit() {
         if (capacity > current) {
-            T* new_arr = allocator_type().allocate(current);
-            std::copy(arr, arr + current, new_arr);
-            allocator_type().deallocate(arr, capacity);
+            pointer new_arr = allocator.allocate(current);
+            try {
+                for (size_type i = 0; i < current; ++i) {
+                    std::allocator_traits<Allocator>::construct(allocator, new_arr + i, std::move_if_noexcept(arr[i]));
+                }
+            } catch (...) {
+                for (size_type i = 0; i < current; ++i) {
+                    std::allocator_traits<Allocator>::destroy(allocator, new_arr + i);
+                }
+                allocator.deallocate(new_arr, current);
+                throw;
+            }
+            destroy_elements();
+            allocator.deallocate(arr, capacity);
             arr = new_arr;
             capacity = current;
         }
     }
-    // clear
+
+    // Modifiers
     void clear() noexcept {
-        allocator_type().deallocate(arr, capacity);
-        arr = allocator_type().allocate(0);
-        current = 0;
-        capacity = 0;
+        destroy_elements();
     }
 
-    // insert
+    void push_back(const T& value) {
+        if (current == capacity) {
+            reserve(capacity == 0 ? 1 : capacity * 2);
+        }
+        std::allocator_traits<Allocator>::construct(allocator, arr + current, value);
+        ++current;
+    }
+
+    void pop_back() {
+        if (current > 0) {
+            --current;
+            std::allocator_traits<Allocator>::destroy(allocator, arr + current);
+        } else {
+            throw std::out_of_range("Cannot pop_back from an empty MyVector");
+        }
+    }
+
+    void resize(size_type count, T value = T()) {
+        if (count > current) {
+            if (count > capacity) {
+                reserve(count);
+            }
+            for (size_type i = current; i < count; ++i) {
+                std::allocator_traits<Allocator>::construct(allocator, arr + i, value);
+            }
+        } else {
+            for (size_type i = count; i < current; ++i) {
+                std::allocator_traits<Allocator>::destroy(allocator, arr + i);
+            }
+        }
+        current = count;
+    }
+
+    void swap(MyVector& other) noexcept {
+        std::swap(arr, other.arr);
+        std::swap(capacity, other.capacity);
+        std::swap(current, other.current);
+        std::swap(allocator, other.allocator);
+    }
+
+    // Insertion and deletion
     iterator insert(const_iterator pos, const T& value) {
         size_type index = std::distance(cbegin(), pos);
         if (current == capacity) {
             reserve(capacity == 0 ? 1 : capacity * 2);
         }
-        std::move_backward(arr + index, arr + current, arr + current + 1);
-        arr[index] = value;
+        if (index < current) {
+            std::move_backward(arr + index, arr + current, arr + current + 1);
+        }
+        std::allocator_traits<Allocator>::construct(allocator, arr + index, value);
         ++current;
         return arr + index;
-    }
-
-    // insert_range
-    template <typename InputIt>
-    void insert(const_iterator pos, InputIt first, InputIt last) {
-        size_type index = std::distance(cbegin(), pos);
-        size_type count = std::distance(first, last);
-        if (current + count > capacity) {
-            reserve(current + count);
-        }
-        std::move_backward(arr + index, arr + current, arr + current + count);
-        std::copy(first, last, arr + index);
-        current += count;
     }
 
     // emplace
@@ -277,126 +332,107 @@ public:
         return arr + index;
     }
 
-    // erase
     iterator erase(const_iterator pos) {
         size_type index = std::distance(cbegin(), pos);
+        std::allocator_traits<Allocator>::destroy(allocator, arr + index);
         std::move(arr + index + 1, arr + current, arr + index);
         --current;
         return arr + index;
     }
 
-    // push_back
-    void push_back(const T& value) {
-        if (current == capacity) {
-            reserve(capacity == 0 ? 1 : capacity * 2);
+    // Range operations
+    template <typename InputIt>
+    void assign(InputIt first, InputIt last) {
+        size_type count = std::distance(first, last);
+        if (count > capacity) {
+            clear();
+            allocator.deallocate(arr, capacity);
+            arr = allocator.allocate(count);
+            capacity = count;
         }
-        arr[current] = value;
-        ++current;
-    }
-
-    // pop_back
-    void pop_back() {
-        if (current > 0) {
-            --current;
-        } else {
-            throw std::out_of_range("Cannot pop_back from an empty MyVector");
+        for (current = 0; current < count; ++current, ++first) {
+            std::allocator_traits<Allocator>::construct(allocator, arr + current, *first);
         }
     }
 
-    // emplace_back
+    void assign(size_type count, const T& value) {
+        if (count > capacity) {
+            clear();
+            allocator.deallocate(arr, capacity);
+            arr = allocator.allocate(count);
+            capacity = count;
+        }
+        for (current = 0; current < count; ++current) {
+            std::allocator_traits<Allocator>::construct(allocator, arr + current, value);
+        }
+    }
+
+    // Additional functions
     template <typename... Args>
     void emplace_back(Args&&... args) {
         if (current == capacity) {
             reserve(capacity == 0 ? 1 : capacity * 2);
         }
-        arr[current] = T(std::forward<Args>(args)...);
+        std::allocator_traits<Allocator>::construct(allocator, arr + current, std::forward<Args>(args)...);
         ++current;
     }
 
-    // append_range
     template <typename InputIt>
     void append_range(InputIt first, InputIt last) {
         size_type count = std::distance(first, last);
         if (current + count > capacity) {
             reserve(current + count);
         }
-        std::copy(first, last, arr + current);
-        current += count;
-    }
-
-    // resize
-    void resize(size_type count, T value = T()) {
-        if (count > capacity) {
-            reserve(count);
+        for (; first != last; ++first, ++current) {
+            std::allocator_traits<Allocator>::construct(allocator, arr + current, *first);
         }
-        if (count > current) {
-            std::fill(arr + current, arr + count, value);
-        }
-        current = count;
-    }
-
-    // swap
-    void swap(MyVector& other) noexcept {
-        std::swap(arr, other.arr);
-        std::swap(capacity, other.capacity);
-        std::swap(current, other.current);
     }
 };
 
 // Non-member functions
-
-// operator==
-template <typename T>
-bool operator==(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+template <typename T, typename Allocator>
+bool operator==(const MyVector<T, Allocator>& lhs, const MyVector<T, Allocator>& rhs) {
     return lhs.size() == rhs.size() && std::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 
-// operator!=
-template <typename T>
-bool operator!=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+template <typename T, typename Allocator>
+bool operator!=(const MyVector<T, Allocator>& lhs, const MyVector<T, Allocator>& rhs) {
     return !(lhs == rhs);
 }
 
-// operator<
-template <typename T>
-bool operator<(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+template <typename T, typename Allocator>
+bool operator<(const MyVector<T, Allocator>& lhs, const MyVector<T, Allocator>& rhs) {
     return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
-// operator<=
-template <typename T>
-bool operator<=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+template <typename T, typename Allocator>
+bool operator<=(const MyVector<T, Allocator>& lhs, const MyVector<T, Allocator>& rhs) {
     return !(rhs < lhs);
 }
 
-// operator>
-template <typename T>
-bool operator>(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+template <typename T, typename Allocator>
+bool operator>(const MyVector<T, Allocator>& lhs, const MyVector<T, Allocator>& rhs) {
     return rhs < lhs;
 }
 
-// operator>=
-template <typename T>
-bool operator>=(const MyVector<T>& lhs, const MyVector<T>& rhs) {
+template <typename T, typename Allocator>
+bool operator>=(const MyVector<T, Allocator>& lhs, const MyVector<T, Allocator>& rhs) {
     return !(lhs < rhs);
 }
 
-// std::swap
 namespace std {
-    template <typename T>
-    void swap(MyVector<T>& lhs, MyVector<T>& rhs) noexcept {
+    template <typename T, typename Allocator>
+    void swap(MyVector<T, Allocator>& lhs, MyVector<T, Allocator>& rhs) noexcept {
         lhs.swap(rhs);
     }
 }
 
-// erase
-template <typename T, typename Pred>
-void erase(MyVector<T>& vec, Pred pred) {
+template <typename T, typename Allocator, typename Pred>
+void erase(MyVector<T, Allocator>& vec, Pred pred) {
     vec.erase(std::remove_if(vec.begin(), vec.end(), pred), vec.end());
 }
 
-// erase_if
-template <typename T, typename Pred>
-void erase_if(MyVector<T>& vec, Pred pred) {
+template <typename T, typename Allocator, typename Pred>
+void erase_if(MyVector<T, Allocator>& vec, Pred pred) {
     vec.erase(std::remove_if(vec.begin(), vec.end(), pred), vec.end());
 }
