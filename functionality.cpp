@@ -12,7 +12,7 @@ int getContainerTypeFromUser() {
     cout << "1 - Vector\n";
     cout << "2 - Deque\n";
     cout << "3 - List\n";
-    cout << "4 - STL Vector\n";
+    cout << "4 - MyVector\n";
     cout << "\nPasirinkite: ";
     cin >> containerType;
 
