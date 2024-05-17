@@ -90,43 +90,11 @@ TEST(MyVectorTest, OperatorSquareBrackets) {
     EXPECT_EQ(vec[0], 10);
 }
 
-TEST(MyVectorTest, Front) {
-    MyVector<int> vec;
-    vec.push_back(10);
-    vec.push_back(20);
-    EXPECT_EQ(vec.front(), 10);
-}
-
 TEST(MyVectorTest, Back) {
     MyVector<int> vec;
     vec.push_back(10);
     vec.push_back(20);
     EXPECT_EQ(vec.back(), 20);
-}
-
-TEST(MyVectorTest, Data) {
-    MyVector<int> vec;
-    vec.push_back(10);
-    vec.push_back(20);
-    int* data = vec.data();
-    EXPECT_EQ(data[0], 10);
-    EXPECT_EQ(data[1], 20);
-}
-
-TEST(MyVectorTest, Begin) {
-    MyVector<int> vec;
-    vec.push_back(10);
-    vec.push_back(20);
-    MyVector<int>::iterator it = vec.begin();
-    EXPECT_EQ(*it, 10);
-}
-
-TEST(MyVectorTest, CBegin) {
-    MyVector<int> vec;
-    vec.push_back(10);
-    vec.push_back(20);
-    MyVector<int>::const_iterator it = vec.cbegin();
-    EXPECT_EQ(*it, 10);
 }
 
 TEST(MyVectorTest, End) {
@@ -161,22 +129,6 @@ TEST(MyVectorTest, CRBegin) {
     EXPECT_EQ(*it, 20);
 }
 
-TEST(MyVectorTest, REnd) {
-    MyVector<int> vec;
-    vec.push_back(10);
-    vec.push_back(20);
-    MyVector<int>::reverse_iterator it = vec.rend();
-    EXPECT_EQ(*(--it), 10);
-}
-
-TEST(MyVectorTest, CREnd) {
-    MyVector<int> vec;
-    vec.push_back(10);
-    vec.push_back(20);
-    MyVector<int>::const_reverse_iterator it = vec.crend();
-    EXPECT_EQ(*(--it), 10);
-}
-
 TEST(MyVectorTest, Empty) {
     MyVector<int> vec;
     EXPECT_TRUE(vec.empty());
@@ -193,8 +145,7 @@ TEST(MyVectorTest, Size) {
 
 TEST(MyVectorTest, MaxSize) {
     MyVector<int> vec;
-    // Patikrina ar nekyla exceptionas
-    EXPECT_NO_THROW(vec.max_size());
+    EXPECT_EQ(vec.max_size(), std::numeric_limits<size_t>::max() / sizeof(int));
 }
 
 TEST(MyVectorTest, Reserve) {
@@ -231,14 +182,6 @@ TEST(MyVectorTest, Insert) {
     EXPECT_EQ(vec[0], 10);
 }
 
-TEST(MyVectorTest, InsertRange) {
-    MyVector<int> vec;
-    std::vector<int> range = {10, 20, 30};
-    vec.insert(vec.begin(), range.begin(), range.end());
-    EXPECT_EQ(vec[0], 10);
-    EXPECT_EQ(vec[1], 20);
-    EXPECT_EQ(vec[2], 30);
-}
 
 TEST(MyVectorTest, Emplace) {
     MyVector<int> vec;

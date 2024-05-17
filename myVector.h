@@ -36,10 +36,10 @@ private:
     }
 
 public:
-    // Constructor
+    // Konstruktorius
     MyVector() : arr(nullptr), capacity(0), current(0) {}
 
-    // Destructor
+    // Destruktorius
     ~MyVector() {
         destroy_elements();
         if (arr) {
@@ -47,7 +47,6 @@ public:
         }
     }
 
-    // Copy constructor
     MyVector(const MyVector& other) : allocator(other.allocator), arr(nullptr), capacity(0), current(0) {
         if (other.current > 0) {
             arr = allocator.allocate(other.capacity);
@@ -64,7 +63,6 @@ public:
         }
     }
 
-    // Copy assignment operator
     MyVector& operator=(const MyVector& other) {
         if (this != &other) {
             MyVector temp(other);
@@ -73,14 +71,12 @@ public:
         return *this;
     }
 
-    // Move constructor
     MyVector(MyVector&& other) noexcept : allocator(std::move(other.allocator)), arr(other.arr), capacity(other.capacity), current(other.current) {
         other.arr = nullptr;
         other.capacity = 0;
         other.current = 0;
     }
 
-    // Move assignment operator
     MyVector& operator=(MyVector&& other) noexcept {
         if (this != &other) {
             destroy_elements();
@@ -100,7 +96,6 @@ public:
         return *this;
     }
 
-    // Element access
     reference at(size_type pos) {
         if (pos >= current) {
             throw std::out_of_range("MyVector::at");
@@ -123,7 +118,6 @@ public:
         return arr[pos];
     }
 
-    // get_allocator
     allocator_type get_allocator() const noexcept {
         return allocator_type();
     }
@@ -152,7 +146,6 @@ public:
         return arr;
     }
 
-    // Iterators
     iterator begin() noexcept {
         return arr;
     }
@@ -201,7 +194,6 @@ public:
         return const_reverse_iterator(begin());
     }
 
-    // Capacity
     bool empty() const noexcept {
         return current == 0;
     }
@@ -211,7 +203,7 @@ public:
     }
 
     size_type max_size() const noexcept {
-        return allocator.max_size();
+        return std::numeric_limits<size_t>::max() / sizeof(T);
     }
 
     void reserve(size_type new_cap) {
@@ -260,7 +252,6 @@ public:
         }
     }
 
-    // Modifiers
     void clear() noexcept {
         destroy_elements();
     }
@@ -305,7 +296,6 @@ public:
         std::swap(allocator, other.allocator);
     }
 
-    // Insertion and deletion
     iterator insert(const_iterator pos, const T& value) {
         size_type index = std::distance(cbegin(), pos);
         if (current == capacity) {
@@ -340,7 +330,6 @@ public:
         return arr + index;
     }
 
-    // Range operations
     template <typename InputIt>
     void assign(InputIt first, InputIt last) {
         size_type count = std::distance(first, last);
@@ -367,7 +356,6 @@ public:
         }
     }
 
-    // Additional functions
     template <typename... Args>
     void emplace_back(Args&&... args) {
         if (current == capacity) {
