@@ -303,11 +303,6 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
             {
                 try
                 { 
-                    // Person P; 
-                    // Jei atkomentuojame eilute virs sitos, gausime klaida, nes Person klase yra abstrakti
-                    
-                    // Testujame 'Rule of five' metodus
-                    // Testuojame konstruktorius
                     std::vector<int> homeworkResults = {5, 6, 7, 8};
                     Student s1("Martynas", "Kazlauskas", 10, homeworkResults);
                     Student s2(s1); // Kopijavimo konstruktorius
@@ -320,7 +315,6 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     {
                         std::cout << "\nKopijavimo konstruktoriaus testas sėkmingas.\n\n";
                     }
-
                     Student s3(std::move(s1)); // Perkėlimo konstruktorius
                     if (!(s3.getFirstName() == "Martynas" && s3.getLastName() == "Kazlauskas" && s3.getExamResults() == 10 && s3.getHomeworkResults() == homeworkResults))
                     {
@@ -331,7 +325,6 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     {
                         std::cout << "Perkėlimo konstruktoriaus testas sėkmingas.\n\n";
                     }
-
                     // Testuojame priskyrimo operatorius
                     Student s4;
                     s4 = s2; // Kopijavimo priskyrimo operatorius
@@ -356,17 +349,14 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     {
                         std::cout << "Perkėlimo priskyrimo operatoriaus testas sėkmingas.\n\n";
                     }
-
                     // Testuojame įvesties operatoriu
                     std::string expectedFirstName = "Martynas";
                     std::string expectedLastName = "Kazlauskas";
                     std::vector<int> expectedHomeworkResults = {5, 6, 7, 8};
                     int expectedExamResults = 10;
-
                     std::istringstream iss("Martynas Kazlauskas 5 6 7 8 10");
                     Student s6;
                     iss >> s6; // Įvesties operatorius
-
                     if (!(s6.getFirstName() == expectedFirstName && s6.getLastName() == expectedLastName && s6.getExamResults() == expectedExamResults && s6.getHomeworkResults() == expectedHomeworkResults)) 
                     {
                         std::cerr << "Įvesties operatoriaus testas nepavyko. \n\n";
@@ -376,7 +366,6 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                     {
                         std::cout << "Įvesties operatoriaus testas sėkmingas.\n\n";
                     }
-
                     // Testuojame išvesties operatorių
                     std::string expectedOutput = "Martynas Kazlauskas 5 6 7 8 10";
                     std::stringstream ss;
@@ -399,6 +388,20 @@ void processStudents(Container &students, bool Median, std::chrono::high_resolut
                 break;
             }
             case 9:
+            {
+                std::vector<unsigned int> sizes = {10000, 100000, 1000000, 10000000, 100000000};
+
+                for (unsigned int sz : sizes) {
+                    std::cout << "Testuojame su " << sz << " elementų.\n";
+
+                    testContainer<std::vector<int>>(sz, "std::vector");
+                    testContainer<MyVector<int>>(sz, "MyVector");
+
+                    std::cout << "\n";
+                }
+                break;
+            }
+            case 10:
             {
                 auto endTotal = chrono::high_resolution_clock::now();
                 chrono::duration<double> diffTotal = endTotal - startTotal;
@@ -426,15 +429,16 @@ int Menu()
     cout << "5 - Sugeneruoti penkis atsitiktinius studentų sąrašų failus\n";
     cout << "6 - Testuoti penkis atsitiktinius studentų sąrašų failus\n";
     cout << "7 - Išvedimas\n";
-    cout << "8 - 'Rule of five' + I/O operatorių Testavimas\n";
-    cout << "9 - Išjungti programą\n";
+    cout << "8 - 'Rule of five' + I/O operatorių testavimas\n";
+    cout << "9 - std::vector ir myVector spartos testavimas\n";
+    cout << "10 - Išjungti programą\n";
     cout << "\nĮveskite skaičių: ";
     cin >> number;
-    if (number < 1 || number > 9 || cin.fail())
+    if (number < 1 || number > 10 || cin.fail())
     {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        throw runtime_error("Netinkama įvestis, įveskite skaičių nuo 1 iki 9.");
+        throw runtime_error("Netinkama įvestis, įveskite skaičių nuo 1 iki 10.");
     }
     return number;
 }

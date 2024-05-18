@@ -17,5 +17,11 @@ void generateFile(int n);
 void outputToTerminal(const std::vector<Student>& studentsLow, const std::vector<Student>& studentsHigh, bool Median);
 template <typename Container>
 void outputToFile(const Container& students, size_t m, bool Median, const std::string& filename);
+template <typename T>
+size_t getCapacity(const std::vector<T>& container);
+template <typename T>
+size_t getCapacity(const MyVector<T>& container);
+template <typename Container>
+void testContainer(unsigned int sz, const std::string& containerName);
 
 #endif // FUNCTIONALITY_H

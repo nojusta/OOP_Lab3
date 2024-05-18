@@ -71,6 +71,36 @@ int isGrade(const string& prompt) {
     }
 }
 
+template <typename T>
+size_t getCapacity(const std::vector<T>& container) {
+    return container.capacity();
+}
+
+template <typename T>
+size_t getCapacity(const MyVector<T>& container) {
+    return container.getCapacity();
+}
+
+template <typename Container>
+void testContainer(unsigned int sz, const std::string& containerName) {
+    auto start = std::chrono::high_resolution_clock::now();
+    Container container;
+    unsigned int reallocations = 0;
+    for (int i = 1; i <= sz; ++i) {
+        if (container.size() == getCapacity(container)) {
+            reallocations++;
+        }
+        container.push_back(i);
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> diff = end - start;
+    std::cout << "Laikas užpildyti " << containerName << " su " << sz << " elementų: " << std::fixed << std::setprecision(6) << diff.count() << " s\n";
+    std::cout << "Atminties perskirstymų skaičius: " << reallocations << "\n\n";
+}
+
+template void testContainer<std::vector<int>>(unsigned int, const std::string&);
+template void testContainer<MyVector<int>>(unsigned int, const std::string&);
+
 void generateFile(int n) {
     auto start = std::chrono::high_resolution_clock::now(); 
 
