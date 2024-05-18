@@ -1,4 +1,4 @@
-![image](https://github.com/nojusta/OOP_Lab3/assets/148903463/b24d6a59-91f0-4f42-bd0d-c5420b62e61a)# v3.0
+# v3.0
 
 ## Diegimo instrukcija
 
@@ -192,6 +192,71 @@ Išvestis turėtų atrodyti maždaug taip:
 Išvestis turėtų atrodyti maždaug taip:
 
 ![Testavimo rezultatai](./Images/test_student.png)
+
+## MyVector funkcijos
+
+### push_back
+
+`push_back` funkcija prideda elementą į vektoriaus pabaigą. Jei vektorius yra pilnas (t.y., `current == capacity`), tai išplečia vektoriaus talpą dvigubai (`reserve(capacity == 0 ? 1 : capacity * 2)`), ir tada prideda elementą.
+
+```cpp
+void push_back(const T& value) {
+  if (current == capacity) {
+    reserve(capacity == 0 ? 1 : capacity * 2);
+  }
+  std::allocator_traits<Allocator>::construct(allocator, arr + current, value);
+  ++current;
+} 
+```
+
+### pop_back
+
+`pop_back` funkcija pašalina paskutinį elementą iš vektoriaus. Jei vektorius yra tuščias, išmeta `std::out_of_range` išimtį.
+
+```cpp
+void pop_back() {
+  if (current > 0) {
+    --current;
+    std::allocator_traits<Allocator>::destroy(allocator, arr + current);
+  } else {
+    throw std::out_of_range("Cannot pop_back from an empty MyVector");
+  }
+}
+```
+
+### clear
+
+`clear` funkcija pašalina visus elementus iš vektoriaus, palikdama jį tuščią.
+
+```cpp
+void clear() noexcept {
+        destroy_elements();
+    }
+```
+
+### empty 
+
+`empty` funkcija patikrina ar vektorius yra tuščias. Grąžina `true`, jei vektorius yra tuščias (`current == 0`), ir `false` priešingu atveju.
+
+```cpp
+bool empty() const noexcept {
+        return current == 0;
+    }
+```
+
+### swap
+
+`swap` funkcija sukeičia du vektorius. Apkeičia elementus, talpą, dabartinį dydį ir skiriamąją atmintį su kitu vektoriumi.
+
+```cpp
+void swap(MyVector& other) noexcept {
+        std::swap(arr, other.arr);
+        std::swap(current, other.current);
+        std::swap(capacity, other.capacity);
+        std::swap(allocator, other.allocator);
+    }
+```
+
 
 ## Klasės naudojami "Rule of five" ir I/O operatoriai.
 
