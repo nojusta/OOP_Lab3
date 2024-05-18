@@ -1,4 +1,4 @@
-# v3.0
+![image](https://github.com/nojusta/OOP_Lab3/assets/148903463/b24d6a59-91f0-4f42-bd0d-c5420b62e61a)# v3.0
 
 ## Diegimo instrukcija
 
@@ -150,7 +150,7 @@ Visi testavimai buvo atlliekami su konteinerių testavimo 1 strategija, naudojan
 <details>
     <summary>rezultatai</summary>
     
-    ![test_container_std](./Images/test_container_std.png)
+    ![container_std](./Images/container_std.png)
   </details>
 
 ### Naudojant MyVector konteinerį:
@@ -164,7 +164,7 @@ Visi testavimai buvo atlliekami su konteinerių testavimo 1 strategija, naudojan
 <details>
     <summary>rezultatai</summary>
     
-    ![test_container_vector](./Images/test_container_vector.png)
+    ![container_vector](https://github.com/nojusta/OOP_Lab3/blob/v3.0/Images/container_vector.png)
   </details>
 
 ### Išvados
