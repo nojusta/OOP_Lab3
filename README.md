@@ -1,10 +1,10 @@
-# v1.5
+# v3.0
 
 ## Diegimo instrukcija
 
 - Atsisiųskite projekto kodą iš GitHub naudodami `git clone` komandą su projekto URL:
 ```
-git clone https://github.com/nojusta/LabDarbas_nr2
+git clone https://github.com/nojusta/OOP_Lab3
 ```
 
 - Pereikite į projekto katalogą naudodami cd komandą. Pavyzdžiui:
@@ -20,32 +20,55 @@ cd *projekto vieta kompiuteryje*
 CXX = g++
 
 # Kompiliatoriaus parametrai
-CXXFLAGS = -std=c++14 -O3
+CXXFLAGS = -std=c++20 -O3 -mmacosx-version-min=14.3
 
-# Vykdymo failo pavadinimas
-TARGET = v1_5
+# Vykdomo failo pavadinimas
+TARGET = v3
 
-# Šaltinio failai
+# Source failai
 SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp
 
-# Objektų failai
+# Object failai
 OBJS = $(SRCS:.cpp=.o)
+
+# Google Test biblioteka
+GTEST = /usr/local/lib/libgtest.a /usr/local/lib/libgtest_main.a
+
+# Bibliotekos
+LIBS = $(GTEST)
+
+# Testuojami failai
+TEST_SRCS = myVector_test.cpp student_test.cpp
+
+# Testuojami objekto failai
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
+
+# Testuojamo failo pavadinimas
+TEST_TARGET = myVector_test student_test
 
 # Taisyklė programa susieti
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Taisyklė kompiliuoti šaltinio failus
+# Taisyklė testams susieti
+myVector_test: student.o myVector_test.o
+	$(CXX) $(CXXFLAGS) -o myVector_test student.o myVector_test.o $(LIBS)
+
+student_test: student.o student_test.o
+	$(CXX) $(CXXFLAGS) -o student_test student.o student_test.o $(LIBS)
+
+# Taisyklė kompiliuoti failus
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $<  -o $@
 
 # Taisyklė išvalyti tarpinius failus
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(TEST_OBJS)
 
 # Taisyklė išvalyti viską
 distclean: clean
-	$(RM) $(TARGET)
+	$(RM) $(TARGET) myVector_test student_test
+
 ```
 - Sukompiliuokite programą naudodami make komandą:
 ```
@@ -57,7 +80,7 @@ Tada gausite tokį rezultatą:
 
 - Paleiskite programą naudodami šią komandą:
 ```
-./v1_5
+./v3
 ```
 
 ### Valymo instrukcija
@@ -72,7 +95,7 @@ make distclean
 
 - Paleiskite programą naudodami šią komandą:
 ```
-./v1
+./v3
 ```
 - Programa pateiks meniu su įvairiomis funkcijomis. Pasirinkite funkciją įvedę atitinkamą numerį ir spauskite `Enter`.
 
@@ -94,7 +117,81 @@ make distclean
   - Naudojama klasė, saugojant studentų duomenis.
   - Galima testuoti visus "Rule of five" konstruktorius ir I/O operatorius.
   - Yra abstrakti klasė Person. Student klasė yra Person klasės išvestinė klasė.
+  - DoxyGen sugeneruota HTML/TEX formato dokumentacija.
+  - Atlikti unit testai su Google Test.
+  - Realizuota pilnavertė alternatyvą std::vector konteineriui - MyVector. MyVector turi visus Member tipus Member funkcijas, Non-member funkcijas reikalingas std::vector funkcionalumui.
 - Norėdami baigti darbą su programa, pasirinkite atitinkamą skaičių.
+
+## Efektyvumo/spartos analizė naudojant std::vector ir MyVector konteinerius.
+
+Visi testavimai buvo atlliekami naudojant O3 optimizavimo flag'ą.
+
+Matuojame kiek laiko užtrunka užpildyti konteinerius su 10000, 100000, 1000000, 10000000 ir 100000000 int elementų naudojant push_back() funkciją:
+
+![Testavimo rezultatai](./Images/test_container.png)
+
+### Išvados
+Visais atvejais MyVector konteineris yra greitesnis nei std::vector konteineris. Tai rodo, kad MyVector konteineris yra efektyvesnis nei std::vector konteineris, kai naudojama push_back() funkcija.
+
+Atminities paskirstymai yra panašūs, tačiau MyVector konteineris yra šiek tiek efektyvesnis nei std::vector konteineris.
+
+## Konteinerių testavimas naudojant duomenų failą su 100 000, 1 000 000 ir 10 000 000 studentų įrašų
+
+Visi testavimai buvo atlliekami su konteinerių testavimo 1 strategija, naudojant O3 optimizavimo flag'ą.
+
+### Naudojant std::vector tipo konteinerį:
+
+| Failo dydis | Skaitymo laikas | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+|-------------|-----------------|------------------|------------------|----------------|
+| 100 000     |      0.251s     |       0.027s     |      0.011s      |     0.290s     |
+| 1 000 000   |      2.112s     |       0.348s     |      0.235s      |     2.696s     |
+| 10 000 000  |      21.528s    |       5.458s     |      4.983s      |     31.970s    |
+
+<details>
+    <summary>rezultatai</summary>
+    
+    ![test_container_std](./Images/test_container_std.png)
+  </details>
+
+### Naudojant MyVector konteinerį:
+
+| Failo dydis | Skaitymo laikas | Rūšiavimo laikas | Skirstymo laikas | Veikimo laikas |
+|-------------|-----------------|------------------|------------------|----------------|
+| 100 000     |      0.249s     |       0.011s     |      0.004s      |     0.265s     |
+| 1 000 000   |      2.120s     |       0.004s     |      0.001s      |     2.126s     |
+| 10 000 000  |      21.223s    |       1.021s     |      1.021s      |     22.985s    |
+
+<details>
+    <summary>rezultatai</summary>
+    
+    ![test_container_vector](./Images/test_container_vector.png)
+  </details>
+
+### Išvados
+
+Visais atvejais MyVector konteineris yra greitesnis nei std::vector konteineris. Skirtumas ypatingai pasimato su didesniais duomenų kiekiais.
+
+## Unit testai naudojant Google Test.
+
+Šis projektas naudoja Google Test unit testavimui. Norėdami paleisti testus, sekite šiuos žingsnius:
+
+### MyVector konteinerio testavimas
+
+1. Sukurkite testavimo failą naudodami `make myVector_test`.
+2. Paleiskite testus su `./myVector_test`.
+
+Išvestis turėtų atrodyti maždaug taip:
+
+![Testavimo rezultatai](./Images/test_vector.png)
+
+### Studento klasės testavimas
+
+1. Sukurkite testavimo failą naudodami `make student_test`.
+2. Paleiskite testus su `./student_test`.
+
+Išvestis turėtų atrodyti maždaug taip:
+
+![Testavimo rezultatai](./Images/test_student.png)
 
 ## Klasės naudojami "Rule of five" ir I/O operatoriai.
 
@@ -395,3 +492,7 @@ Bendra išvada yra, kad konteinerio tipo ir strategijos pasirinkimas gali turėt
 - v1.1: Naudojamos klasės su destruktoriais ir konstruktoriais, vietoj struktūrų.
 
 - v1.2: Prideda galimybė testuoti visus "Rule of five" konstruktorius ir I/O operatorius.
+
+- v1.5: Abstrakti klasė Person. Student klasė yra Person klasės išvestinė klasė.
+
+- v2.0: Google test unit testai, DoxyGen TeX/html dokumentacija.
