@@ -1,0 +1,1760 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="lt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Laboratinis darbas Nr.3 (v3.0): MyVector&lt; T, Allocator &gt; Klasė Šablonas</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Laboratinis darbas Nr.3 (v3.0)
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Sugeneruota Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Paieška');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Vieši Tipai</a> &#124;
+<a href="#pub-methods">Vieši Metodai</a> &#124;
+<a href="class_my_vector-members.html">Visų narių sąrašas</a>  </div>
+  <div class="headertitle"><div class="title">MyVector&lt; T, Allocator &gt; Klasė Šablonas</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> konteineris, kurios funkcionalumas yra panašus į std::vector.  
+ <a href="#details">Daugiau...</a></p>
+
+<p><code>#include &lt;<a class="el" href="my_vector_8h_source.html">myVector.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Vieši Tipai</h2></td></tr>
+<tr class="memitem:aed75ba29fe8f3abff669b0f8950f847e" id="r_aed75ba29fe8f3abff669b0f8950f847e"><td class="memItemLeft" align="right" valign="top"><a id="aed75ba29fe8f3abff669b0f8950f847e" name="aed75ba29fe8f3abff669b0f8950f847e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = T</td></tr>
+<tr class="memdesc:aed75ba29fe8f3abff669b0f8950f847e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elementų tipas. <br /></td></tr>
+<tr class="separator:aed75ba29fe8f3abff669b0f8950f847e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae403ff61afaa58e816548d096793cce8" id="r_ae403ff61afaa58e816548d096793cce8"><td class="memItemLeft" align="right" valign="top"><a id="ae403ff61afaa58e816548d096793cce8" name="ae403ff61afaa58e816548d096793cce8"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>allocator_type</b> = Allocator</td></tr>
+<tr class="memdesc:ae403ff61afaa58e816548d096793cce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skiriamosios atminties valdiklio tipas. <br /></td></tr>
+<tr class="separator:ae403ff61afaa58e816548d096793cce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc6a9a36f9ccd3a22f984145f2a8871" id="r_a7dc6a9a36f9ccd3a22f984145f2a8871"><td class="memItemLeft" align="right" valign="top"><a id="a7dc6a9a36f9ccd3a22f984145f2a8871" name="a7dc6a9a36f9ccd3a22f984145f2a8871"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>size_type</b> = std::size_t</td></tr>
+<tr class="memdesc:a7dc6a9a36f9ccd3a22f984145f2a8871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dydis, naudojamas vektoriuje. <br /></td></tr>
+<tr class="separator:a7dc6a9a36f9ccd3a22f984145f2a8871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79da28b1f0d245159afb0b3365c7f672" id="r_a79da28b1f0d245159afb0b3365c7f672"><td class="memItemLeft" align="right" valign="top"><a id="a79da28b1f0d245159afb0b3365c7f672" name="a79da28b1f0d245159afb0b3365c7f672"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>difference_type</b> = std::ptrdiff_t</td></tr>
+<tr class="memdesc:a79da28b1f0d245159afb0b3365c7f672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skirtumas tarp dviejų iteratorių. <br /></td></tr>
+<tr class="separator:a79da28b1f0d245159afb0b3365c7f672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a396c2546b02567ebb8d6cfe9501628a4" id="r_a396c2546b02567ebb8d6cfe9501628a4"><td class="memItemLeft" align="right" valign="top"><a id="a396c2546b02567ebb8d6cfe9501628a4" name="a396c2546b02567ebb8d6cfe9501628a4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reference</b> = <a class="el" href="#aed75ba29fe8f3abff669b0f8950f847e">value_type</a> &amp;</td></tr>
+<tr class="memdesc:a396c2546b02567ebb8d6cfe9501628a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuoroda į elementą. <br /></td></tr>
+<tr class="separator:a396c2546b02567ebb8d6cfe9501628a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af501d5142563245b4407edca13143970" id="r_af501d5142563245b4407edca13143970"><td class="memItemLeft" align="right" valign="top"><a id="af501d5142563245b4407edca13143970" name="af501d5142563245b4407edca13143970"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reference</b> = const <a class="el" href="#aed75ba29fe8f3abff669b0f8950f847e">value_type</a> &amp;</td></tr>
+<tr class="memdesc:af501d5142563245b4407edca13143970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuoroda į konstantų elementą. <br /></td></tr>
+<tr class="separator:af501d5142563245b4407edca13143970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1924524f952dcf2c0e16b12e9aec5e5e" id="r_a1924524f952dcf2c0e16b12e9aec5e5e"><td class="memItemLeft" align="right" valign="top"><a id="a1924524f952dcf2c0e16b12e9aec5e5e" name="a1924524f952dcf2c0e16b12e9aec5e5e"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>pointer</b> = typename std::allocator_traits&lt;Allocator&gt;::pointer</td></tr>
+<tr class="memdesc:a1924524f952dcf2c0e16b12e9aec5e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuoroda į elementą atmintyje. <br /></td></tr>
+<tr class="separator:a1924524f952dcf2c0e16b12e9aec5e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afab37317da64f4d9b289415109d56a3d" id="r_afab37317da64f4d9b289415109d56a3d"><td class="memItemLeft" align="right" valign="top"><a id="afab37317da64f4d9b289415109d56a3d" name="afab37317da64f4d9b289415109d56a3d"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_pointer</b> = typename std::allocator_traits&lt;Allocator&gt;::const_pointer</td></tr>
+<tr class="memdesc:afab37317da64f4d9b289415109d56a3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nuoroda į konstantų elementą atmintyje. <br /></td></tr>
+<tr class="separator:afab37317da64f4d9b289415109d56a3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7523349d8cf767ccb9e6378ae1977716" id="r_a7523349d8cf767ccb9e6378ae1977716"><td class="memItemLeft" align="right" valign="top"><a id="a7523349d8cf767ccb9e6378ae1977716" name="a7523349d8cf767ccb9e6378ae1977716"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>iterator</b> = <a class="el" href="#a1924524f952dcf2c0e16b12e9aec5e5e">pointer</a></td></tr>
+<tr class="memdesc:a7523349d8cf767ccb9e6378ae1977716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iteratorius per elementus. <br /></td></tr>
+<tr class="separator:a7523349d8cf767ccb9e6378ae1977716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225a5116f5c53ee7c76f352325b4508a" id="r_a225a5116f5c53ee7c76f352325b4508a"><td class="memItemLeft" align="right" valign="top"><a id="a225a5116f5c53ee7c76f352325b4508a" name="a225a5116f5c53ee7c76f352325b4508a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_iterator</b> = <a class="el" href="#afab37317da64f4d9b289415109d56a3d">const_pointer</a></td></tr>
+<tr class="memdesc:a225a5116f5c53ee7c76f352325b4508a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iteratorius per konstantus elementus. <br /></td></tr>
+<tr class="separator:a225a5116f5c53ee7c76f352325b4508a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9b65451457de20f904edb0a4685642" id="r_aaf9b65451457de20f904edb0a4685642"><td class="memItemLeft" align="right" valign="top"><a id="aaf9b65451457de20f904edb0a4685642" name="aaf9b65451457de20f904edb0a4685642"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>reverse_iterator</b> = std::reverse_iterator&lt;<a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a>&gt;</td></tr>
+<tr class="memdesc:aaf9b65451457de20f904edb0a4685642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atvirkštinis iteratorius per elementus. <br /></td></tr>
+<tr class="separator:aaf9b65451457de20f904edb0a4685642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac220d4de82daafee3a207e3004383830" id="r_ac220d4de82daafee3a207e3004383830"><td class="memItemLeft" align="right" valign="top"><a id="ac220d4de82daafee3a207e3004383830" name="ac220d4de82daafee3a207e3004383830"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>const_reverse_iterator</b> = std::reverse_iterator&lt;<a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a>&gt;</td></tr>
+<tr class="memdesc:ac220d4de82daafee3a207e3004383830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atvirkštinis iteratorius per konstantus elementus. <br /></td></tr>
+<tr class="separator:ac220d4de82daafee3a207e3004383830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Vieši Metodai</h2></td></tr>
+<tr class="memitem:aa636e52e46f1351e6d3fd093342ad309" id="r_aa636e52e46f1351e6d3fd093342ad309"><td class="memItemLeft" align="right" valign="top"><a id="aa636e52e46f1351e6d3fd093342ad309" name="aa636e52e46f1351e6d3fd093342ad309"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MyVector</b> ()</td></tr>
+<tr class="memdesc:aa636e52e46f1351e6d3fd093342ad309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktorius be parametrų, sukuriantis tuščią vektorių. <br /></td></tr>
+<tr class="separator:aa636e52e46f1351e6d3fd093342ad309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0f2bdf39354c999d188f487bdd1e31" id="r_a9b0f2bdf39354c999d188f487bdd1e31"><td class="memItemLeft" align="right" valign="top"><a id="a9b0f2bdf39354c999d188f487bdd1e31" name="a9b0f2bdf39354c999d188f487bdd1e31"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~MyVector</b> ()</td></tr>
+<tr class="memdesc:a9b0f2bdf39354c999d188f487bdd1e31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destruktorius, atlaisvinantis vektoriaus resursus. <br /></td></tr>
+<tr class="separator:a9b0f2bdf39354c999d188f487bdd1e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adddde4150bdae4e471c0c2c53d344c75" id="r_adddde4150bdae4e471c0c2c53d344c75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adddde4150bdae4e471c0c2c53d344c75">MyVector</a> (const <a class="el" href="class_my_vector.html">MyVector</a> &amp;other)</td></tr>
+<tr class="memdesc:adddde4150bdae4e471c0c2c53d344c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kopijavimo konstruktorius.  <br /></td></tr>
+<tr class="separator:adddde4150bdae4e471c0c2c53d344c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10507f55c982ed8604ffd25684e75081" id="r_a10507f55c982ed8604ffd25684e75081"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_my_vector.html">MyVector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10507f55c982ed8604ffd25684e75081">operator=</a> (const <a class="el" href="class_my_vector.html">MyVector</a> &amp;other)</td></tr>
+<tr class="memdesc:a10507f55c982ed8604ffd25684e75081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priskyrimo operatorius kopijavimui.  <br /></td></tr>
+<tr class="separator:a10507f55c982ed8604ffd25684e75081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a640b63b5be3f31cc5164078386b7e443" id="r_a640b63b5be3f31cc5164078386b7e443"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a640b63b5be3f31cc5164078386b7e443">MyVector</a> (<a class="el" href="class_my_vector.html">MyVector</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a640b63b5be3f31cc5164078386b7e443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perkėlimo konstruktorius.  <br /></td></tr>
+<tr class="separator:a640b63b5be3f31cc5164078386b7e443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6abbc61ea96373929f5bc5e2e21658ae" id="r_a6abbc61ea96373929f5bc5e2e21658ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_my_vector.html">MyVector</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6abbc61ea96373929f5bc5e2e21658ae">operator=</a> (<a class="el" href="class_my_vector.html">MyVector</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a6abbc61ea96373929f5bc5e2e21658ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Priskyrimo operatorius perkėlimui.  <br /></td></tr>
+<tr class="separator:a6abbc61ea96373929f5bc5e2e21658ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af48decf9ae1744e647cafd8ba7b0d21f" id="r_af48decf9ae1744e647cafd8ba7b0d21f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af48decf9ae1744e647cafd8ba7b0d21f">at</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> pos)</td></tr>
+<tr class="memdesc:af48decf9ae1744e647cafd8ba7b0d21f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina elementą nurodytoje pozicijoje su ribų tikrinimu.  <br /></td></tr>
+<tr class="separator:af48decf9ae1744e647cafd8ba7b0d21f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a391371d9e401d7dac90fd3ef0fad281e" id="r_a391371d9e401d7dac90fd3ef0fad281e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a391371d9e401d7dac90fd3ef0fad281e">at</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> pos) const</td></tr>
+<tr class="memdesc:a391371d9e401d7dac90fd3ef0fad281e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina elementą nurodytoje pozicijoje su ribų tikrinimu (konstanta versija).  <br /></td></tr>
+<tr class="separator:a391371d9e401d7dac90fd3ef0fad281e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05f9d7ab110dd1fc9bc8b41aa05c5345" id="r_a05f9d7ab110dd1fc9bc8b41aa05c5345"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05f9d7ab110dd1fc9bc8b41aa05c5345">operator[]</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> pos)</td></tr>
+<tr class="memdesc:a05f9d7ab110dd1fc9bc8b41aa05c5345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina elementą nurodytoje pozicijoje.  <br /></td></tr>
+<tr class="separator:a05f9d7ab110dd1fc9bc8b41aa05c5345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afefa7b444902e666cf8a6342a225b162" id="r_afefa7b444902e666cf8a6342a225b162"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afefa7b444902e666cf8a6342a225b162">operator[]</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> pos) const</td></tr>
+<tr class="memdesc:afefa7b444902e666cf8a6342a225b162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina elementą nurodytoje pozicijoje (konstanta versija).  <br /></td></tr>
+<tr class="separator:afefa7b444902e666cf8a6342a225b162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add26cf45129f38c70d56ba9d12131164" id="r_add26cf45129f38c70d56ba9d12131164"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ae403ff61afaa58e816548d096793cce8">allocator_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add26cf45129f38c70d56ba9d12131164">get_allocator</a> () const noexcept</td></tr>
+<tr class="memdesc:add26cf45129f38c70d56ba9d12131164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina vektoriaus paskirstytoją.  <br /></td></tr>
+<tr class="separator:add26cf45129f38c70d56ba9d12131164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7044b9a33ac19c5878fe1c7080455360" id="r_a7044b9a33ac19c5878fe1c7080455360"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7044b9a33ac19c5878fe1c7080455360">front</a> ()</td></tr>
+<tr class="memdesc:a7044b9a33ac19c5878fe1c7080455360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina pirmąjį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a7044b9a33ac19c5878fe1c7080455360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebdbd309434725e28a03ccc1b74efbbc" id="r_aebdbd309434725e28a03ccc1b74efbbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebdbd309434725e28a03ccc1b74efbbc">front</a> () const</td></tr>
+<tr class="memdesc:aebdbd309434725e28a03ccc1b74efbbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina pirmąjį vektoriaus elementą (konstanta versija).  <br /></td></tr>
+<tr class="separator:aebdbd309434725e28a03ccc1b74efbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d5a9b661b8e700bf5b97e332180f1d6" id="r_a7d5a9b661b8e700bf5b97e332180f1d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d5a9b661b8e700bf5b97e332180f1d6">back</a> ()</td></tr>
+<tr class="memdesc:a7d5a9b661b8e700bf5b97e332180f1d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina paskutinį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a7d5a9b661b8e700bf5b97e332180f1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af368da70161655012f485d37ffd32079" id="r_af368da70161655012f485d37ffd32079"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af368da70161655012f485d37ffd32079">back</a> () const</td></tr>
+<tr class="memdesc:af368da70161655012f485d37ffd32079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina paskutinį vektoriaus elementą (konstanta versija).  <br /></td></tr>
+<tr class="separator:af368da70161655012f485d37ffd32079"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac906f100d1bab79a8e5c049d42c630a8" id="r_ac906f100d1bab79a8e5c049d42c630a8"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac906f100d1bab79a8e5c049d42c630a8">data</a> () noexcept</td></tr>
+<tr class="memdesc:ac906f100d1bab79a8e5c049d42c630a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina žaliąjį vektoriaus masyvą.  <br /></td></tr>
+<tr class="separator:ac906f100d1bab79a8e5c049d42c630a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbdce63e7c3ee0857dfc8731d9991bf1" id="r_afbdce63e7c3ee0857dfc8731d9991bf1"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbdce63e7c3ee0857dfc8731d9991bf1">data</a> () const noexcept</td></tr>
+<tr class="memdesc:afbdce63e7c3ee0857dfc8731d9991bf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina žaliąjį vektoriaus masyvą (konstanta versija).  <br /></td></tr>
+<tr class="separator:afbdce63e7c3ee0857dfc8731d9991bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a709cbdda20ee3d0f7867c15d3531ba41" id="r_a709cbdda20ee3d0f7867c15d3531ba41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a709cbdda20ee3d0f7867c15d3531ba41">begin</a> () noexcept</td></tr>
+<tr class="memdesc:a709cbdda20ee3d0f7867c15d3531ba41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina iteratorių į pirmąjį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a709cbdda20ee3d0f7867c15d3531ba41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc85586103af75a7fab8daff4398503" id="r_a8bc85586103af75a7fab8daff4398503"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bc85586103af75a7fab8daff4398503">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:a8bc85586103af75a7fab8daff4398503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina iteratorių į pirmąjį vektoriaus elementą (konstanta versija).  <br /></td></tr>
+<tr class="separator:a8bc85586103af75a7fab8daff4398503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e5e4ceb4b4c459115a540afa44c8339" id="r_a1e5e4ceb4b4c459115a540afa44c8339"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e5e4ceb4b4c459115a540afa44c8339">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a1e5e4ceb4b4c459115a540afa44c8339"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina konstanta iteratorių į pirmąjį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a1e5e4ceb4b4c459115a540afa44c8339"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5626b4bae8984dda9694976911765cc" id="r_ae5626b4bae8984dda9694976911765cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5626b4bae8984dda9694976911765cc">end</a> () noexcept</td></tr>
+<tr class="memdesc:ae5626b4bae8984dda9694976911765cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina iteratorių į paskutinį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:ae5626b4bae8984dda9694976911765cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09f29fcaa3ede7731145da3829f7ea0d" id="r_a09f29fcaa3ede7731145da3829f7ea0d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09f29fcaa3ede7731145da3829f7ea0d">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a09f29fcaa3ede7731145da3829f7ea0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina iteratorių į paskutinį vektoriaus elementą (konstanta versija).  <br /></td></tr>
+<tr class="separator:a09f29fcaa3ede7731145da3829f7ea0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a658ea1964821289a85dbbe1ac5c36ee0" id="r_a658ea1964821289a85dbbe1ac5c36ee0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a658ea1964821289a85dbbe1ac5c36ee0">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:a658ea1964821289a85dbbe1ac5c36ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina konstanta iteratorių į paskutinį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a658ea1964821289a85dbbe1ac5c36ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812919394fcdce1305c4ebc1ea7edcef" id="r_a812919394fcdce1305c4ebc1ea7edcef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aaf9b65451457de20f904edb0a4685642">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a812919394fcdce1305c4ebc1ea7edcef">rbegin</a> () noexcept</td></tr>
+<tr class="memdesc:a812919394fcdce1305c4ebc1ea7edcef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina atvirkštinį iteratorių į pirmąjį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a812919394fcdce1305c4ebc1ea7edcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643d2c129839467bc4c343ec92ab6c76" id="r_a643d2c129839467bc4c343ec92ab6c76"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a643d2c129839467bc4c343ec92ab6c76">rbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a643d2c129839467bc4c343ec92ab6c76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina atvirkštinį iteratorių į pirmąjį vektoriaus elementą (konstanta versija).  <br /></td></tr>
+<tr class="separator:a643d2c129839467bc4c343ec92ab6c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0afc1089abbf6c4cc026e7256e20fd5b" id="r_a0afc1089abbf6c4cc026e7256e20fd5b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0afc1089abbf6c4cc026e7256e20fd5b">crbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a0afc1089abbf6c4cc026e7256e20fd5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina konstanta atvirkštinį iteratorių į pirmąjį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a0afc1089abbf6c4cc026e7256e20fd5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5d68969d4a94bfc1f73d653a2aabff" id="r_a8f5d68969d4a94bfc1f73d653a2aabff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#aaf9b65451457de20f904edb0a4685642">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f5d68969d4a94bfc1f73d653a2aabff">rend</a> () noexcept</td></tr>
+<tr class="memdesc:a8f5d68969d4a94bfc1f73d653a2aabff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina atvirkštinį iteratorių į paskutinį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a8f5d68969d4a94bfc1f73d653a2aabff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8496c5629a92b2493c7996ec27ff71c0" id="r_a8496c5629a92b2493c7996ec27ff71c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8496c5629a92b2493c7996ec27ff71c0">rend</a> () const noexcept</td></tr>
+<tr class="memdesc:a8496c5629a92b2493c7996ec27ff71c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina atvirkštinį iteratorių į paskutinį vektoriaus elementą (konstanta versija).  <br /></td></tr>
+<tr class="separator:a8496c5629a92b2493c7996ec27ff71c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abed92de011ecebfef62cf0d147f2489c" id="r_abed92de011ecebfef62cf0d147f2489c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abed92de011ecebfef62cf0d147f2489c">crend</a> () const noexcept</td></tr>
+<tr class="memdesc:abed92de011ecebfef62cf0d147f2489c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina konstanta atvirkštinį iteratorių į paskutinį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:abed92de011ecebfef62cf0d147f2489c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e370dcabbfe6365c2bacd872151f9f" id="r_ae9e370dcabbfe6365c2bacd872151f9f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9e370dcabbfe6365c2bacd872151f9f">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:ae9e370dcabbfe6365c2bacd872151f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Patikrina, ar vektorius yra tuščias.  <br /></td></tr>
+<tr class="separator:ae9e370dcabbfe6365c2bacd872151f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae01ddaddad4f8945bb406c2994685d59" id="r_ae01ddaddad4f8945bb406c2994685d59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae01ddaddad4f8945bb406c2994685d59">size</a> () const noexcept</td></tr>
+<tr class="memdesc:ae01ddaddad4f8945bb406c2994685d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina elementų skaičių vektoriuje.  <br /></td></tr>
+<tr class="separator:ae01ddaddad4f8945bb406c2994685d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26d04b3f231960e8ad407ab590554e14" id="r_a26d04b3f231960e8ad407ab590554e14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26d04b3f231960e8ad407ab590554e14">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:a26d04b3f231960e8ad407ab590554e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina maksimalų galimą vektoriaus dydį.  <br /></td></tr>
+<tr class="separator:a26d04b3f231960e8ad407ab590554e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651f2220a36594024746fb926c1de92a" id="r_a651f2220a36594024746fb926c1de92a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a651f2220a36594024746fb926c1de92a">reserve</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> new_cap)</td></tr>
+<tr class="memdesc:a651f2220a36594024746fb926c1de92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rezervuoja nurodytą vietos kiekį vektoriui.  <br /></td></tr>
+<tr class="separator:a651f2220a36594024746fb926c1de92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaa27484459ee8089a1bdc12b0a28e14" id="r_aaaa27484459ee8089a1bdc12b0a28e14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaa27484459ee8089a1bdc12b0a28e14">getCapacity</a> () const noexcept</td></tr>
+<tr class="memdesc:aaaa27484459ee8089a1bdc12b0a28e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grąžina vektoriaus talpą.  <br /></td></tr>
+<tr class="separator:aaaa27484459ee8089a1bdc12b0a28e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e202629b430eebf13b0257bd0ee0e3a" id="r_a6e202629b430eebf13b0257bd0ee0e3a"><td class="memItemLeft" align="right" valign="top"><a id="a6e202629b430eebf13b0257bd0ee0e3a" name="a6e202629b430eebf13b0257bd0ee0e3a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>shrink_to_fit</b> ()</td></tr>
+<tr class="memdesc:a6e202629b430eebf13b0257bd0ee0e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sumažina vektoriaus talpą iki dabartinio elemento skaičiaus. <br /></td></tr>
+<tr class="separator:a6e202629b430eebf13b0257bd0ee0e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27635f0d77531a3e559e90fcc9f25cd7" id="r_a27635f0d77531a3e559e90fcc9f25cd7"><td class="memItemLeft" align="right" valign="top"><a id="a27635f0d77531a3e559e90fcc9f25cd7" name="a27635f0d77531a3e559e90fcc9f25cd7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> () noexcept</td></tr>
+<tr class="memdesc:a27635f0d77531a3e559e90fcc9f25cd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Išvalo vektoriaus turinį. <br /></td></tr>
+<tr class="separator:a27635f0d77531a3e559e90fcc9f25cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f8155e57e503c8c933f2fc4ce3af4ea" id="r_a3f8155e57e503c8c933f2fc4ce3af4ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f8155e57e503c8c933f2fc4ce3af4ea">push_back</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a3f8155e57e503c8c933f2fc4ce3af4ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prideda elementą į vektoriaus pabaigą.  <br /></td></tr>
+<tr class="separator:a3f8155e57e503c8c933f2fc4ce3af4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5808317860125d8508cb4fe17f7908" id="r_a3e5808317860125d8508cb4fe17f7908"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e5808317860125d8508cb4fe17f7908">pop_back</a> ()</td></tr>
+<tr class="memdesc:a3e5808317860125d8508cb4fe17f7908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pašalina paskutinį vektoriaus elementą.  <br /></td></tr>
+<tr class="separator:a3e5808317860125d8508cb4fe17f7908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a586878a3913dd465f764b44c9840409f" id="r_a586878a3913dd465f764b44c9840409f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a586878a3913dd465f764b44c9840409f">resize</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> count, T value=T())</td></tr>
+<tr class="memdesc:a586878a3913dd465f764b44c9840409f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pakeičia vektoriaus dydį.  <br /></td></tr>
+<tr class="separator:a586878a3913dd465f764b44c9840409f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a109a6234b4419ffe23211a248c69fc55" id="r_a109a6234b4419ffe23211a248c69fc55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a109a6234b4419ffe23211a248c69fc55">swap</a> (<a class="el" href="class_my_vector.html">MyVector</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a109a6234b4419ffe23211a248c69fc55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pakeičia šio vektoriaus turinį su kitu vektoriumi.  <br /></td></tr>
+<tr class="separator:a109a6234b4419ffe23211a248c69fc55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3ee4e81458ab1eaf0732d4e04786609" id="r_ae3ee4e81458ab1eaf0732d4e04786609"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3ee4e81458ab1eaf0732d4e04786609">insert</a> (<a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> pos, const T &amp;value)</td></tr>
+<tr class="memdesc:ae3ee4e81458ab1eaf0732d4e04786609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Įterpia elementą nurodytoje pozicijoje.  <br /></td></tr>
+<tr class="separator:ae3ee4e81458ab1eaf0732d4e04786609"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dbce2ed256c89af0079713db46511af" id="r_a9dbce2ed256c89af0079713db46511af"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a9dbce2ed256c89af0079713db46511af"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a9dbce2ed256c89af0079713db46511af">emplace</a> (<a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> pos, Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a9dbce2ed256c89af0079713db46511af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Įterpia elementą nurodytoje pozicijoje su argumentais.  <br /></td></tr>
+<tr class="separator:a9dbce2ed256c89af0079713db46511af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a8a1971772dcd118ebc1f56007f10d" id="r_a57a8a1971772dcd118ebc1f56007f10d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57a8a1971772dcd118ebc1f56007f10d">erase</a> (<a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> pos)</td></tr>
+<tr class="memdesc:a57a8a1971772dcd118ebc1f56007f10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pašalina elementą nurodytoje pozicijoje.  <br /></td></tr>
+<tr class="separator:a57a8a1971772dcd118ebc1f56007f10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f134ae37e6efa70ba9eb432b4d7bd9f" id="r_a6f134ae37e6efa70ba9eb432b4d7bd9f"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
+<tr class="memitem:a6f134ae37e6efa70ba9eb432b4d7bd9f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a6f134ae37e6efa70ba9eb432b4d7bd9f">assign</a> (InputIt first, InputIt last)</td></tr>
+<tr class="memdesc:a6f134ae37e6efa70ba9eb432b4d7bd9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pakeičia vektoriaus turinį intervalu.  <br /></td></tr>
+<tr class="separator:a6f134ae37e6efa70ba9eb432b4d7bd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12da2f72e4f3a49fb1287cf26fa449b9" id="r_a12da2f72e4f3a49fb1287cf26fa449b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12da2f72e4f3a49fb1287cf26fa449b9">assign</a> (<a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> count, const T &amp;value)</td></tr>
+<tr class="memdesc:a12da2f72e4f3a49fb1287cf26fa449b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pakeičia vektoriaus turinį nurodytu elementų skaičiumi.  <br /></td></tr>
+<tr class="separator:a12da2f72e4f3a49fb1287cf26fa449b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0962cb2dc81e1a467cec3bb6b8f746ed" id="r_a0962cb2dc81e1a467cec3bb6b8f746ed"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a0962cb2dc81e1a467cec3bb6b8f746ed"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a0962cb2dc81e1a467cec3bb6b8f746ed">emplace_back</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="memdesc:a0962cb2dc81e1a467cec3bb6b8f746ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prideda elementą į vektoriaus pabaigą su argumentais.  <br /></td></tr>
+<tr class="separator:a0962cb2dc81e1a467cec3bb6b8f746ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef7ab69ad10ee4d667b3284d6053f65" id="r_a6ef7ab69ad10ee4d667b3284d6053f65"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
+<tr class="memitem:a6ef7ab69ad10ee4d667b3284d6053f65"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a6ef7ab69ad10ee4d667b3284d6053f65">append_range</a> (InputIt first, InputIt last)</td></tr>
+<tr class="memdesc:a6ef7ab69ad10ee4d667b3284d6053f65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prideda elementų intervalą į vektoriaus pabaigą.  <br /></td></tr>
+<tr class="separator:a6ef7ab69ad10ee4d667b3284d6053f65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Smulkus aprašymas</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Allocator = std::allocator&lt;T&gt;&gt;<br />
+class MyVector&lt; T, Allocator &gt;</div><p><a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> konteineris, kurios funkcionalumas yra panašus į std::vector. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Elementų tipas </td></tr>
+    <tr><td class="paramname">Allocator</td><td>Skiriamosios atminties valdiklio tipas </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Konstruktoriaus ir Destruktoriaus Dokumentacija</h2>
+<a id="adddde4150bdae4e471c0c2c53d344c75" name="adddde4150bdae4e471c0c2c53d344c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adddde4150bdae4e471c0c2c53d344c75">&#9670;&#160;</a></span>MyVector() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;<a class="el" href="class_my_vector.html">::MyVector</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Kopijavimo konstruktorius. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Kitas vektorius, iš kurio bus kopijuojami duomenys. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a640b63b5be3f31cc5164078386b7e443" name="a640b63b5be3f31cc5164078386b7e443"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a640b63b5be3f31cc5164078386b7e443">&#9670;&#160;</a></span>MyVector() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;<a class="el" href="class_my_vector.html">::MyVector</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Perkėlimo konstruktorius. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Kitas vektorius, kurio duomenys bus perkelti. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Metodų Dokumentacija</h2>
+<a id="a6ef7ab69ad10ee4d667b3284d6053f65" name="a6ef7ab69ad10ee4d667b3284d6053f65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ef7ab69ad10ee4d667b3284d6053f65">&#9670;&#160;</a></span>append_range()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename InputIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::append_range </td>
+          <td>(</td>
+          <td class="paramtype">InputIt</td>          <td class="paramname"><span class="paramname"><em>first</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prideda elementų intervalą į vektoriaus pabaigą. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Pradžios iteratorius. </td></tr>
+    <tr><td class="paramname">last</td><td>Pabaigos iteratorius. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6f134ae37e6efa70ba9eb432b4d7bd9f" name="a6f134ae37e6efa70ba9eb432b4d7bd9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f134ae37e6efa70ba9eb432b4d7bd9f">&#9670;&#160;</a></span>assign() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename InputIt &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype">InputIt</td>          <td class="paramname"><span class="paramname"><em>first</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pakeičia vektoriaus turinį intervalu. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Pradžios iteratorius. </td></tr>
+    <tr><td class="paramname">last</td><td>Pabaigos iteratorius. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a12da2f72e4f3a49fb1287cf26fa449b9" name="a12da2f72e4f3a49fb1287cf26fa449b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12da2f72e4f3a49fb1287cf26fa449b9">&#9670;&#160;</a></span>assign() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::assign </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pakeičia vektoriaus turinį nurodytu elementų skaičiumi. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Elementų skaičius. </td></tr>
+    <tr><td class="paramname">value</td><td>Elementų reikšmė. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af48decf9ae1744e647cafd8ba7b0d21f" name="af48decf9ae1744e647cafd8ba7b0d21f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af48decf9ae1744e647cafd8ba7b0d21f">&#9670;&#160;</a></span>at() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina elementą nurodytoje pozicijoje su ribų tikrinimu. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Elemento pozicija. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į elementą. </dd></dl>
+<dl class="exception"><dt>Išimtys</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>Jei pozicija yra už vektoriaus ribų. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a391371d9e401d7dac90fd3ef0fad281e" name="a391371d9e401d7dac90fd3ef0fad281e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a391371d9e401d7dac90fd3ef0fad281e">&#9670;&#160;</a></span>at() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::at </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina elementą nurodytoje pozicijoje su ribų tikrinimu (konstanta versija). </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Elemento pozicija. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į elementą. </dd></dl>
+<dl class="exception"><dt>Išimtys</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>Jei pozicija yra už vektoriaus ribų. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7d5a9b661b8e700bf5b97e332180f1d6" name="a7d5a9b661b8e700bf5b97e332180f1d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d5a9b661b8e700bf5b97e332180f1d6">&#9670;&#160;</a></span>back() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::back </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina paskutinį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="af368da70161655012f485d37ffd32079" name="af368da70161655012f485d37ffd32079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af368da70161655012f485d37ffd32079">&#9670;&#160;</a></span>back() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::back </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina paskutinį vektoriaus elementą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a8bc85586103af75a7fab8daff4398503" name="a8bc85586103af75a7fab8daff4398503"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bc85586103af75a7fab8daff4398503">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina iteratorių į pirmąjį vektoriaus elementą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a709cbdda20ee3d0f7867c15d3531ba41" name="a709cbdda20ee3d0f7867c15d3531ba41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a709cbdda20ee3d0f7867c15d3531ba41">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina iteratorių į pirmąjį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a1e5e4ceb4b4c459115a540afa44c8339" name="a1e5e4ceb4b4c459115a540afa44c8339"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e5e4ceb4b4c459115a540afa44c8339">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina konstanta iteratorių į pirmąjį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Konstanta iteratorius į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a658ea1964821289a85dbbe1ac5c36ee0" name="a658ea1964821289a85dbbe1ac5c36ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a658ea1964821289a85dbbe1ac5c36ee0">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina konstanta iteratorių į paskutinį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Konstanta iteratorius į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a0afc1089abbf6c4cc026e7256e20fd5b" name="a0afc1089abbf6c4cc026e7256e20fd5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0afc1089abbf6c4cc026e7256e20fd5b">&#9670;&#160;</a></span>crbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::crbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina konstanta atvirkštinį iteratorių į pirmąjį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Konstanta atvirkštinis iteratorius į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="abed92de011ecebfef62cf0d147f2489c" name="abed92de011ecebfef62cf0d147f2489c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abed92de011ecebfef62cf0d147f2489c">&#9670;&#160;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::crend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina konstanta atvirkštinį iteratorių į paskutinį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Konstanta atvirkštinis iteratorius į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="afbdce63e7c3ee0857dfc8731d9991bf1" name="afbdce63e7c3ee0857dfc8731d9991bf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbdce63e7c3ee0857dfc8731d9991bf1">&#9670;&#160;</a></span>data() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T * <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina žaliąjį vektoriaus masyvą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Rodyklė į masyvą. </dd></dl>
+
+</div>
+</div>
+<a id="ac906f100d1bab79a8e5c049d42c630a8" name="ac906f100d1bab79a8e5c049d42c630a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac906f100d1bab79a8e5c049d42c630a8">&#9670;&#160;</a></span>data() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::data </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina žaliąjį vektoriaus masyvą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Rodyklė į masyvą. </dd></dl>
+
+</div>
+</div>
+<a id="a9dbce2ed256c89af0079713db46511af" name="a9dbce2ed256c89af0079713db46511af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dbce2ed256c89af0079713db46511af">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>pos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Įterpia elementą nurodytoje pozicijoje su argumentais. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Pozicija, kurioje bus įterptas elementas. </td></tr>
+    <tr><td class="paramname">args</td><td>Argumentai, naudojami elemento konstravimui. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į įterptą elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a0962cb2dc81e1a467cec3bb6b8f746ed" name="a0962cb2dc81e1a467cec3bb6b8f746ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0962cb2dc81e1a467cec3bb6b8f746ed">&#9670;&#160;</a></span>emplace_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::emplace_back </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prideda elementą į vektoriaus pabaigą su argumentais. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Argumentai, naudojami elemento konstravimui. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae9e370dcabbfe6365c2bacd872151f9f" name="ae9e370dcabbfe6365c2bacd872151f9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9e370dcabbfe6365c2bacd872151f9f">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Patikrina, ar vektorius yra tuščias. </p>
+<dl class="section return"><dt>Gražina</dt><dd>True, jei vektorius yra tuščias, priešingu atveju False. </dd></dl>
+
+</div>
+</div>
+<a id="a09f29fcaa3ede7731145da3829f7ea0d" name="a09f29fcaa3ede7731145da3829f7ea0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09f29fcaa3ede7731145da3829f7ea0d">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina iteratorių į paskutinį vektoriaus elementą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="ae5626b4bae8984dda9694976911765cc" name="ae5626b4bae8984dda9694976911765cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5626b4bae8984dda9694976911765cc">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina iteratorių į paskutinį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a57a8a1971772dcd118ebc1f56007f10d" name="a57a8a1971772dcd118ebc1f56007f10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57a8a1971772dcd118ebc1f56007f10d">&#9670;&#160;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pašalina elementą nurodytoje pozicijoje. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Pozicija, iš kurios bus pašalintas elementas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į poziciją po pašalinto elemento. </dd></dl>
+
+</div>
+</div>
+<a id="a7044b9a33ac19c5878fe1c7080455360" name="a7044b9a33ac19c5878fe1c7080455360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7044b9a33ac19c5878fe1c7080455360">&#9670;&#160;</a></span>front() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina pirmąjį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="aebdbd309434725e28a03ccc1b74efbbc" name="aebdbd309434725e28a03ccc1b74efbbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebdbd309434725e28a03ccc1b74efbbc">&#9670;&#160;</a></span>front() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::front </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina pirmąjį vektoriaus elementą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="add26cf45129f38c70d56ba9d12131164" name="add26cf45129f38c70d56ba9d12131164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add26cf45129f38c70d56ba9d12131164">&#9670;&#160;</a></span>get_allocator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae403ff61afaa58e816548d096793cce8">allocator_type</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::get_allocator </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina vektoriaus paskirstytoją. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Paskirstytojo objektas. </dd></dl>
+
+</div>
+</div>
+<a id="aaaa27484459ee8089a1bdc12b0a28e14" name="aaaa27484459ee8089a1bdc12b0a28e14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaa27484459ee8089a1bdc12b0a28e14">&#9670;&#160;</a></span>getCapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::getCapacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina vektoriaus talpą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Talpa. </dd></dl>
+
+</div>
+</div>
+<a id="ae3ee4e81458ab1eaf0732d4e04786609" name="ae3ee4e81458ab1eaf0732d4e04786609"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3ee4e81458ab1eaf0732d4e04786609">&#9670;&#160;</a></span>insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7523349d8cf767ccb9e6378ae1977716">iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a225a5116f5c53ee7c76f352325b4508a">const_iterator</a></td>          <td class="paramname"><span class="paramname"><em>pos</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Įterpia elementą nurodytoje pozicijoje. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Pozicija, kurioje bus įterptas elementas. </td></tr>
+    <tr><td class="paramname">value</td><td>Įterpiamas elementas. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Iteratorius į įterptą elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a26d04b3f231960e8ad407ab590554e14" name="a26d04b3f231960e8ad407ab590554e14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26d04b3f231960e8ad407ab590554e14">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina maksimalų galimą vektoriaus dydį. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Maksimalus elementų skaičius. </dd></dl>
+
+</div>
+</div>
+<a id="a10507f55c982ed8604ffd25684e75081" name="a10507f55c982ed8604ffd25684e75081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10507f55c982ed8604ffd25684e75081">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_my_vector.html">MyVector</a> &amp; <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Priskyrimo operatorius kopijavimui. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Kitas vektorius, iš kurio bus kopijuojami duomenys. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Grąžinamas pats objektas po priskyrimo. </dd></dl>
+
+</div>
+</div>
+<a id="a6abbc61ea96373929f5bc5e2e21658ae" name="a6abbc61ea96373929f5bc5e2e21658ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6abbc61ea96373929f5bc5e2e21658ae">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_my_vector.html">MyVector</a> &amp; <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Priskyrimo operatorius perkėlimui. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Kitas vektorius, kurio duomenys bus perkelti. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Grąžinamas pats objektas po priskyrimo. </dd></dl>
+
+</div>
+</div>
+<a id="a05f9d7ab110dd1fc9bc8b41aa05c5345" name="a05f9d7ab110dd1fc9bc8b41aa05c5345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05f9d7ab110dd1fc9bc8b41aa05c5345">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a396c2546b02567ebb8d6cfe9501628a4">reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina elementą nurodytoje pozicijoje. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Elemento pozicija. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į elementą. </dd></dl>
+
+</div>
+</div>
+<a id="afefa7b444902e666cf8a6342a225b162" name="afefa7b444902e666cf8a6342a225b162"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afefa7b444902e666cf8a6342a225b162">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#af501d5142563245b4407edca13143970">const_reference</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>pos</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina elementą nurodytoje pozicijoje (konstanta versija). </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>Elemento pozicija. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Gražina</dt><dd>Nuoroda į elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a3e5808317860125d8508cb4fe17f7908" name="a3e5808317860125d8508cb4fe17f7908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5808317860125d8508cb4fe17f7908">&#9670;&#160;</a></span>pop_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::pop_back </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pašalina paskutinį vektoriaus elementą. </p>
+<dl class="exception"><dt>Išimtys</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::out_of_range</td><td>Jei vektorius yra tuščias. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3f8155e57e503c8c933f2fc4ce3af4ea" name="a3f8155e57e503c8c933f2fc4ce3af4ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f8155e57e503c8c933f2fc4ce3af4ea">&#9670;&#160;</a></span>push_back()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::push_back </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prideda elementą į vektoriaus pabaigą. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Elemento reikšmė. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a643d2c129839467bc4c343ec92ab6c76" name="a643d2c129839467bc4c343ec92ab6c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a643d2c129839467bc4c343ec92ab6c76">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina atvirkštinį iteratorių į pirmąjį vektoriaus elementą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Atvirkštinis iteratorius į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a812919394fcdce1305c4ebc1ea7edcef" name="a812919394fcdce1305c4ebc1ea7edcef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a812919394fcdce1305c4ebc1ea7edcef">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aaf9b65451457de20f904edb0a4685642">reverse_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina atvirkštinį iteratorių į pirmąjį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Atvirkštinis iteratorius į pirmąjį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a8496c5629a92b2493c7996ec27ff71c0" name="a8496c5629a92b2493c7996ec27ff71c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8496c5629a92b2493c7996ec27ff71c0">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac220d4de82daafee3a207e3004383830">const_reverse_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina atvirkštinį iteratorių į paskutinį vektoriaus elementą (konstanta versija). </p>
+<dl class="section return"><dt>Gražina</dt><dd>Atvirkštinis iteratorius į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a8f5d68969d4a94bfc1f73d653a2aabff" name="a8f5d68969d4a94bfc1f73d653a2aabff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f5d68969d4a94bfc1f73d653a2aabff">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aaf9b65451457de20f904edb0a4685642">reverse_iterator</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina atvirkštinį iteratorių į paskutinį vektoriaus elementą. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Atvirkštinis iteratorius į paskutinį elementą. </dd></dl>
+
+</div>
+</div>
+<a id="a651f2220a36594024746fb926c1de92a" name="a651f2220a36594024746fb926c1de92a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a651f2220a36594024746fb926c1de92a">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>new_cap</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rezervuoja nurodytą vietos kiekį vektoriui. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_cap</td><td>Nauja talpa. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a586878a3913dd465f764b44c9840409f" name="a586878a3913dd465f764b44c9840409f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a586878a3913dd465f764b44c9840409f">&#9670;&#160;</a></span>resize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::resize </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a></td>          <td class="paramname"><span class="paramname"><em>count</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em><span class="paramdefsep"> = </span><span class="paramdefval">T()</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pakeičia vektoriaus dydį. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>Naujas dydis. </td></tr>
+    <tr><td class="paramname">value</td><td>Nauji elementai bus užpildyti šia reikšme. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae01ddaddad4f8945bb406c2994685d59" name="ae01ddaddad4f8945bb406c2994685d59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae01ddaddad4f8945bb406c2994685d59">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7dc6a9a36f9ccd3a22f984145f2a8871">size_type</a> <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Grąžina elementų skaičių vektoriuje. </p>
+<dl class="section return"><dt>Gražina</dt><dd>Elementų skaičius. </dd></dl>
+
+</div>
+</div>
+<a id="a109a6234b4419ffe23211a248c69fc55" name="a109a6234b4419ffe23211a248c69fc55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a109a6234b4419ffe23211a248c69fc55">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename Allocator  = std::allocator&lt;T&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_my_vector.html">MyVector</a>&lt; T, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pakeičia šio vektoriaus turinį su kitu vektoriumi. </p>
+<dl class="params"><dt>Parametrai</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Kitas vektorius. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>Dokumentacija šiai klasei sugeneruota iš šio failo:<ul>
+<li><a class="el" href="my_vector_8h_source.html">myVector.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Sugeneruota&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>

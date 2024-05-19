@@ -1,0 +1,44 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{doxygen}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{ifthen}
+\usepackage{changepage}
+\usepackage{makeidx}
+\DeclareUnicodeCharacter{0328}{\k{}}
+\DeclareUnicodeCharacter{030C}{\v{}}
+\newcommand{\+}{}
+\begin{document}
+\input{md__r_e_a_d_m_e}
+\chapter{Vardų Srities Indeksas}
+\input{namespaces}
+\chapter{Hierarchijos Indeksas}
+\input{hierarchy}
+\chapter{Klasės Indeksas}
+\input{annotated}
+\chapter{Failo Indeksas}
+\input{files}
+\chapter{Vardų Srities Dokumentacija}
+\input{namespacestd}
+\chapter{Klasės Dokumentacija}
+\input{class_my_vector}
+\input{class_person}
+\input{class_student}
+\chapter{Failo Dokumentacija}
+\input{calculations_8h_source}
+\input{functionality_8h_source}
+\input{input_8h_source}
+\input{my_vector_8h_source}
+\input{person_8h_source}
+\input{student_8h_source}
+%--- End generated contents ---
+% Index
+  \backmatter
+  \newpage
+  \phantomsection
+  \clearemptydoublepage
+  \addcontentsline{toc}{chapter}{\indexname}
+  \printindex
+% Required for some languages (in combination with latexdocumentpre from the header)
+\end{document}

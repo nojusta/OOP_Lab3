@@ -1,0 +1,628 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="lt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Laboratinis darbas Nr.3 (v3.0): v3.0</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Laboratinis darbas Nr.3 (v3.0)
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Sugeneruota Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Paieška');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">v3.0</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> </p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Diegimo instrukcija</h1>
+<ul>
+<li>Atsisiųskite projekto kodą iš GitHub naudodami <code>git clone</code> komandą su projekto URL: <div class="fragment"><div class="line">git clone https://github.com/nojusta/OOP_Lab3</div>
+</div><!-- fragment --></li>
+<li>Pereikite į projekto katalogą naudodami cd komandą. Pavyzdžiui:</li>
+</ul>
+<div class="fragment"><div class="line">cd *projekto vieta kompiuteryje*</div>
+</div><!-- fragment --><ul>
+<li>Sukurkite Makefile su reikiamomis taisyklėmis. Jūsų Makefile turėtų atrodyti maždaug taip (Unix OS atveju):</li>
+</ul>
+<div class="fragment"><div class="line"># Kompiliatorius</div>
+<div class="line">CXX = g++</div>
+<div class="line"> </div>
+<div class="line"># Kompiliatoriaus parametrai</div>
+<div class="line">CXXFLAGS = -std=c++20 -O3 -mmacosx-version-min=14.3</div>
+<div class="line"> </div>
+<div class="line"># Vykdomo failo pavadinimas</div>
+<div class="line">TARGET = v3</div>
+<div class="line"> </div>
+<div class="line"># Source failai</div>
+<div class="line">SRCS = main.cpp functionality.cpp input.cpp calculations.cpp student.cpp</div>
+<div class="line"> </div>
+<div class="line"># Object failai</div>
+<div class="line">OBJS = $(SRCS:.cpp=.o)</div>
+<div class="line"> </div>
+<div class="line"># Google Test biblioteka</div>
+<div class="line">GTEST = /usr/local/lib/libgtest.a /usr/local/lib/libgtest_main.a</div>
+<div class="line"> </div>
+<div class="line"># Bibliotekos</div>
+<div class="line">LIBS = $(GTEST)</div>
+<div class="line"> </div>
+<div class="line"># Testuojami failai</div>
+<div class="line">TEST_SRCS = myVector_test.cpp student_test.cpp</div>
+<div class="line"> </div>
+<div class="line"># Testuojami objekto failai</div>
+<div class="line">TEST_OBJS = $(TEST_SRCS:.cpp=.o)</div>
+<div class="line"> </div>
+<div class="line"># Testuojamo failo pavadinimas</div>
+<div class="line">TEST_TARGET = myVector_test student_test</div>
+<div class="line"> </div>
+<div class="line"># Taisyklė programa susieti</div>
+<div class="line">$(TARGET): $(OBJS)</div>
+<div class="line">    $(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)</div>
+<div class="line"> </div>
+<div class="line"># Taisyklė testams susieti</div>
+<div class="line">myVector_test: student.o myVector_test.o</div>
+<div class="line">    $(CXX) $(CXXFLAGS) -o myVector_test student.o myVector_test.o $(LIBS)</div>
+<div class="line"> </div>
+<div class="line">student_test: student.o student_test.o</div>
+<div class="line">    $(CXX) $(CXXFLAGS) -o student_test student.o student_test.o $(LIBS)</div>
+<div class="line"> </div>
+<div class="line"># Taisyklė kompiliuoti failus</div>
+<div class="line">.cpp.o:</div>
+<div class="line">    $(CXX) $(CXXFLAGS) -c $&lt;  -o $@</div>
+<div class="line"> </div>
+<div class="line"># Taisyklė išvalyti tarpinius failus</div>
+<div class="line">clean:</div>
+<div class="line">    $(RM) $(OBJS) $(TEST_OBJS)</div>
+<div class="line"> </div>
+<div class="line"># Taisyklė išvalyti viską</div>
+<div class="line">distclean: clean</div>
+<div class="line">    $(RM) $(TARGET) myVector_test student_test</div>
+</div><!-- fragment --><ul>
+<li>Sukompiliuokite programą naudodami make komandą: <div class="fragment"><div class="line">make</div>
+</div><!-- fragment --> Tada gausite tokį rezultatą: <br  />
+</li>
+</ul>
+<p><img src="./Images/make.png" alt="make_terminal" class="inline"/></p>
+<ul>
+<li>Paleiskite programą naudodami šią komandą: <div class="fragment"><div class="line">./v3</div>
+</div><!-- fragment --></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Valymo instrukcija</h2>
+<ul>
+<li>Jei norite išvalyti sukompiliuotus failus, galite naudoti šias make komandas: <div class="fragment"><div class="line">make clean</div>
+<div class="line">make distclean</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Naudojimosi instrukcija</h1>
+<ul>
+<li>Paleiskite programą naudodami šią komandą: <div class="fragment"><div class="line">./v3</div>
+</div><!-- fragment --></li>
+<li>Programa pateiks meniu su įvairiomis funkcijomis. Pasirinkite funkciją įvedę atitinkamą numerį ir spauskite <code>Enter</code>.</li>
+</ul>
+<p><img src="./Images/menu.png" alt="Menu" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Programos funkcijos:</h2>
+<ul>
+<li>Nuskaito duomenis iš naudotojo arba failo ir patikrina ar jie yra teisingi (naudojant išimčių valdymą).</li>
+<li>Duoda naudotojui galimybė pasirinkti du galutinio balo skaičiavimo būdus - skaičiuojant vidurkį ar medianą.</li>
+<li>Leidžia pasirinkti 5 skirtingus būdus įvesti, nuskaityti ar sugeneruoti duomenis.</li>
+<li>Dinamiškai paskiria atmintį pagal įvesta / nuskaitytą duomenų kiekį.</li>
+<li>Atidaro testavimo failus ir apskaičiuoja laiką, kurį praleidžia apdorojant duomenis iš failų.</li>
+<li>Visi pranešimai išvedami lietuvių kalbą.</li>
+<li>Projektas išskaidytas į kelis failus (.h ir .cpp).</li>
+<li>Generuoja penkis atsitiktinius studentų sąrašų failus, sudarytus iš: 1 000, 10 000, 100 000, 1 000 000, 10 000 000 įrašų</li>
+<li>Atlieka tyrimus / testavimus su sugeneruotais failais.</li>
+<li>Surūšiuoja studentus ir išveda į du naujus failus.</li>
+<li>Yra 3 skirtingi konteinerio tipo pasirinkimai testavimui - vector, deque, list.</li>
+<li>Yra 3 skirtingos strategijos duomenų skirstymui.</li>
+<li>Naudojama klasė, saugojant studentų duomenis.</li>
+<li>Galima testuoti visus "Rule of five" konstruktorius ir I/O operatorius.</li>
+<li>Yra abstrakti klasė <a class="el" href="class_person.html" title="Klasė, aprašanti žmogų.">Person</a>. <a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a> klasė yra <a class="el" href="class_person.html" title="Klasė, aprašanti žmogų.">Person</a> klasės išvestinė klasė.</li>
+<li>DoxyGen sugeneruota HTML/TEX formato dokumentacija.</li>
+<li>Atlikti unit testai su Google Test.</li>
+<li>Realizuota pilnavertė alternatyvą std::vector konteineriui - <a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a>. <a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> turi visus Member tipus Member funkcijas, Non-member funkcijas reikalingas std::vector funkcionalumui.</li>
+</ul>
+<p>Norėdami baigti darbą su programa, pasirinkite atitinkamą skaičių.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Efektyvumo/spartos analizė naudojant std::vector ir MyVector konteinerius.</h1>
+<p>Visi testavimai buvo atlliekami naudojant O3 optimizavimo flag'ą.</p>
+<p>Matuojame kiek laiko užtrunka užpildyti konteinerius su 10000, 100000, 1000000, 10000000 ir 100000000 int elementų naudojant push_back() funkciją:</p>
+<p><img src="./Images/test_container.png" alt="Testavimo rezultatai" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Išvados</h2>
+<p>Visais atvejais <a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> konteineris yra greitesnis nei std::vector konteineris. Tai rodo, kad <a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> konteineris yra efektyvesnis nei std::vector konteineris, kai naudojama push_back() funkcija.</p>
+<p>Atminities paskirstymai yra panašūs, tačiau <a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> konteineris yra šiek tiek efektyvesnis nei std::vector konteineris.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Konteinerių testavimas naudojant duomenų failą su 100 000, 1 000 000 ir 10 000 000 studentų įrašų</h1>
+<p>Visi testavimai buvo atlliekami su konteinerių testavimo 1 strategija, naudojant O3 optimizavimo flag'ą.</p>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Naudojant std::vector tipo konteinerį:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.251s   </td><td class="markdownTableBodyNone">0.027s   </td><td class="markdownTableBodyNone">0.011s   </td><td class="markdownTableBodyNone">0.290s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">2.112s   </td><td class="markdownTableBodyNone">0.348s   </td><td class="markdownTableBodyNone">0.235s   </td><td class="markdownTableBodyNone">2.696s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">21.528s   </td><td class="markdownTableBodyNone">5.458s   </td><td class="markdownTableBodyNone">4.983s   </td><td class="markdownTableBodyNone">31.970s   </td></tr>
+</table>
+<details >
+<summary >
+rezultatai</summary>
+<p></p>
+<p><img src="./Images/container_std.png" alt="container_std" class="inline"/> </p>
+</details>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Naudojant MyVector konteinerį:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.249s   </td><td class="markdownTableBodyNone">0.011s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.265s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">2.120s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.001s   </td><td class="markdownTableBodyNone">2.126s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">21.223s   </td><td class="markdownTableBodyNone">1.021s   </td><td class="markdownTableBodyNone">1.021s   </td><td class="markdownTableBodyNone">22.985s   </td></tr>
+</table>
+<details >
+<summary >
+rezultatai</summary>
+<p></p>
+<p><img src="https://github.com/nojusta/OOP_Lab3/blob/v3.0/Images/container_vector.png" alt="container_vector" class="inline"/> </p>
+</details>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Išvados</h2>
+<p>Visais atvejais <a class="el" href="class_my_vector.html" title="MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.">MyVector</a> konteineris yra greitesnis nei std::vector konteineris. Skirtumas ypatingai pasimato su didesniais duomenų kiekiais.</p>
+<h1><a class="anchor" id="autotoc_md11"></a>
+Unit testai naudojant Google Test.</h1>
+<p>Šis projektas naudoja Google Test unit testavimui. Norėdami paleisti testus, sekite šiuos žingsnius:</p>
+<h2><a class="anchor" id="autotoc_md12"></a>
+MyVector konteinerio testavimas</h2>
+<ol type="1">
+<li>Sukurkite testavimo failą naudodami <code>make myVector_test</code>.</li>
+<li>Paleiskite testus su <code>./myVector_test</code>.</li>
+</ol>
+<p>Išvestis turėtų atrodyti maždaug taip:</p>
+<p><img src="./Images/test_vector.png" alt="Testavimo rezultatai" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md13"></a>
+Studento klasės testavimas</h2>
+<ol type="1">
+<li>Sukurkite testavimo failą naudodami <code>make student_test</code>.</li>
+<li>Paleiskite testus su <code>./student_test</code>.</li>
+</ol>
+<p>Išvestis turėtų atrodyti maždaug taip:</p>
+<p><img src="./Images/test_student.png" alt="Testavimo rezultatai" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md14"></a>
+MyVector funkcijos</h1>
+<h2><a class="anchor" id="autotoc_md15"></a>
+push_back</h2>
+<p><code>push_back</code> funkcija prideda elementą į vektoriaus pabaigą. Jei vektorius yra pilnas (t.y., <code>current == capacity</code>), tai išplečia vektoriaus talpą dvigubai (<code>reserve(capacity == 0 ? 1 : capacity * 2)</code>), ir tada prideda elementą.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> push_back(<span class="keyword">const</span> T&amp; value) {</div>
+<div class="line">  <span class="keywordflow">if</span> (current == capacity) {</div>
+<div class="line">    reserve(capacity == 0 ? 1 : capacity * 2);</div>
+<div class="line">  }</div>
+<div class="line">  std::allocator_traits&lt;Allocator&gt;::construct(allocator, arr + current, value);</div>
+<div class="line">  ++current;</div>
+<div class="line">} </div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
+pop_back</h2>
+<p><code>pop_back</code> funkcija pašalina paskutinį elementą iš vektoriaus. Jei vektorius yra tuščias, išmeta <code>std::out_of_range</code> išimtį.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> pop_back() {</div>
+<div class="line">  <span class="keywordflow">if</span> (current &gt; 0) {</div>
+<div class="line">    --current;</div>
+<div class="line">    std::allocator_traits&lt;Allocator&gt;::destroy(allocator, arr + current);</div>
+<div class="line">  } <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">throw</span> std::out_of_range(<span class="stringliteral">&quot;Cannot pop_back from an empty MyVector&quot;</span>);</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
+clear</h2>
+<p><code>clear</code> funkcija pašalina visus elementus iš vektoriaus, palikdama jį tuščią.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> clear() noexcept {</div>
+<div class="line">        destroy_elements();</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md18"></a>
+empty</h2>
+<p><code>empty</code> funkcija patikrina ar vektorius yra tuščias. Grąžina <code>true</code>, jei vektorius yra tuščias (<code>current == 0</code>), ir <code>false</code> priešingu atveju.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">bool</span> empty() const noexcept {</div>
+<div class="line">        <span class="keywordflow">return</span> current == 0;</div>
+<div class="line">    }</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md19"></a>
+swap</h2>
+<p><code>swap</code> funkcija sukeičia du vektorius. Apkeičia elementus, talpą, dabartinį dydį ir skiriamąją atmintį su kitu vektoriumi.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> swap(<a class="code hl_class" href="class_my_vector.html">MyVector</a>&amp; other) <span class="keyword">noexcept</span> {</div>
+<div class="line">        std::swap(arr, other.arr);</div>
+<div class="line">        std::swap(current, other.current);</div>
+<div class="line">        std::swap(capacity, other.capacity);</div>
+<div class="line">        std::swap(allocator, other.allocator);</div>
+<div class="line">    }</div>
+<div class="ttc" id="aclass_my_vector_html"><div class="ttname"><a href="class_my_vector.html">MyVector</a></div><div class="ttdoc">MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.</div><div class="ttdef"><b>Definition</b> myVector.h:16</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md20"></a>
+Klasės naudojami "Rule of five" ir I/O operatoriai.</h1>
+<p>"Rule of five" yra C++ programavimo kalbos konceptas, kuris apima penkis pagrindinius komponentus, reikalingus objektų valdymui: destruktorius, kopijavimo konstruktorius, kopijavimo priskyrimo operatorius, perkeliamasis konstruktorius ir perkeliamasis priskyrimo operatorius. Šiame projekte "Rule of five" yra taikomas <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> klasei.</p>
+<ol type="1">
+<li><b>Destruktorius</b>: Šis komponentas naudojamas išvalyti <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą, kai jis nebereikalingas.</li>
+<li><b>Kopijavimo konstruktorius</b>: Šis komponentas leidžia sukurti naują <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą, kuris yra identiškas esamam <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektui.</li>
+<li><b>Kopijavimo priskyrimo operatorius</b>: Šis operatorius leidžia priskirti vieno <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objekto vertę kitam <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektui.</li>
+<li><b>Perkeliamasis konstruktorius</b>: Šis komponentas leidžia "perkelti" <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą, o ne kopijuoti jį. Tai yra efektyvesnis būdas sukurti naują <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą, kai turime laikiną <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą, kurio mums nebereikia.</li>
+<li><b>Perkeliamasis priskyrimo operatorius</b>: Šis operatorius leidžia "perkelti" vieno <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objekto vertę į kitą <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą, o ne kopijuoti ją.</li>
+</ol>
+<p>Be to, šiame projekte yra naudojami įvesties (<code>&gt;&gt;</code>) ir išvesties (<code>&lt;&lt;</code>) operatoriai.</p>
+<p><b>Įvesties operatorius (<code>&gt;&gt;</code>)**: Šis operatorius naudojamas nuskaitant duomenis iš įvesties srauto (pvz., <code>std::cin</code> ar <code>std::istringstream</code>) į <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą.</b></p>
+<p><b>**Išvesties operatorius (<code>&lt;&lt;</code>)</b>: Šis operatorius naudojamas rašant <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektą į išvesties srautą (pvz., <code>std::cout</code> ar <code>std::ostringstream</code>).</p>
+<p>Šie operatoriai leidžia lengvai ir efektyviai manipuliuoti <code><a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a></code> objektais, nuskaitant duomenis iš įvesties srautų ir rašant juos į išvesties srautus.</p>
+<p>Visiems konstruktoriams / operatoriams yra atlikti testai, siekiantys patikrinti ar visi jie veikia. Testus galima atlikti pasirinkus tai per meniu.</p>
+<h1><a class="anchor" id="autotoc_md21"></a>
+Programos sparta naudojant skirtingus kompiliatoriaus optimizavimo lygius</h1>
+<h2><a class="anchor" id="autotoc_md22"></a>
+Testavimo sistemos parametrai:</h2>
+<ul>
+<li>Saugykla: 256 GB, Integruota NVMe SSD</li>
+<li>Atmintis: 8 GB RAM</li>
+<li>Procesorius: Apple M1</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md23"></a>
+Be optimizavimo testavimas</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">Greitis(1mln.)   </th><th class="markdownTableHeadNone">Greitis(10mln.)   </th><th class="markdownTableHeadNone">Failo dydis    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Struct   </td><td class="markdownTableBodyNone">12.111s   </td><td class="markdownTableBodyNone">130.058s   </td><td class="markdownTableBodyNone">411kb    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Klasė   </td><td class="markdownTableBodyNone">11.358s   </td><td class="markdownTableBodyNone">118.430s   </td><td class="markdownTableBodyNone">404kb   </td></tr>
+</table>
+<details >
+<summary >
+Peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/no_flag/Struct.png" alt="O0 Struct" class="inline"/> <b>Struktūros testavimo rezultatai</b></p>
+<p><img src="./Images/no_flag/Struct_exe.png" alt="O0 Struct_exe" class="inline"/> <b>Struktūros failo dydis</b></p>
+<p><img src="./Images/no_flag/Klase.png" alt="O0 Klase" class="inline"/> <b>Klasės testavimo rezultatai</b></p>
+<p><img src="./Images/no_flag/Klase_exe.png" alt="O0 Klase_exe" class="inline"/> <b>Klasės failo dydis</b></p>
+<p></p>
+</details>
+<h2><a class="anchor" id="autotoc_md24"></a>
+O1 optimizavimo lygio testavimas</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">Greitis(1mln.)   </th><th class="markdownTableHeadNone">Greitis(10mln.)   </th><th class="markdownTableHeadNone">Failo dydis    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Struct   </td><td class="markdownTableBodyNone">2.790s   </td><td class="markdownTableBodyNone">30.391s   </td><td class="markdownTableBodyNone">162kb    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Klasė   </td><td class="markdownTableBodyNone">11.489s   </td><td class="markdownTableBodyNone">117.949s   </td><td class="markdownTableBodyNone">147kb   </td></tr>
+</table>
+<ul>
+<li>Su struktūra greitesni testavimo rezultatai, naudojant šį optimizavimo raktą.</li>
+<li>Struktūros ir klasių failų dydžiai mažesni, naudojant šį optimizavimo raktą.</li>
+</ul>
+<details >
+<summary >
+Peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/O1_flag/Struct.png" alt="O1 Struct" class="inline"/> <b>Struktūros testavimo rezultatai</b></p>
+<p><img src="./Images/O1_flag/Struct_exe.png" alt="O1 Struct_exe" class="inline"/> <b>Struktūros failo dydis</b></p>
+<p><img src="./Images/O1_flag/Klase.png" alt="O1 Klase" class="inline"/> <b>Klasės testavimo rezultatai</b></p>
+<p><img src="./Images/O1_flag/Klase_exe.png" alt="O1 Klase_exe" class="inline"/> <b>Klasės failo dydis</b></p>
+<p></p>
+</details>
+<h2><a class="anchor" id="autotoc_md25"></a>
+O2 optimizavimo lygio testavimas</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">Greitis(1mln.)   </th><th class="markdownTableHeadNone">Greitis(10mln.)   </th><th class="markdownTableHeadNone">Failo dydis    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Struct   </td><td class="markdownTableBodyNone">2.662s   </td><td class="markdownTableBodyNone">30.459s   </td><td class="markdownTableBodyNone">162kb    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Klasė   </td><td class="markdownTableBodyNone">2.767s   </td><td class="markdownTableBodyNone">29.540s   </td><td class="markdownTableBodyNone">147kb   </td></tr>
+</table>
+<ul>
+<li>Su klase greitesni testavimo rezultatai, naudojant šį optimizavimo raktą.</li>
+<li>Struktūros ir klasių failų dydžiai išliko tokie patys, kaip su praeitu optimizavimo raktu.</li>
+</ul>
+<details >
+<summary >
+Peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/O2_flag/Struct.png" alt="O2 Struct" class="inline"/> <b>Struktūros testavimo rezultatai</b></p>
+<p><img src="./Images/O2_flag/Struct_exe.png" alt="O2 Struct_exe" class="inline"/> <b>Struktūros failo dydis</b></p>
+<p><img src="./Images/O2_flag/Klase.png" alt="O2 Klase" class="inline"/> <b>Klasės testavimo rezultatai</b></p>
+<p><img src="./Images/O2_flag/Klase_exe.png" alt="O2 Klase_exe" class="inline"/> <b>Klasės failo dydis</b></p>
+<p></p>
+</details>
+<h2><a class="anchor" id="autotoc_md26"></a>
+O3 optimizavimo lygio testavimas</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"></th><th class="markdownTableHeadNone">Greitis(1mln.)   </th><th class="markdownTableHeadNone">Greitis(10mln.)   </th><th class="markdownTableHeadNone">Failo dydis    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Struct   </td><td class="markdownTableBodyNone">2.734s   </td><td class="markdownTableBodyNone">28.984s   </td><td class="markdownTableBodyNone">161kb    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Klasė   </td><td class="markdownTableBodyNone">2.738s   </td><td class="markdownTableBodyNone">29.735s   </td><td class="markdownTableBodyNone">162kb   </td></tr>
+</table>
+<ul>
+<li>Testavimo greičio rezultatai panašūs su praeitu optimizavimo raktu.</li>
+<li>Failų dydžiai minimaliai pasikeitė.</li>
+</ul>
+<details >
+<summary >
+Peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/O3_flag/Struct.png" alt="O3 Struct" class="inline"/> <b>Struktūros testavimo rezultatai</b></p>
+<p><img src="./Images/O3_flag/Struct_exe.png" alt="O3 Struct_exe" class="inline"/> <b>Struktūros failo dydis</b></p>
+<p><img src="./Images/O3_flag/Klase.png" alt="O3 Klase" class="inline"/> <b>Klasės testavimo rezultatai</b></p>
+<p><img src="./Images/O3_flag/Klase_exe.png" alt="O3 Klase_exe" class="inline"/> <b>Klasės failo dydis</b></p>
+<p></p>
+</details>
+<h1><a class="anchor" id="autotoc_md27"></a>
+Konteinerių testavimas</h1>
+<details >
+<summary >
+Peržiūrėti</summary>
+<p></p>
+<p></p>
+</details>
+<h2><a class="anchor" id="autotoc_md28"></a>
+Testavimo sistemos parametrai:</h2>
+<ul>
+<li>Saugykla: 256 GB, Integruota NVMe SSD</li>
+<li>Atmintis: 8 GB RAM</li>
+<li>Procesorius: Apple M1</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md29"></a>
+1 strategija</h1>
+<h2><a class="anchor" id="autotoc_md30"></a>
+Naudojant Vector tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.005s   </td><td class="markdownTableBodyNone">0.033s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.113s   </td><td class="markdownTableBodyNone">0.018s   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.155s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.763s   </td><td class="markdownTableBodyNone">0.188s   </td><td class="markdownTableBodyNone">0.237s   </td><td class="markdownTableBodyNone">1.189s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">7.448s   </td><td class="markdownTableBodyNone">2.105s   </td><td class="markdownTableBodyNone">2.673s   </td><td class="markdownTableBodyNone">12.227s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">74.810s   </td><td class="markdownTableBodyNone">24.911s   </td><td class="markdownTableBodyNone">31.783s   </td><td class="markdownTableBodyNone">131.505s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/Vector_pradine.png" alt="Vector_1" class="inline"/> </p>
+</details>
+<h2><a class="anchor" id="autotoc_md31"></a>
+Naudojant Deque tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.005s   </td><td class="markdownTableBodyNone">0.034s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.093s   </td><td class="markdownTableBodyNone">0.019s   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.136s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.766s   </td><td class="markdownTableBodyNone">0.193s   </td><td class="markdownTableBodyNone">0.239s   </td><td class="markdownTableBodyNone">1.198s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">7.312s   </td><td class="markdownTableBodyNone">2.160s   </td><td class="markdownTableBodyNone">2.638s   </td><td class="markdownTableBodyNone">12.111s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">73.857s   </td><td class="markdownTableBodyNone">25.580s   </td><td class="markdownTableBodyNone">30.620s   </td><td class="markdownTableBodyNone">130.058s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/Deque_pradine.png" alt="Deque_1" class="inline"/> </p>
+</details>
+<h2><a class="anchor" id="autotoc_md32"></a>
+Naudojant List tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.003s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.031s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.112s   </td><td class="markdownTableBodyNone">0.018s   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.154s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.761s   </td><td class="markdownTableBodyNone">0.247s   </td><td class="markdownTableBodyNone">0.296s   </td><td class="markdownTableBodyNone">1.305s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">7.352s   </td><td class="markdownTableBodyNone">3.322s   </td><td class="markdownTableBodyNone">3.818s   </td><td class="markdownTableBodyNone">14.493s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">73.862s   </td><td class="markdownTableBodyNone">42.406s   </td><td class="markdownTableBodyNone">47.849s   </td><td class="markdownTableBodyNone">164.118s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/List_pradine.png" alt="List_1" class="inline"/> </p>
+</details>
+<h1><a class="anchor" id="autotoc_md33"></a>
+2 strategija</h1>
+<h2><a class="anchor" id="autotoc_md34"></a>
+Naudojant Vector tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.024s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.035s   </td><td class="markdownTableBodyNone">0.064s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.112s   </td><td class="markdownTableBodyNone">0.018s   </td><td class="markdownTableBodyNone">1.879s   </td><td class="markdownTableBodyNone">2.010s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.762s   </td><td class="markdownTableBodyNone">0.184s   </td><td class="markdownTableBodyNone">184.637s   </td><td class="markdownTableBodyNone">184.637s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/Vector_2.png" alt="Vector_2" class="inline"/> </p>
+</details>
+<ul>
+<li>Rezultatų su 1 000 000 ir 10 000 000 nėra, nes per ilgai trunka skaičiavimai (&gt;10min).</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md35"></a>
+Naudojant Deque tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.021s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.006s   </td><td class="markdownTableBodyNone">0.032s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.114s   </td><td class="markdownTableBodyNone">0.019s   </td><td class="markdownTableBodyNone">0.025s   </td><td class="markdownTableBodyNone">0.158s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.765s   </td><td class="markdownTableBodyNone">0.192s   </td><td class="markdownTableBodyNone">0.252s   </td><td class="markdownTableBodyNone">1.210s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">7.337s   </td><td class="markdownTableBodyNone">2.128s   </td><td class="markdownTableBodyNone">2.772s   </td><td class="markdownTableBodyNone">12.238s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/Deque_2.png" alt="Deque_2" class="inline"/> </p>
+</details>
+<ul>
+<li>Rezultatų su 10 000 000 nėra, nes per ilgai trunka skaičiavimai (&gt;10min).</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md36"></a>
+Naudojant List tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.003s   </td><td class="markdownTableBodyNone">0.001s   </td><td class="markdownTableBodyNone">0.028s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.113s   </td><td class="markdownTableBodyNone">0.018s   </td><td class="markdownTableBodyNone">0.005s   </td><td class="markdownTableBodyNone">0.137s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.761s   </td><td class="markdownTableBodyNone">0.239s   </td><td class="markdownTableBodyNone">0.061s   </td><td class="markdownTableBodyNone">1.062s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">7.433s   </td><td class="markdownTableBodyNone">3.324s   </td><td class="markdownTableBodyNone">0.668s   </td><td class="markdownTableBodyNone">11.344s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">72.891s   </td><td class="markdownTableBodyNone">42.406s   </td><td class="markdownTableBodyNone">8.586s   </td><td class="markdownTableBodyNone">123.646s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/List_2.png" alt="List_2" class="inline"/> </p>
+</details>
+<h1><a class="anchor" id="autotoc_md37"></a>
+3 strategija</h1>
+<h2><a class="anchor" id="autotoc_md38"></a>
+Naudojant Vector tipo konteinerius:</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Failo dydis   </th><th class="markdownTableHeadNone">Skaitymo laikas   </th><th class="markdownTableHeadNone">Rūšiavimo laikas   </th><th class="markdownTableHeadNone">Skirstymo laikas   </th><th class="markdownTableHeadNone">Veikimo laikas    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">1 000   </td><td class="markdownTableBodyNone">0.023s   </td><td class="markdownTableBodyNone">0.004s   </td><td class="markdownTableBodyNone">0.001s   </td><td class="markdownTableBodyNone">0.028s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">10 000   </td><td class="markdownTableBodyNone">0.112s   </td><td class="markdownTableBodyNone">0.019s   </td><td class="markdownTableBodyNone">0.005s   </td><td class="markdownTableBodyNone">0.137s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">100 000   </td><td class="markdownTableBodyNone">0.758s   </td><td class="markdownTableBodyNone">0.191s   </td><td class="markdownTableBodyNone">0.051s   </td><td class="markdownTableBodyNone">1.001s    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1 000 000   </td><td class="markdownTableBodyNone">7.303s   </td><td class="markdownTableBodyNone">2.263s   </td><td class="markdownTableBodyNone">0.622s   </td><td class="markdownTableBodyNone">10.189s    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">10 000 000   </td><td class="markdownTableBodyNone">73.373s   </td><td class="markdownTableBodyNone">24.204s   </td><td class="markdownTableBodyNone">8.597s   </td><td class="markdownTableBodyNone">106.176s   </td></tr>
+</table>
+<details >
+<summary >
+peržiūrėti</summary>
+<p></p>
+<p><img src="./Images/Vector_3.png" alt="Vector_3" class="inline"/> </p>
+</details>
+<h1><a class="anchor" id="autotoc_md39"></a>
+Išvados</h1>
+<p>Remiantis atliktų testų rezultatais, galime padaryti keletą išvadų:</p>
+<ol type="1">
+<li><b>Vector tipo konteineriai</b>: Vector tipo konteineriai parodė geriausius rezultatus su mažesniais failais. Tačiau, kai studentų kiekis padidėjo iki 1 000 000 ir 10 000 000, Vector tipo konteinerių veikimo laikas žymiai padidėjo, naudojant antrąją strategiją, kuri yra neefektyvi su šiuo konteineriu tipu. Pirmoji ir trečioji strategija parodė greičiausius rezultatus.</li>
+<li><b>Deque tipo konteineriai</b>: Deque tipo konteineriai parodė panašius rezultatus kaip ir Vector tipo konteineriai. Tačiau, jie buvo šiek tiek greitesni su didesniais failų dydžiais. Kaip ir su vektoriais, antroji strategija buvo neefektyvi.</li>
+<li><b>List tipo konteineriai</b>: List tipo konteineriai parodė geriausius rezultatus su didesniais failų dydžiais. Jie buvo ypač efektyvūs naudojant antrąją strategiją.</li>
+</ol>
+<p>Bendra išvada yra, kad konteinerio tipo ir strategijos pasirinkimas gali turėti didelę įtaką programos veikimo laikui, ypač dirbant su didelėmis duomenų apimtimis.</p>
+<p><br  />
+</p>
+<h1><a class="anchor" id="autotoc_md40"></a>
+Senesnių versijų aprašymai</h1>
+<ul>
+<li>v.pradinė: Pradinė versija. Nuskaito vartotojo įvestį, patikrina ją, leidžia vartotojui pasirinkti tarp dviejų galutinio balo skaičiavimo būdų (vidurkis ar mediana), ir išveda duomenis ekrane.</li>
+<li>v0.1: Prideda galimybę pasirinkti iš 4 skirtingų būdų įvesti arba generuoti duomenis / baigti programą. Dinamiškai paskiria atmintį pagal įvestų duomenų kiekį. Išveda duomenis ekrane.</li>
+<li>v0.2: Prideda galimybę skaityti duomenis iš failo. Leidžia vartotojui pasirinkti iš 5 skirtingų būdų įvesti, skaityti arba generuoti duomenis. Dinamiškai skiria atmintį pagal įvestą / nuskaitytą duomenų kiekį. Atidaro testavimo failus ir apskaičiuoja laiką, kurį praleidžia apdorojant duomenis iš failų. Išveda duomenis pasirinktinai ekrane arba faile.</li>
+<li>v0.3: Prideda išimčių valdymą duomenų nuskaitymui. Visi pranešimai išvedami lietuvių kalba. Projektas išskaidytas į kelis failus (.h ir .cpp).</li>
+<li>v0.4: Prideda galimybę generuoti penkis atsitiktinius studentų sąrašų failus, sudarytus iš: 1 000, 10 000, 100 000, 1 000 000, 10 000 000 įrašų. Atlieka tyrimus / testavimus su sugeneruotais failais. Surūšiuoja studentus ir išveda į du naujus failus.</li>
+<li>v1.0_pradinė: Prideda 3 skirtingus konteinerio tipo pasirinkimus testavimui - vector, deque, list.</li>
+<li>v1.0: Yra 3 skirtingos konteinerių testavimo strategijos ir galimybė sukompiliuoti programą, naudojant Makefile.</li>
+<li>v1.1: Naudojamos klasės su destruktoriais ir konstruktoriais, vietoj struktūrų.</li>
+<li>v1.2: Prideda galimybė testuoti visus "Rule of five" konstruktorius ir I/O operatorius.</li>
+<li>v1.5: Abstrakti klasė <a class="el" href="class_person.html" title="Klasė, aprašanti žmogų.">Person</a>. <a class="el" href="class_student.html" title="Klasė, aprašanti studentą.">Student</a> klasė yra <a class="el" href="class_person.html" title="Klasė, aprašanti žmogų.">Person</a> klasės išvestinė klasė.</li>
+<li>v2.0: Google test unit testai, DoxyGen TeX/html dokumentacija. </li>
+</ul>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Sugeneruota&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+</small></address>
+</body>
+</html>
