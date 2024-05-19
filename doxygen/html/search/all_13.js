@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['senesnių_20versijų_20aprašymai_0',['Senesnių versijų aprašymai',['../md__r_e_a_d_m_e.html#autotoc_md40',1,'']]],
+  ['setexamresults_1',['setExamResults',['../class_student.html#a1ad30521586fd09372dcb452cd031318',1,'Student']]],
+  ['setfirstname_2',['setFirstName',['../class_student.html#a863f6e9970dfabef00a50375cc8c4098',1,'Student']]],
+  ['sethomeworkresults_3',['setHomeworkResults',['../class_student.html#ac8bb34ef50d9bd57310ae0d5320bbb43',1,'Student']]],
+  ['setlastname_4',['setLastName',['../class_student.html#ab33cbd7f8da4c170dd7227d52b2fa8a0',1,'Student']]],
+  ['shrink_5fto_5ffit_5',['shrink_to_fit',['../class_my_vector.html#a6e202629b430eebf13b0257bd0ee0e3a',1,'MyVector']]],
+  ['sistemos_20parametrai_3a_6',['Sistemos parametrai:',['../md__r_e_a_d_m_e.html#autotoc_md22',1,'Testavimo sistemos parametrai:'],['../md__r_e_a_d_m_e.html#autotoc_md28',1,'Testavimo sistemos parametrai:']]],
+  ['size_7',['size',['../class_my_vector.html#ae01ddaddad4f8945bb406c2994685d59',1,'MyVector']]],
+  ['size_5ftype_8',['size_type',['../class_my_vector.html#a7dc6a9a36f9ccd3a22f984145f2a8871',1,'MyVector']]],
+  ['skirtingus_20kompiliatoriaus_20optimizavimo_20lygius_9',['Programos sparta naudojant skirtingus kompiliatoriaus optimizavimo lygius',['../md__r_e_a_d_m_e.html#autotoc_md21',1,'']]],
+  ['sparta_20naudojant_20skirtingus_20kompiliatoriaus_20optimizavimo_20lygius_10',['Programos sparta naudojant skirtingus kompiliatoriaus optimizavimo lygius',['../md__r_e_a_d_m_e.html#autotoc_md21',1,'']]],
+  ['spartos_20analizė_20naudojant_20std_3a_3avector_20ir_20myvector_20konteinerius_11',['Efektyvumo/spartos analizė naudojant std::vector ir MyVector konteinerius.',['../md__r_e_a_d_m_e.html#autotoc_md5',1,'']]],
+  ['std_12',['std',['../namespacestd.html',1,'']]],
+  ['std_3a_3avector_20ir_20myvector_20konteinerius_13',['Efektyvumo/spartos analizė naudojant std::vector ir MyVector konteinerius.',['../md__r_e_a_d_m_e.html#autotoc_md5',1,'']]],
+  ['std_3a_3avector_20tipo_20konteinerį_3a_14',['Naudojant std::vector tipo konteinerį:',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
+  ['strategija_15',['Strategija',['../md__r_e_a_d_m_e.html#autotoc_md29',1,'1 strategija'],['../md__r_e_a_d_m_e.html#autotoc_md33',1,'2 strategija'],['../md__r_e_a_d_m_e.html#autotoc_md37',1,'3 strategija']]],
+  ['studentų_20įrašų_16',['Konteinerių testavimas naudojant duomenų failą su 100 000, 1 000 000 ir 10 000 000 studentų įrašų',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
+  ['student_17',['Student',['../class_student.html',1,'Student'],['../class_student.html#af9168cedbfa5565cf0b20c1a9d3f5c9d',1,'Student::Student()'],['../class_student.html#ad4aff0e87bb158bfb672264fd64b8947',1,'Student::Student(const std::string &amp;firstName, const std::string &amp;lastName, int examResults, const std::vector&lt; int &gt; &amp;homeworkResults)'],['../class_student.html#a05b37ffb050ddb039db63a8764d790cb',1,'Student::Student(const Student &amp;other)'],['../class_student.html#a154f8e92f220eff931891d336ebed0be',1,'Student::Student(Student &amp;&amp;other) noexcept']]],
+  ['studento_20klasės_20testavimas_18',['Studento klasės testavimas',['../md__r_e_a_d_m_e.html#autotoc_md13',1,'']]],
+  ['su_20100_20000_201_20000_20000_20ir_2010_20000_20000_20studentų_20įrašų_19',['Konteinerių testavimas naudojant duomenų failą su 100 000, 1 000 000 ir 10 000 000 studentų įrašų',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
+  ['swap_20',['swap',['../class_my_vector.html#a109a6234b4419ffe23211a248c69fc55',1,'MyVector']]],
+  ['swap_21',['swap',['../md__r_e_a_d_m_e.html#autotoc_md19',1,'']]]
+];

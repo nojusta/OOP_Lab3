@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['test_0',['Unit testai naudojant Google Test.',['../md__r_e_a_d_m_e.html#autotoc_md11',1,'']]],
+  ['testai_20naudojant_20google_20test_1',['Unit testai naudojant Google Test.',['../md__r_e_a_d_m_e.html#autotoc_md11',1,'']]],
+  ['testavimas_2',['Testavimas',['../md__r_e_a_d_m_e.html#autotoc_md23',1,'Be optimizavimo testavimas'],['../md__r_e_a_d_m_e.html#autotoc_md27',1,'Konteinerių testavimas'],['../md__r_e_a_d_m_e.html#autotoc_md12',1,'MyVector konteinerio testavimas'],['../md__r_e_a_d_m_e.html#autotoc_md24',1,'O1 optimizavimo lygio testavimas'],['../md__r_e_a_d_m_e.html#autotoc_md25',1,'O2 optimizavimo lygio testavimas'],['../md__r_e_a_d_m_e.html#autotoc_md26',1,'O3 optimizavimo lygio testavimas'],['../md__r_e_a_d_m_e.html#autotoc_md13',1,'Studento klasės testavimas']]],
+  ['testavimas_20naudojant_20duomenų_20failą_20su_20100_20000_201_20000_20000_20ir_2010_20000_20000_20studentų_20įrašų_3',['Konteinerių testavimas naudojant duomenų failą su 100 000, 1 000 000 ir 10 000 000 studentų įrašų',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
+  ['testavimo_20sistemos_20parametrai_3a_4',['Testavimo sistemos parametrai:',['../md__r_e_a_d_m_e.html#autotoc_md22',1,'Testavimo sistemos parametrai:'],['../md__r_e_a_d_m_e.html#autotoc_md28',1,'Testavimo sistemos parametrai:']]],
+  ['tipo_20konteinerį_3a_5',['Naudojant std::vector tipo konteinerį:',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
+  ['tipo_20konteinerius_3a_6',['Tipo konteinerius:',['../md__r_e_a_d_m_e.html#autotoc_md31',1,'Naudojant Deque tipo konteinerius:'],['../md__r_e_a_d_m_e.html#autotoc_md35',1,'Naudojant Deque tipo konteinerius:'],['../md__r_e_a_d_m_e.html#autotoc_md32',1,'Naudojant List tipo konteinerius:'],['../md__r_e_a_d_m_e.html#autotoc_md36',1,'Naudojant List tipo konteinerius:'],['../md__r_e_a_d_m_e.html#autotoc_md30',1,'Naudojant Vector tipo konteinerius:'],['../md__r_e_a_d_m_e.html#autotoc_md34',1,'Naudojant Vector tipo konteinerius:'],['../md__r_e_a_d_m_e.html#autotoc_md38',1,'Naudojant Vector tipo konteinerius:']]]
+];
