@@ -6,7 +6,7 @@
 #include <utility>
 
 /**
- * @brief MyVector klasė, kurios funkcionalumas yra panašus į std::vector.
+ * @brief MyVector konteineris, kurios funkcionalumas yra panašus į std::vector.
  *
  * @tparam T Elementų tipas
  * @tparam Allocator Skiriamosios atminties valdiklio tipas
