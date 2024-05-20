@@ -2,6 +2,19 @@
 
 ## Diegimo instrukcija
 
+1. Atsisiųskite `.dmg` diegimo paketą iš [naujausio leidimo](https://github.com/nojusta/OOP_Lab3/releases/latest) GitHub.
+2. Atidarykite atsisiųstą `.dmg` failą.
+
+![Diegimo programa](./Images/installer.png)
+
+3. Tempkite programos failą į savo `Applications` aplanką.
+4. Dabar galite paleisti programą per `Spotlight` paiešką arba `Launchpad`.
+
+<details>
+<summary>Senos / rankinio būdo diegimo instrukcijos (spustelėkite, kad išplėstumėte)</summary>
+
+## Diegimo instrukcija
+
 - Atsisiųskite projekto kodą iš GitHub naudodami `git clone` komandą su projekto URL:
 ```
 git clone https://github.com/nojusta/OOP_Lab3
@@ -48,26 +61,26 @@ TEST_TARGET = myVector_test student_test
 
 # Taisyklė programa susieti
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+  $(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 # Taisyklė testams susieti
 myVector_test: student.o myVector_test.o
-	$(CXX) $(CXXFLAGS) -o myVector_test student.o myVector_test.o $(LIBS)
+  $(CXX) $(CXXFLAGS) -o myVector_test student.o myVector_test.o $(LIBS)
 
 student_test: student.o student_test.o
-	$(CXX) $(CXXFLAGS) -o student_test student.o student_test.o $(LIBS)
+  $(CXX) $(CXXFLAGS) -o student_test student.o student_test.o $(LIBS)
 
 # Taisyklė kompiliuoti failus
 .cpp.o:
-	$(CXX) $(CXXFLAGS) -c $<  -o $@
+  $(CXX) $(CXXFLAGS) -c $<  -o $@
 
 # Taisyklė išvalyti tarpinius failus
 clean:
-	$(RM) $(OBJS) $(TEST_OBJS)
+  $(RM) $(OBJS) $(TEST_OBJS)
 
 # Taisyklė išvalyti viską
 distclean: clean
-	$(RM) $(TARGET) myVector_test student_test
+  $(RM) $(TARGET) myVector_test student_test
 
 ```
 - Sukompiliuokite programą naudodami make komandą:
@@ -90,13 +103,10 @@ Tada gausite tokį rezultatą:
 make clean
 make distclean
 ```
+</details>
 
 ## Naudojimosi instrukcija
 
-- Paleiskite programą naudodami šią komandą:
-```
-./v3
-```
 - Programa pateiks meniu su įvairiomis funkcijomis. Pasirinkite funkciją įvedę atitinkamą numerį ir spauskite `Enter`.
 
 ![Menu](./Images/menu.png)
