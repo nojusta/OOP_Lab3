@@ -2,7 +2,7 @@
 CXX = g++
 
 # Kompiliatoriaus parametrai
-CXXFLAGS = -std=c++14 -O3 -mmacosx-version-min=14.3
+CXXFLAGS = -std=c++20 -O3 -mmacosx-version-min=14.3
 
 # Vykdomo failo pavadinimas
 TARGET = v3
@@ -29,8 +29,12 @@ TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 TEST_TARGET = myVector_test student_test
 
 # Taisyklė programa susieti
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+$(TARGET): $(OBJS) libmyVectorWrapper.dylib
+	$(CXX) $(CXXFLAGS) -L. -lmyVectorWrapper -o $(TARGET) $(OBJS)
+
+# Taisyklė bibliotekai sukurti
+libmyVectorWrapper.dylib: myVector.o
+	$(CXX) $(CXXFLAGS) -dynamiclib -o libmyVectorWrapper.dylib myVector.o
 
 # Taisyklė testams susieti
 myVector_test: student.o myVector_test.o
@@ -45,8 +49,8 @@ student_test: student.o student_test.o
 
 # Taisyklė išvalyti tarpinius failus
 clean:
-	$(RM) $(OBJS) $(TEST_OBJS)
+	$(RM) $(OBJS) $(TEST_OBJS) libmyVectorWrapper.dylib
 
 # Taisyklė išvalyti viską
 distclean: clean
-	$(RM) $(TARGET) myVector_test student_test
+	$(RM) $(TARGET) myVector_test student_test libmyVectorWrapper.dylib
